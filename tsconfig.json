@@ -20,7 +20,10 @@
     "noFallthroughCasesInSwitch": true,
 
     /* typescript module route */
-    "typeRoots": ["./node_modules/react-kakao-maps-sdk/lib/@types"]
+    "baseUrl": ".",
+    "paths": {
+      "react-kakao-maps-sdk": ["node_modules/react-kakao-maps-sdk/lib/@types/index.d"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
