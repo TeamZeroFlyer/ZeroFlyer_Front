@@ -1,17 +1,9 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AdvertiserMap from './pages/AdvertiserMap';
+import { Outlet } from "react-router-dom";
 
 function App() {
-
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Routes>
-          <Route path="/advertiserMap" element={<AdvertiserMap />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
-  )
+      <Outlet />
+  );
 }
 
-export default App
+export default App;
