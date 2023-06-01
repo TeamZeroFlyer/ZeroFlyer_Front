@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
-import AdvertiserMap from './pages/AdvertiserMap';
 import App from './App';
+import KakaoMap from './components/KakaoMap';
 
 const router = createBrowserRouter([
   {
@@ -12,8 +12,8 @@ const router = createBrowserRouter([
         element: <></>,
       },
       {
-        path: 'advertiserMap',
-        element: <AdvertiserMap />,
+        path: 'map',
+        element: <KakaoMap />,
       },
     ],
   },
