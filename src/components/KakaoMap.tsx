@@ -78,6 +78,7 @@ const KakaoMap = () => {
   const enterSearch: KeyboardEventHandler<HTMLInputElement> = (event) => {
     if(event.key === 'Enter' && search.current!.value !== ''){
       console.log(search.current!.value);
+      search.current!.blur();
       // TODO: search.current!.value 연관검색어 리스트 서버에 받아와서 아래 set 해주기
       setStores(
         [{
