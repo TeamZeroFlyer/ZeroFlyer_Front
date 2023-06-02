@@ -1,7 +1,14 @@
+import { ReactNode } from "react";
 import ReactDOM from "react-dom";
 import "./ModalPortal.css";
 
-const ModalPortal = (props: any) => {
+interface ModalPortalProps {
+  show: boolean;
+  onClick: () => void;
+  children: ReactNode;
+}
+
+const ModalPortal: React.FC<ModalPortalProps> = (props) => {
   return (
     <div>
       {ReactDOM.createPortal(
