@@ -11,6 +11,7 @@ interface StoreProps{
         closeTime: string;
         address: string;
         hashTag: string[];
+        hasCoupon: boolean;
     },
     last: boolean;
     move: (center: {lat: number, lng: number}) => void;
