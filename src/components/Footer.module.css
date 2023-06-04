@@ -1,0 +1,26 @@
+@media (max-width: 767px) {
+  .footer {
+    /* 모바일 */
+    width: 100vw;
+    height: 80px;
+    position: fixed;
+    bottom: 0px;
+    z-index: 101;
+    background-color: #ffffff;
+    border-top: 1px solid #f0f0f0;
+  }
+}
+
+@media (min-width: 768px) {
+  .footer {
+    width: 768px;
+    height: 80px;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+    bottom: 0px;
+    z-index: 101;
+    background-color: #ffffff;
+    border-top: 1px solid #f0f0f0;
+  }
+}

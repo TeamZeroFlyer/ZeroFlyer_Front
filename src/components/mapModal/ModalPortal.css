@@ -1,9 +1,14 @@
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
 *,
 *::before,
 *::after {
   padding: 0;
   margin: 0;
   box-sizing: inherit;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 html {
@@ -15,6 +20,8 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  font-family: "NanumSquare", sans-serif;
+  font-style: normal;
 }
 
 .backdrop {
@@ -26,45 +33,63 @@ body {
 }
 
 @media (max-width: 767px) {
+  /* 모바일 */
   .modal {
-    /* 모바일 */
     position: fixed;
-    z-index: 100;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    z-index: 102;
     width: 100vw;
-    height: 80vh;
+    bottom: 0;
+    height: 65vh;
+    padding-top: 40px;
     background-color: #ffffff;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
     box-shadow: 0px 4px 20px 8px rgba(0, 0, 0, 0.2);
+    overflow: scroll;
+  }
+  .modalOne {
+    position: fixed;
+    z-index: 100;
+    width: 100vw;
+    bottom: 0;
+    height: 240px;
+    padding-top: 40px;
+    background-color: #ffffff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0px 4px 20px 8px rgba(0, 0, 0, 0.2);
+    overflow: scroll;
   }
 }
 
 @media (min-width: 768px) {
   .modal {
     position: fixed;
-    z-index: 100;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    z-index: 102;
     width: 768px;
-    height: 80vh;
+    bottom: 0;
+    left: calc(50% - 384px);
+    height: 65vh;
+    padding-top: 40px;
     background-color: #ffffff;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
     box-shadow: 0px 4px 20px 8px rgba(0, 0, 0, 0.2);
+    overflow: scroll;
+  }
+  .modalOne {
+    position: fixed;
+    z-index: 100;
+    width: 768px;
+    bottom: 0;
+    left: calc(50% - 384px);
+    height: 240px;
+    padding-top: 40px;
+    background-color: #ffffff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0px 4px 20px 8px rgba(0, 0, 0, 0.2);
+    overflow: scroll;
   }
 }
 
@@ -78,22 +103,23 @@ body {
 
 @keyframes moveUp {
   0% {
-    transform: translate(-50%, 100%);
+    transform: translate(0, 100%);
     opacity: 0;
   }
   100% {
-    transform: translate(-50%, -50%);
+    transform: translate(0, 0%);
     opacity: 1;
   }
 }
 
 @keyframes moveDown {
   0% {
-    transform: translate(-50%, -50%);
+    transform: translate(0, 0%);
     opacity: 1;
   }
   100% {
-    transform: translate(-50%, 100%);
+    transform: translate(0, 100%);
+
     opacity: 0;
   }
 }
