@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import QrGenerator from "../components/QrGenerator";
+import style from "./CreateQRCode.module.css";
+import Button from "../ui/Button";
+import FlyerPreview from "../components/FlyerPreview";
 
 export type FlyerInf = {
-  id: string;
-  issuer: string;
-  imgUrl: string;
+  id: number;
+  src: string;
+  flyerName: string;
+  hashTag: string[];
+  alt: string;
 };
-
-const flyers: FlyerInf[] = [
-  { id: "1", issuer: "juhong", imgUrl: "https://localhost:5173/flyer/1" },
-  { id: "2", issuer: "hyeonsik", imgUrl: "https://localhost:5173/flyer/2" },
-  { id: "3", issuer: "gitae", imgUrl: "https://localhost:5173/flyer/3" },
-];
 
 const CreateQRCode: React.FC = () => {
   const [isQRModalOpen, setIsQRModalOpen] = useState<boolean>(false);
@@ -23,35 +22,41 @@ const CreateQRCode: React.FC = () => {
   const qrOpenModalHandler = () => setIsQRModalOpen(true);
   const qrCloseHandler = () => setIsQRModalOpen(false);
 
-  const createQrLink = (qrNumber: number) => {
-    let linkArr = [];
-    for (let i = 0; i < qrNumber; i++) {
-      linkArr.push(
-        <li>
-          <Link to={`${i + 1}`}>qr{i + 1}</Link>
-        </li>
-      );
-    }
-    return linkArr;
-  };
-
   return (
     <>
       {isQRModalOpen && (
         <QrGenerator
           onConfirm={qrCloseHandler}
-          flyers={flyers}
           onSelectFlyer={setSelectedFlyer}
           onSelectQrNumber={setQrNumber}
         />
       )}
-      <div>
+      <div className={style.createQRCode}>
+        <div className={style.title}>
+          <h2>QR코드 만들기</h2>
+          <div>
+            <span className={style.cancle}>
+              <Link to="/qr">취소</Link>
+            </span>
+            <span style={{ fontWeight: "bold" }}>
+              <Link to="#">생성</Link>
+            </span>
+          </div>
+        </div>
+        <div className={style.flyer}>
+          <Button onClick={qrOpenModalHandler} width="100%">
+            전단지 선택
+          </Button>
+        </div>
         <div>
-          <p>QR 코드 만들기</p>
-          <button onClick={qrOpenModalHandler}>QR 생성</button>
+          {seletedFlyer && (
+            <FlyerPreview
+              previewFlyer={seletedFlyer}
+              selectQrNumber={setQrNumber}
+            />
+          )}
         </div>
       </div>
-      {seletedFlyer && createQrLink(qrNumber)}
     </>
   );
 };

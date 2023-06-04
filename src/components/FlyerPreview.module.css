@@ -1,0 +1,44 @@
+.flyerPreview {
+  margin: 2rem 0;
+}
+
+
+.flyerPreview h3 {
+  margin: 1rem 0;
+}
+
+.flyer {
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-grow: 1;
+}
+
+.label {
+  font-size: 0.8rem;
+}
+
+.name {
+  font-weight: bold;
+  margin-top: 0.3rem;
+}
+
+.content {
+  display: flex;
+  padding: 0 0.5rem;
+}
+
+.input input{
+  width: 3rem;
+  height: 30%;
+  margin: 3.5rem 0;
+}
+
+.content img {
+  width: 8rem;
+}
+
+.hashtag > *{
+  margin: 1rem 1rem 0 0;
+}

@@ -1,0 +1,28 @@
+.contents {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.img {
+  margin: auto 1rem auto 0;
+}
+
+.img img {
+  border-radius: 100%;
+}
+
+.qrInfo {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+li {
+  list-style-type: none;
+}

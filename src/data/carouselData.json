@@ -1,0 +1,25 @@
+{
+  "slides": [
+    {
+      "id": 1,
+      "src": "https://picsum.photos/seed/img1/300/400",
+      "flyerName": "첫 방문 고객 할인",
+      "hashTag": ["합리적인가격", "헤어스파", "두피클리닉"],
+      "alt": "Image 1 for carousel"
+    },
+    {
+      "id": 2,
+      "src": "https://picsum.photos/seed/img2/300/400",
+      "flyerName": "첫 방문 고객 할인",
+      "hashTag": ["합리적인가격", "헤어스파", "두피클리닉"],
+      "alt": "Image 2 for carousel"
+    },
+    {
+      "id": 3,
+      "src": "https://picsum.photos/seed/img3/300/400",
+      "flyerName": "첫 방문 고객 할인",
+      "hashTag": ["합리적인가격", "헤어스파", "두피클리닉"],
+      "alt": "Image 3 for carousel"
+    }
+  ]
+}

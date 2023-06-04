@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import AdvertiserMap from "./pages/AdvertiserMap";
-import App from "./App";
+import App from './App';
+import KakaoMap from './components/KakaoMap';
 import CreateQRCode from "./pages/CreateQRCode";
 import FlyerDetailPage from "./pages/FlyerDetail";
 import QrScanner from "./pages/QrScanner";
+import ManageQRCode from "./pages/ManageQRCode";
 
 const router = createBrowserRouter([
   {
@@ -16,28 +17,32 @@ const router = createBrowserRouter([
         element: <></>,
       },
       {
-        path: "advertiserMap",
-        element: <AdvertiserMap />,
+        path: 'map',
+        element: <KakaoMap />,
       },
       {
         path: "qr",
         children: [
           {
             index: true,
-            element: <CreateQRCode />,
+            element: <ManageQRCode />,
           },
           {
             path: ":qrId",
             element: <QrScanner />,
           },
+          {
+            path: "new",
+            element: <CreateQRCode />,
+          }
         ],
       },
       {
-        path: "flyer/:flyerId",
+        path: "flyer/:flyerId/qr/:qrId",
         element: <FlyerDetailPage />,
       },
     ],
-  },
+  }, 
 ]);
 
 export default router;

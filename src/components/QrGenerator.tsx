@@ -1,9 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState} from "react";
 import ReactDOM from "react-dom";
 
-import Flyer from "./Flyer";
+import { FlyerInf } from "../pages/CreateQRCode";
+import { slides } from "../data/carouselData.json";
 import style from "./QrGenerator.module.css";
-import { FlyerInf } from "src/pages/CreateQRCode";
+import Card from "../ui/Card";
+import FlyerCarousel from "./FlyerCarousel";
+import FlyerPreview from "./FlyerPreview";
 
 const Backdrop: React.FC<{ onConfirm: () => void }> = (props) => {
   return <div className={style.backdrop} onClick={props.onConfirm} />;
@@ -13,48 +16,42 @@ const ModalOverlay: React.FC<{
   onConfirm: () => void;
   onSelectFlyer: (flyer: FlyerInf) => void;
   onSelectQrNumber: (qrNumber: number) => void;
-  flyers: FlyerInf[];
 }> = (props) => {
   const [previewFlyer, setPreviewFlyer] = useState<FlyerInf>();
-  const qrNumberRef = useRef<HTMLInputElement>(null);
-
+  const [qrNumber, setQrNumber] = useState<number>(1);
 
   const onConfirmHandler = (event: React.MouseEvent) => {
     event.preventDefault();
     props.onSelectFlyer(previewFlyer!);
-    props.onSelectQrNumber(Number(qrNumberRef.current!.value));
+    props.onSelectQrNumber(qrNumber);
+  };
+
+  const selectPreviewFlyer = (flyerId: number) => {
+    const selectedFlyer = slides.find((slide) => slide.id === flyerId)!;
+    props.onSelectFlyer(selectedFlyer);
     props.onConfirm();
-  }
+
+  };
 
   return (
-    <div className={style.modal}>
+    <Card className={style.modal}>
       <header>
-        <p>QR 생성하기</p>
-        <button onClick={props.onConfirm}>x</button>
+        <div>
+          <h3>전단지 선택</h3>
+        </div>
+        <span onClick={props.onConfirm}>x</span>
       </header>
       <div>
-        {previewFlyer &&
-          <div>
-            <p>{previewFlyer.imgUrl}</p>
-            <input name="qr-number" type="number" ref={qrNumberRef} />
+        <div className={style.carouselContainer}>
+          <div className={style.carousel}>
+            {slides.length > 0 && (
+              <FlyerCarousel selectPreviewFlyer={selectPreviewFlyer} />
+            )}
+            {slides.length < 0 && <button>전단지 추가하기</button>}
           </div>
-        }
-        <ul>
-          {props.flyers.length > 0 &&
-            props.flyers.map((flyer) => (
-              <Flyer
-                key={flyer.id}
-                flyer={flyer}
-                onSelectFlyer={setPreviewFlyer.bind(null, flyer)}
-              />
-            ))}
-          {props.flyers.length < 0 && <button>전단지 추가하기</button>}
-        </ul>
+        </div>
       </div>
-      <footer>
-        <button onClick={onConfirmHandler}>생성</button>
-      </footer>
-    </div>
+    </Card>
   );
 };
 
@@ -62,7 +59,6 @@ const QrGenerator: React.FC<{
   onConfirm: () => void;
   onSelectFlyer: (flyer: FlyerInf) => void;
   onSelectQrNumber: (qrNumber: number) => void;
-  flyers: FlyerInf[];
 }> = (props) => {
   return (
     <>
@@ -73,7 +69,6 @@ const QrGenerator: React.FC<{
       {ReactDOM.createPortal(
         <ModalOverlay
           onConfirm={props.onConfirm}
-          flyers={props.flyers}
           onSelectFlyer={props.onSelectFlyer}
           onSelectQrNumber={props.onSelectQrNumber}
         />,
