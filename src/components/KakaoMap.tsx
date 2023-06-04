@@ -14,6 +14,7 @@ interface Store {
   closeTime: string;
   address: string;
   hashTag: string[];
+  hasCoupon: boolean;
 }
 
 const KakaoMap = () => {
@@ -25,7 +26,7 @@ const KakaoMap = () => {
   const [isFlyer, setIsFlyer] = useState(true);
   const [flyerUrl, setFlyerUrl] = useState('/public/image/greenFlyer.svg');
   const [couponUrl, setCouponUrl] = useState('/public/image/whiteCoupon.svg');
-  const [oneStore, setOneStore] = useState<Store>({latlng: {lat: 0,lng: 0}, storeName: '', startTime: '', closeTime: '', address: '', hashTag: ['']});
+  const [oneStore, setOneStore] = useState<Store>({latlng: {lat: 0,lng: 0}, storeName: '', startTime: '', closeTime: '', address: '', hashTag: [''], hasCoupon: true});
   const { loading, error } = useInjectKakaoMapApi({ appkey: import.meta.env.VITE_KAKAO_API_KEY, libraries: ['services'] });
   const search = useRef<HTMLInputElement>(null);
   const [stores, setStores] = useState<Store[]>([]); // 초기 좌표 기준으로 설정해두기
@@ -34,6 +35,7 @@ const KakaoMap = () => {
   // 위치정보 불러와지는 것 감시한 뒤 이동시키기
   useEffect(()=>{
     setCenter({ lat: location.loaded ? location.coordinates!.lat : 37.575813, lng: location.loaded ? location.coordinates!.lng : 126.976849 });
+    setLevel(4);
   }, [location.loaded]);
 
   // TODO: 지도의 중심좌표에 따라 서버에 주변 점포 요청해서 set해주기
@@ -61,7 +63,7 @@ const KakaoMap = () => {
 
   const onClickHandler = () => { setShowModal(false) };
   const onClickHandlerOne = () => { setShowModalOne(false) };
-  const onClickCenterMove = (center: {lat: number, lng: number}) => { setShowModal(false); setShowModalOne(false); setCenter(center) };
+  const onClickCenterMove = (center: {lat: number, lng: number}) => { setShowModal(false); setShowModalOne(false); setCenter(center); setLevel(4); };
   const changeToFlyer = () => {
     if (!isFlyer){
       setIsFlyer(true);
@@ -79,6 +81,7 @@ const KakaoMap = () => {
   const getLocation = () => {
     if(location.loaded){
       setCenter({lat: location.coordinates!.lat, lng: location.coordinates!.lng});
+      setLevel(4);
     }else{
       window.location.reload();
     }
@@ -99,7 +102,8 @@ const KakaoMap = () => {
           closeTime: "1200",
           address: "서울시 새싹구 새싹동 새싹로 123길 53",
           hashTag: ["합리적인가격", "헤어스파", "두피클리닉"],
-        }
+          hasCoupon: true,
+  }
       ])
       setSearchLock(true);
       setShowModal(true);
@@ -154,11 +158,12 @@ export default KakaoMap;
 const dummy = [
   {
     latlng: {lat: 35.311526, lng: 128.291077},
-    storeName: "새싹미용실1",
+    storeName: "새싹미용실12",
     startTime: "1000",
     closeTime: "1200",
     address: "서울시 새싹구 새싹동 새싹로 123길 53",
     hashTag: ["합리적인가격", "헤어스1파", "두피1클리닉"],
+    hasCoupon: true,
   },
   {
     latlng: {lat: 35.313526, lng: 128.292077},
@@ -167,6 +172,7 @@ const dummy = [
     closeTime: "1900",
     address: "서울시 새싹구 새싹동 새싹로 123길 53",
     hashTag: ["합리적인가격", "헤어2스파", "두피클리2닉"],
+    hasCoupon: true,
   },
   {
     latlng: {lat: 35.315526, lng: 128.291077},
@@ -175,6 +181,7 @@ const dummy = [
     closeTime: "2400",
     address: "서울시 새싹구 새싹동 새싹로 123길 53",
     hashTag: ["합리적인가격", "헤어3스파", "두피클3리닉"],
+    hasCoupon: true,
   },
   {
     latlng: {lat: 35.317526, lng: 128.296077},
@@ -183,6 +190,7 @@ const dummy = [
     closeTime: "1100",
     address: "서울시 새싹구 새싹동 새싹로 123길 53",
     hashTag: ["합리적인가격", "헤어4스파", "두피클4리닉"],
+    hasCoupon: true,
   },
   {
     latlng: {lat: 35.319526, lng: 128.292077},
@@ -191,14 +199,16 @@ const dummy = [
     closeTime: "2400",
     address: "서울시 새싹구 새싹동 새싹로 123길 53",
     hashTag: ["합리적인가격", "헤어5스파"],
+    hasCoupon: true,
   },
   {
     latlng: {lat: 35.321526, lng: 128.297077},
-    storeName: "새싹미용실6",
+    storeName: "새싹미용실62",
     startTime: "1000",
     closeTime: "1500",
     address: "서울시 새싹구 새싹동 새싹로 123길 53",
     hashTag: ["합리적인가격"],
+    hasCoupon: true,
   },
   {
     latlng: {lat: 35.331526, lng: 128.291077},
@@ -207,6 +217,7 @@ const dummy = [
     closeTime: "1200",
     address: "서울시 새싹구 새싹동 새싹로 123길 53",
     hashTag: ["합리적인가격", "헤어스1파", "두피1클리닉"],
+    hasCoupon: true,
   },
   {
     latlng: {lat: 37.4984587, lng: 127.0585077},
@@ -215,6 +226,7 @@ const dummy = [
     closeTime: "1900",
     address: "서울시 새싹구 새싹동 새싹로 123길 53",
     hashTag: ["합리적인가격", "헤어2스파", "두피클리2닉"],
+    hasCoupon: true,
   },
   {
     latlng: {lat: 35.335526, lng: 128.291077},
@@ -223,6 +235,7 @@ const dummy = [
     closeTime: "2400",
     address: "서울시 새싹구 새싹동 새싹로 123길 53",
     hashTag: ["합리적인가격", "헤어3스파", "두피클3리닉"],
+    hasCoupon: true,
   },
   {
     latlng: {lat: 35.337526, lng: 128.296077},
@@ -231,6 +244,7 @@ const dummy = [
     closeTime: "1100",
     address: "서울시 새싹구 새싹동 새싹로 123길 53",
     hashTag: ["합리적인가격", "헤어4스파", "두피클4리닉"],
+    hasCoupon: true,
   },
   {
     latlng: {lat: 35.339526, lng: 128.292077},
@@ -239,6 +253,7 @@ const dummy = [
     closeTime: "2400",
     address: "서울시 새싹구 새싹동 새싹로 123길 53",
     hashTag: ["합리적인가격", "헤어5스파"],
+    hasCoupon: true,
   },
   {
     latlng: {lat: 35.331526, lng: 128.297077},
@@ -247,5 +262,6 @@ const dummy = [
     closeTime: "1500",
     address: "서울시 새싹구 새싹동 새싹로 123길 53",
     hashTag: ["합리적인가격"],
+    hasCoupon: true,
   }
 ];
