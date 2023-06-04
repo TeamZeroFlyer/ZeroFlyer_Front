@@ -1,0 +1,50 @@
+:root {
+  --button-color: #ffffff;
+  --button-bg-color: #0d6efd;
+  --button-hover-bg-color: #e9ecef;
+}
+
+.button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: .8rem;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width: auto;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  background: white;
+}
+
+.button:active,
+.button:hover,
+.button:focus {
+  background: var(--button-hover-bg-color);
+  outline: 0;
+}
+.button:disabled {
+  opacity: 0.5;
+}
+
+button.success {
+  --button-bg-color: #28a745;
+  --button-hover-bg-color: #218838;
+}
+
+button.error {
+  --button-bg-color: #dc3545;
+  --button-hover-bg-color: #c82333;
+}
+
+button.warning {
+  --button-color: #212529;
+  --button-bg-color: #ffc107;
+  --button-hover-bg-color: #e0a800;
+}

@@ -1,0 +1,53 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.modal {
+  position: fixed;
+  top: 10vh;
+  left: calc(50% - 20rem);
+  width: 31rem;
+  z-index: 100;
+  overflow: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px #e9ecef solid;
+}
+
+header span {
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.carouselContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem auto;
+  background-color: #e9ecef;
+}
+
+footer button {
+  width: 100%;
+}

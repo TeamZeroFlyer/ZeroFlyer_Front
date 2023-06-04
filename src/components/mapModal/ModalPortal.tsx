@@ -22,5 +22,4 @@ const ModalPortal: React.FC<ModalPortalProps> = (props) => {
     </div>
   );
 };
-
 export default ModalPortal;

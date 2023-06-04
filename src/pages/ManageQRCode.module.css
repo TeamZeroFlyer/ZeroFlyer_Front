@@ -1,0 +1,24 @@
+.container {
+    width: 768px;
+    margin: 3rem auto;
+}
+
+.titleBox {
+    text-align: center;
+}
+
+.contentsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: .1px solid #e9ecef;
+    padding: 1rem;
+}
+
+.contentsHeader p {
+    font-size: 1.2rem;
+}
+
+li:hover {
+    background-color: #e9ecef;
+}
