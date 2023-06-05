@@ -12,18 +12,18 @@ const Footer = () => {
 
     // 로그인 구현시 로그인 정보를 불러와 userState에 담아준다.
     // 0: 비로그인, 1: 소비자, 2: 광고주
-    let userState = 1;
+    let userState = 2;
     useEffect(()=>{
         // footer element 개수에 따라 간격 조정
         if(footerRef.current){
         footerRef.current.style.gap = `calc((100% - 115px) / ${footerList[userState].length})`;
         }
-    })
+    }, [])
 
     return (
         <div className={style.footer} ref={footerRef}>
-            {footerList[userState].map((element, _) => (
-                <FooterElement imgSrc={element} state={userState} now={now} onClick = {()=>{setNow("/" + element);}} />
+            {footerList[userState].map((element, i) => (
+                <FooterElement key={i} imgSrc={element} state={userState} now={now} onClick = {()=>{setNow("/" + element);}} />
             ))}
         </div>
     );
