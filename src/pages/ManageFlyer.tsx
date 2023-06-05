@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import style from "./ManageFlyer.module.css";
+import { Link } from 'react-router-dom';
 
 interface Flyer {
     flyerCode: number;
@@ -75,7 +76,9 @@ const FlyerManage = () => {
                             </div>
                             <div className={style.flyerBtn}>
                                 <div className={style.btn}>QR 만들기</div>
+                                <Link to={`/flyer/${flyer.flyerCode}`}>
                                 <div className={style.btn}>수정</div>
+                                </Link>
                             </div>
                         </div>
                         <div className={style.imgInfo}>
@@ -84,9 +87,11 @@ const FlyerManage = () => {
                     </div>
                 ))}
                 {now === "using" &&
+                <Link to="/flyer/new">
                 <div className={style.addFlyer}>
                     <img src="/public/image/addFlyer.svg" />
-                </div>}
+                </div>
+                </Link>}
                 {now === "used" && dummy.map((flyer, i)=>(
                     parseInt(flyer.endDate) < currentNumber && 
                     <div key={i} className={style.flyerInfoUsed}>

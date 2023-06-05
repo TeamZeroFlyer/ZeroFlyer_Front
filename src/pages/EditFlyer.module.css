@@ -1,0 +1,231 @@
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: "NanumSquare", sans-serif;
+  font-style: normal;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 768px;
+    margin: auto;
+    position: relative;
+    background-color: #f5f5f5;
+    height: calc(100vh - 80px);
+    padding: 3rem 2rem 2rem 2rem;
+    overflow: scroll;
+  }
+}
+
+@media (max-width: 767px) {
+  /* 모바일 */
+  .container {
+    width: 100vw;
+    margin: auto;
+    position: relative;
+    background-color: #f5f5f5;
+    height: calc(100vh - 80px);
+    padding: 3rem 2rem 2rem 2rem;
+    overflow: scroll;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.title {
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 20px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.cancel {
+  display: flex;
+  margin-left: auto;
+  justify-content: right;
+  align-items: right;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+}
+.complete {
+  margin-left: 15px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 20px;
+  text-align: right;
+}
+.cancel:hover,
+.complete:hover {
+  cursor: pointer;
+}
+
+.infoTitle {
+  margin: 40px 0 20px 0;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.twoInput {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.uploadImg {
+  background: #ffffff;
+  border-radius: 5px;
+  height: 142px;
+  width: 113px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.uploadThumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.signup-profileImg-input {
+  display: none;
+}
+.star {
+  color: red;
+}
+
+.colInput {
+  margin-left: 5%;
+  width: calc(100% - 113px);
+}
+.nick {
+  margin: 0 0 10px 0;
+}
+.nick2 {
+  margin: 10px 0 5px 0;
+}
+.searchBox {
+  background: #ffffff;
+  border-radius: 8px;
+  border: none;
+  text-indent: 10px;
+  font-size: 12pt;
+  height: 40px;
+  width: 100%;
+}
+.validDate {
+  background: #ffffff;
+  border-radius: 8px;
+  border: none;
+  text-indent: 10px;
+  font-size: 12pt;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.date {
+  border: none;
+  width: 50%;
+  max-width: 150px;
+}
+.date2 {
+  margin-left: 10px;
+  border: none;
+  width: 50%;
+  max-width: 150px;
+}
+
+.forTag {
+  margin: 30px 0 60px 0;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+}
+.tagInfo {
+  margin-bottom: 10px;
+}
+.searchBox2 {
+  background: #ffffff;
+  border-radius: 8px;
+  border: none;
+  text-indent: 20px;
+  font-size: 12pt;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.storeName {
+  margin: 15px 0 5px 0;
+}
+.noHashTag {
+  color: #c8c8c8;
+  border: 1px solid #c8c8c8;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  border-radius: 43px;
+  padding: 5px 10px 5px 10px;
+  margin-right: 5px;
+}
+.storeHashtag {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  color: #006c3a;
+  border: 1px solid #006c3a;
+  border-radius: 43px;
+  padding: 5px 10px 5px 10px;
+  margin-right: 5px;
+}
+.searchBox3 {
+  background: #ffffff;
+  border-radius: 8px;
+  border: none;
+  text-indent: 20px;
+  font-size: 12pt;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.numBox {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.boxInner1 {
+  margin-right: 10px;
+  width: calc(50% - 10px);
+}
+.boxInner2 {
+  width: calc(50% - 10px);
+}

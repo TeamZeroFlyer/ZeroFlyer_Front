@@ -7,6 +7,7 @@ import FlyerDetailPage from "./pages/FlyerDetail";
 import QrScanner from "./pages/QrScanner";
 import ManageQRCode from "./pages/ManageQRCode";
 import FlyerManage from "./pages/ManageFlyer";
+import EditFlyer from "./pages/EditFlyer";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,16 @@ const router = createBrowserRouter([
       },
       {
         path: 'flyer',
-        element: <FlyerManage />,
+        children: [
+          {
+            index: true,
+            element: <FlyerManage />,
+          },
+          {
+            path: ":flyerCode",
+            element: <EditFlyer />,
+          }
+        ],
       },
       {
         path: "qr",
