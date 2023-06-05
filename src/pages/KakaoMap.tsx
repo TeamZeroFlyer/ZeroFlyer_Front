@@ -3,9 +3,9 @@ import { Map, MapMarker, useInjectKakaoMapApi } from "react-kakao-maps-sdk";
 import style from "./KakaoMap.module.css";
 import { Outlet } from 'react-router-dom';
 import useGeoLocation from "../hooks/useGeolocation";
-import ModalPortal from "./mapModal/ModalPortal";
+import ModalPortal from "../components/mapModal/ModalPortal";
 import { CSSTransition } from "react-transition-group";
-import StoreInformation from "./StoreInfomation";
+import StoreInformation from "../components/StoreInfomation";
 
 interface Store {
   latlng: {lat: number; lng: number;};
