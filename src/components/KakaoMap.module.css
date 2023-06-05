@@ -7,25 +7,30 @@
     z-index: 2;
   }
   .flyer {
-    position: absolute;
+    position: fixed;
     top: 130px;
     left: 50%;
     transform: translate(-370px);
     z-index: 4;
   }
   .coupon {
-    position: absolute;
+    position: fixed;
     top: 174px;
     left: 50%;
     transform: translate(-380px);
     z-index: 3;
   }
   .findMyGeo {
-    position: absolute;
+    position: fixed;
     top: 125px;
     right: 50%;
     transform: translate(380px);
     z-index: 5;
+  }
+  .modalHandle {
+    position: absolute;
+    top: 20px;
+    left: calc(50% - 57.5px);
   }
 }
 
@@ -57,10 +62,15 @@
     right: 5px;
     z-index: 5;
   }
+  .modalHandle {
+    position: absolute;
+    top: 20px;
+    left: calc(50% - 57.5px);
+  }
 }
 
 .divForShadow {
-  position: absolute;
+  position: fixed;
   width: 350px;
   height: 48px;
   left: 50%;
@@ -73,7 +83,7 @@
   z-index: 2;
 }
 .searchBox {
-  position: absolute;
+  position: fixed;
   width: 350px;
   height: 48px;
   left: 50%;
@@ -90,7 +100,7 @@
   outline: none;
 }
 .searchIcon {
-  position: absolute;
+  position: fixed;
   left: 50%;
   transform: translate(-155px);
   top: 63px;
@@ -109,4 +119,15 @@
 .flyer:hover,
 .coupon {
   cursor: pointer;
+}
+
+.markerName {
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  position: absolute;
+  display: block;
+  width: 150px;
+  top: 15px;
 }

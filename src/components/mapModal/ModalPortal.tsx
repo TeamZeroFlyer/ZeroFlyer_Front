@@ -7,6 +7,7 @@ interface ModalPortalProps {
   onClick: () => void;
   children: ReactNode;
 }
+
 const ModalPortal: React.FC<ModalPortalProps> = (props) => {
   return (
     <div>
