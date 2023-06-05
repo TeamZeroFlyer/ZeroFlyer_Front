@@ -133,7 +133,7 @@ const KakaoMap = () => {
           <div className="modal">
           <img src="/public/image/modalHandle.svg" className={style.modalHandle}/>
           {stores.map((store, i) => (
-            <StoreInformation store={store} last={stores.length === i + 1 ? true : false} move = {onClickCenterMove}/>
+            <StoreInformation key={i} store={store} last={stores.length === i + 1 ? true : false} move = {onClickCenterMove}/>
           ))}
           </div>
         </CSSTransition>
