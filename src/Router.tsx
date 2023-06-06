@@ -9,6 +9,7 @@ import ManageQRCode from "./pages/ManageQRCode";
 import FlyerManage from "./pages/ManageFlyer";
 import EditFlyer from "./pages/EditFlyer";
 import Setting from "./pages/Setting";
+import Home from "./pages/Home";
 
 const router = createBrowserRouter([
   {
@@ -59,7 +60,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'home',
-        element: <></>,
+        element: <Home />,
       },
       {
         path: 'setting',
