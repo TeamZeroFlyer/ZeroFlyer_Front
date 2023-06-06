@@ -44,8 +44,8 @@ const StoreInformation: React.FC<StoreProps> = (props) => {
             </div>
             <div className={style.storeAddress}>{props.store.address}</div>
             <div className={style.storeHashtags}>
-            {props.store.hashTag.map((hashtag) => (
-                <span className={style.storeHashtag}>#{hashtag}</span>
+            {props.store.hashTag.map((hashtag, i) => (
+                <span key={i} className={style.storeHashtag}>#{hashtag}</span>
             ))}
             </div>
         </div>
