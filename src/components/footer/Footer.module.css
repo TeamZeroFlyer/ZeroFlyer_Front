@@ -1,38 +1,26 @@
-@media (max-width: 767px) {
-  .footer {
-    /* 모바일 */
-    width: 100vw;
-    height: 80px;
-    position: fixed;
-    bottom: 0px;
-    z-index: 8;
-    background-color: #ffffff;
-    border-top: 1px solid #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: calc((100% - 115px) / 6);
-  }
-}
-
-@media (min-width: 768px) {
-  .footer {
-    width: 768px;
-    height: 80px;
-    position: fixed;
-    left: 50%;
-    transform: translate(-50%);
-    bottom: 0px;
-    z-index: 8;
-    background-color: #ffffff;
-    border-top: 1px solid #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: calc((100% - 115px) / 6);
-  }
+.footer {
+  height: 80px;
+  position: fixed;
+  width: 100vw;
+  max-width: 768px;
+  bottom: 0;
+  z-index: 8;
+  background-color: #ffffff;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: calc((100% - 115px) / 6);
 }
 
 .footerElement:hover {
   cursor: pointer;
+}
+
+.titleBox {
+  margin: 5vh 0 3vh 0;
+  font-weight: 800;
+  font-size: 1.2rem;
+  line-height: 16px;
+  text-align: center;
 }

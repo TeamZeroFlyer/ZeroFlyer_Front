@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import style from "./ManageFlyer.module.css";
 import { Link } from 'react-router-dom';
+import Header from "../components/footer/Header";
 
 interface Flyer {
     flyerCode: number;
@@ -56,7 +57,7 @@ const FlyerManage = () => {
 
     return(
         <div className={style.container}>
-            <div className={style.titleBox}>전단지 관리</div>
+            <Header>전단지관리</Header>
             <div className={style.contentsHeader}>
                 <div id="using" className={style.state} onClick={()=>{if(now !== "using"){setNow("using")}}}>이용중</div>
                 <div id="used" className={style.state} onClick={()=>{if(now !== "used"){setNow("used")}}}>이용완료</div>

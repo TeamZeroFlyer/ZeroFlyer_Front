@@ -8,6 +8,7 @@ import QrScanner from "./pages/QrScanner";
 import ManageQRCode from "./pages/ManageQRCode";
 import FlyerManage from "./pages/ManageFlyer";
 import EditFlyer from "./pages/EditFlyer";
+import Setting from "./pages/Setting";
 
 const router = createBrowserRouter([
   {
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'setting',
-        element: <></>,
+        element: <Setting />,
       },      {
         path: 'point',
         element: <></>,

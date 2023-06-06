@@ -27,7 +27,8 @@ const EditFlyer = () => {
     const imgRef = useRef<HTMLInputElement>(null);
     const tag = useRef<HTMLInputElement>(null);
     const [hashTag, setHashTag] = useState(dummy.hashTag);
-    document.querySelector("body")!.style.backgroundColor = "#f5f5f5";
+    const [checked, setChecked] = useState(false);
+    // document.querySelector("body")!.style.backgroundColor = "#f5f5f5";
     useEffect(()=>{
         if (flyerCode === "new"){
 
@@ -75,7 +76,13 @@ const EditFlyer = () => {
                 <div className={style.complete}>완료</div>
             </div>
             <div className={style.infoTitle}>
-                전단지 정보
+                <div>전단지 정보</div>
+                
+                
+                <div className={style.box} onClick={()=>checked ? setChecked(false) :  setChecked(true)}>
+                    <img className={style.check} src={checked ? `/public/image/checkedBox.svg` : `/public/image/checkBox.svg`} />
+                    쿠폰포함
+                </div>
             </div>
 
             <div className={style.twoInput}>
@@ -98,11 +105,11 @@ const EditFlyer = () => {
 
             <div className={style.forTag}>
                 <div className={style.tagInfo}>태그 (최대 3개)</div>
-                <input ref={tag} onKeyUpCapture={enterTag} className={style.searchBox2} minLength={1} maxLength={6} placeholder='# 키워드 입력 후 enter'/>
+                <input ref={tag} onKeyUpCapture={enterTag} className={style.searchBox2} minLength={1} maxLength={6} placeholder='키워드 입력 후 Enter'/>
                 <div>
                     {hashTag.length === 0 && <span className={style.noHashTag}>ex) #합리적인가격</span>}
                     {hashTag.map((hashtag, i) => (
-                        <span className={style.storeHashtag} onClick={()=>{removeTag(i)}}>#{hashtag}</span>
+                        <span key={i} className={style.storeHashtag} onClick={()=>{removeTag(i)}}>#{hashtag}</span>
                     ))}
                 </div>
             </div>
@@ -111,20 +118,21 @@ const EditFlyer = () => {
                 사업장 정보
             </div>
             <div className={style.storeName}><span className={style.star}>* </span>상호명</div>
-            <input className={style.searchBox2} minLength={1} maxLength={10} placeholder={dummy.storeName}/>
+            <input readOnly className={style.searchBox2} minLength={1} maxLength={10} placeholder={dummy.storeName}/>
             <div className={style.storeName}><span className={style.star}>* </span>주소</div>
-            <input className={style.searchBox3} minLength={1} maxLength={10} placeholder={dummy.address}/>
-            <input className={style.searchBox2} minLength={1} maxLength={10} placeholder={dummy.detailAddress}/>
+            <input readOnly className={style.searchBox3} minLength={1} maxLength={10} placeholder={dummy.address}/>
+            <input readOnly className={style.searchBox2} minLength={1} maxLength={10} placeholder={dummy.detailAddress}/>
             <div className={style.numBox}>
                 <div className={style.boxInner1}>
                     <div className={style.storeName}><span className={style.star}>* </span>전화번호</div>
-                    <input className={style.searchBox3} minLength={1} maxLength={10} placeholder={dummy.phone}/>
+                    <input readOnly className={style.searchBox3} minLength={1} maxLength={10} placeholder={dummy.phone}/>
                 </div>
                 <div className={style.boxInner2}>
                     <div className={style.storeName}><span className={style.star}>* </span>영업시간</div>
-                    <input className={style.searchBox3} minLength={1} maxLength={10} placeholder={`${dummy.startTime.substring(0, 2) + ":" + dummy.startTime.substring(2)}~${dummy.closeTime.substring(0, 2) + ":" + dummy.closeTime.substring(2)}`}/>
+                    <input readOnly className={style.searchBox3} minLength={1} maxLength={10} placeholder={`${dummy.startTime.substring(0, 2) + ":" + dummy.startTime.substring(2)}~${dummy.closeTime.substring(0, 2) + ":" + dummy.closeTime.substring(2)}`}/>
                 </div>
             </div>
+            {flyerCode !== "new" && <div className={style.deleteBtn}>전단지삭제</div>}
         </div>
     );
 }
