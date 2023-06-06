@@ -1,0 +1,14 @@
+@media (min-width: 768px) {
+  #root {
+    width: 768px;
+    margin: auto;
+    position: relative;
+  }
+}
+
+@media (max-width: 767px) {
+  /* 모바일 */
+  #root {
+    width: 100vw;
+  }
+}

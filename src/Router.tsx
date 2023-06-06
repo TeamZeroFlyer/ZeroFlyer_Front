@@ -56,6 +56,17 @@ const router = createBrowserRouter([
         path: "flyer/:flyerId/qr/:qrId",
         element: <FlyerDetailPage />,
       },
+      {
+        path: 'home',
+        element: <></>,
+      },
+      {
+        path: 'setting',
+        element: <></>,
+      },      {
+        path: 'point',
+        element: <></>,
+      },
     ],
   }, 
 ]);

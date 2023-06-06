@@ -1,26 +1,25 @@
 .createQRCode {
-    width: 768px;
-    margin: 3rem auto;
+  margin: 3rem auto;
 }
 
 .flyer {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .title {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .title div {
-    padding: .5rem 0;
+  padding: 0.5rem 0;
 }
 
 .content button {
-    margin-top: 1.2rem;
-    width: 100%;
+  margin-top: 1.2rem;
+  width: 100%;
 }
 
 .cancle {
-    margin-right: 1rem;
+  margin-right: 1rem;
 }
