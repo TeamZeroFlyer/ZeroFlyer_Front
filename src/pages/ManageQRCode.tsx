@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import QRList from "../components/QRList";
+import QRList from "../components/qr/QRList";
 import style from "./ManageQRCode.module.css";
 import Button from "../ui/Button";
 const ManageQRCode = () => {

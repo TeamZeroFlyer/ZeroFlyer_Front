@@ -1,12 +1,12 @@
 import React, { useState} from "react";
 import ReactDOM from "react-dom";
 
-import { FlyerInf } from "../pages/CreateQRCode";
-import { slides } from "../data/carouselData.json";
+import { FlyerInf } from "../../pages/CreateQRCode";
+import { slides } from "../../data/carouselData.json";
 import style from "./QrGenerator.module.css";
-import Card from "../ui/Card";
-import FlyerCarousel from "./FlyerCarousel";
-import FlyerPreview from "./FlyerPreview";
+import Card from "../../UI/Card";
+import FlyerCarousel from "../FlyerCarousel";
+import FlyerPreview from "../FlyerPreview";
 
 const Backdrop: React.FC<{ onConfirm: () => void }> = (props) => {
   return <div className={style.backdrop} onClick={props.onConfirm} />;

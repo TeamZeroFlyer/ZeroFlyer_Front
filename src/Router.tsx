@@ -7,11 +7,15 @@ import FlyerDetailPage from "./pages/FlyerDetail";
 import QrScanner from "./pages/QrScanner";
 import ManageQRCode from "./pages/ManageQRCode";
 import FlyerManage from "./pages/ManageFlyer";
+import LoginPage from "./pages/login/Login";
+import { tokenLoader } from "./util/auth";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    loader: tokenLoader,
+    id: 'root',
     children: [
       {
         path: "",
@@ -47,7 +51,11 @@ const router = createBrowserRouter([
         element: <FlyerDetailPage />,
       },
     ],
-  }, 
+    
+  }, {
+    path: "/login",
+    element: <LoginPage />,
+  }
 ]);
 
 export default router;

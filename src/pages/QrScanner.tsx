@@ -1,7 +1,7 @@
 import React from "react";
 import { QRCodeCanvas } from "qrcode.react";
 
-import QRCode from "../components/QRCode";
+import QRCode from "../components/qr/QRCode";
 
 export type QRType = {
   qrId: string;

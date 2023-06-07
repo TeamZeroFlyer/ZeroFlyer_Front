@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import QrGenerator from "../components/QrGenerator";
+import QrGenerator from "../components/qr/QrGenerator";
 import style from "./CreateQRCode.module.css";
-import Button from "../ui/Button";
+import Button from "../UI/Button";
 import FlyerPreview from "../components/FlyerPreview";
 
 export type FlyerInf = {
