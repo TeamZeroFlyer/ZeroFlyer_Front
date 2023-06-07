@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
 import { FlyerInf } from "../../pages/CreateQRCode";
@@ -30,26 +30,19 @@ const ModalOverlay: React.FC<{
     const selectedFlyer = slides.find((slide) => slide.id === flyerId)!;
     props.onSelectFlyer(selectedFlyer);
     props.onConfirm();
-
   };
 
   return (
     <Card className={style.modal}>
       <header>
-        <div>
-          <h3>전단지 선택</h3>
-        </div>
+        <h3>전단지 선택</h3>
         <span onClick={props.onConfirm}>x</span>
       </header>
-      <div>
-        <div className={style.carouselContainer}>
-          <div className={style.carousel}>
-            {slides.length > 0 && (
-              <FlyerCarousel selectPreviewFlyer={selectPreviewFlyer} />
-            )}
-            {slides.length < 0 && <button>전단지 추가하기</button>}
-          </div>
-        </div>
+      <div className={style.carouselContainer}>
+        {slides.length > 0 && (
+          <FlyerCarousel selectPreviewFlyer={selectPreviewFlyer} />
+        )}
+        {slides.length < 0 && <button>전단지 추가하기</button>}
       </div>
     </Card>
   );

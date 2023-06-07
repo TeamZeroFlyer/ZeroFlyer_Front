@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import style from "./ManageFlyer.module.css";
+import { Link } from 'react-router-dom';
+import Header from "../components/footer/Header";
 
 interface Flyer {
     flyerCode: number;
@@ -55,7 +57,7 @@ const FlyerManage = () => {
 
     return(
         <div className={style.container}>
-            <div className={style.titleBox}>전단지 관리</div>
+            <Header>전단지관리</Header>
             <div className={style.contentsHeader}>
                 <div id="using" className={style.state} onClick={()=>{if(now !== "using"){setNow("using")}}}>이용중</div>
                 <div id="used" className={style.state} onClick={()=>{if(now !== "used"){setNow("used")}}}>이용완료</div>
@@ -75,7 +77,9 @@ const FlyerManage = () => {
                             </div>
                             <div className={style.flyerBtn}>
                                 <div className={style.btn}>QR 만들기</div>
+                                <Link to={`/flyer/${flyer.flyerCode}`}>
                                 <div className={style.btn}>수정</div>
+                                </Link>
                             </div>
                         </div>
                         <div className={style.imgInfo}>
@@ -84,9 +88,11 @@ const FlyerManage = () => {
                     </div>
                 ))}
                 {now === "using" &&
+                <Link to="/flyer/new">
                 <div className={style.addFlyer}>
                     <img src="/public/image/addFlyer.svg" />
-                </div>}
+                </div>
+                </Link>}
                 {now === "used" && dummy.map((flyer, i)=>(
                     parseInt(flyer.endDate) < currentNumber && 
                     <div key={i} className={style.flyerInfoUsed}>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 import style from "./FlyerPreview.module.css";
-import { FlyerInf } from "src/pages/CreateQRCode";
-import Hashtag from "../ui/Hashtag";
+import { FlyerInf } from "../pages/qr/CreateQRCode";
+import Hashtag from "../UI/Hashtag";
 
 const FlyerPreview: React.FC<{
   previewFlyer: FlyerInf;
@@ -19,7 +19,7 @@ const FlyerPreview: React.FC<{
 
   return (
     <div className={style.flyerPreview}>
-      <h3>전단지 정보</h3>
+      <p>전단지 정보</p>
       {props.previewFlyer && (
         <div className={style.content}>
           <img src={props.previewFlyer.src} alt={props.previewFlyer.alt} />

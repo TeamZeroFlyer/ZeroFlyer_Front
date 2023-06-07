@@ -1,0 +1,40 @@
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: "NanumSquare", sans-serif;
+  font-style: normal;
+}
+
+@media (min-width: 768px) {
+  #root {
+    width: 768px;
+    margin: auto;
+    position: relative;
+  }
+}
+
+@media (max-width: 767px) {
+  /* 모바일 */
+  #root {
+    width: 100vw;
+  }
+}

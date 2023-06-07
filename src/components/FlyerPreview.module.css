@@ -1,10 +1,11 @@
 .flyerPreview {
-  margin: 2rem 0;
+  margin-top: 2rem;
 }
 
-
-.flyerPreview h3 {
-  margin: 1rem 0;
+.flyerPreview > p {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 1.1rem;
 }
 
 .flyer {
@@ -16,17 +17,23 @@
 }
 
 .label {
-  font-size: 0.8rem;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .name {
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 16px;
   margin-top: 0.3rem;
 }
 
 .content {
   display: flex;
-  padding: 0 0.5rem;
+}
+
+.content img {
+  width: 113px;
+  height: 138px;
 }
 
 .input input{
@@ -35,10 +42,10 @@
   margin: 3.5rem 0;
 }
 
-.content img {
-  width: 8rem;
+.hashtag {
+  margin-top: 9px;
 }
 
-.hashtag > *{
-  margin: 1rem 1rem 0 0;
+.hashtag > * {
+  margin-right: 6px;
 }

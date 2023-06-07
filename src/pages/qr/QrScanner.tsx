@@ -1,7 +1,7 @@
 import React from "react";
 import { QRCodeCanvas } from "qrcode.react";
 
-import QRCode from "../components/qr/QRCode";
+import QRCode from "../../components/qr/QRCode";
 
 export type QRType = {
   qrId: string;
@@ -15,10 +15,6 @@ const QR: QRType[] = [
 ];
 
 const QrScanner: React.FC = () => {
-
-  const qrcode = (
-    <QRCodeCanvas id="qrCode" value={QR[1].flyerLink} size={300} level={"H"} />
-  );
 
   return (
     <div>

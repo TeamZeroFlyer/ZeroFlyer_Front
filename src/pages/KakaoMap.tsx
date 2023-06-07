@@ -3,9 +3,9 @@ import { Map, MapMarker, useInjectKakaoMapApi } from "react-kakao-maps-sdk";
 import style from "./KakaoMap.module.css";
 import { Outlet } from 'react-router-dom';
 import useGeoLocation from "../hooks/useGeolocation";
-import ModalPortal from "../components/mapModal/ModalPortal";
+import ModalPortal from "../components/map/ModalPortal";
 import { CSSTransition } from "react-transition-group";
-import StoreInformation from "../components/StoreInfomation";
+import StoreInformation from "../components/map/StoreInfomation";
 
 interface Store {
   latlng: {lat: number; lng: number;};
@@ -30,8 +30,6 @@ const KakaoMap = () => {
   const { loading, error } = useInjectKakaoMapApi({ appkey: import.meta.env.VITE_KAKAO_API_KEY, libraries: ['services'] });
   const search = useRef<HTMLInputElement>(null);
   const [stores, setStores] = useState<Store[]>([]); // 초기 좌표 기준으로 설정해두기
-  const [searchLock, setSearchLock] = useState(false); // 검색한 뒤 가게를 클릭하여 중심좌표가 이동될때만큼은 이동하는 곳 주변이 아닌 검색된 리스트가 한번만 유지되게 함
-
   // 위치정보 불러와지는 것 감시한 뒤 이동시키기
   useEffect(()=>{
     setCenter({ lat: location.loaded ? location.coordinates!.lat : 37.575813, lng: location.loaded ? location.coordinates!.lng : 126.976849 });
@@ -40,7 +38,7 @@ const KakaoMap = () => {
 
   // TODO: 지도의 중심좌표에 따라 서버에 주변 점포 요청해서 set해주기
   useEffect(()=>{
-    !searchLock ? setStores(dummy) : setSearchLock(false);
+    setStores(dummy);
     const span = document.getElementById("root")!.querySelectorAll("span");
     for(var i = 0; i < span.length; i++){
       const parent = span[i]?.parentElement;
@@ -94,18 +92,7 @@ const KakaoMap = () => {
     if(event.key === 'Enter' && search.current!.value !== ''){
       search.current!.blur();
       // TODO: search.current!.value 연관검색어 리스트 서버에 받아와서 아래 set 해주기
-      setStores(
-        [{
-          latlng: {lat: 37.4985317, lng: 127.0585205},
-          storeName: "새싹미용실",
-          startTime: "1000",
-          closeTime: "1200",
-          address: "서울시 새싹구 새싹동 새싹로 123길 53",
-          hashTag: ["합리적인가격", "헤어스파", "두피클리닉"],
-          hasCoupon: true,
-  }
-      ])
-      setSearchLock(true);
+      // setStores(searchResult);
       setShowModal(true);
     }
   };

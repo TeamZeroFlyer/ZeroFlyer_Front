@@ -6,7 +6,6 @@ import GoogleLoginButton from "./GoogleLoginButton";
 import KakaoLoginButton from "./KakaoLoginButton";
 import logo from "../../../public/image/login_button/logo.svg";
 
-
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_LOGIN_API_KEY;
 const KAKAO_LOGIN_KEY = import.meta.env.VITE_KAKAO_LOGIN_API_KEY;
 const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
@@ -19,14 +18,12 @@ const LoginForm = () => {
 
   return (
     <div className={style.loginForm}>
-      <img src={logo} alt="logo" />
-      <div className={style.contents}>
+        <img src={logo} alt="logo" />
         <div className={style.buttons}>
           <KakaoLoginButton onClick={kakaoLoginHandler} />
           <GoogleOAuthProvider clientId={CLIENT_ID}>
             <GoogleLoginButton />
           </GoogleOAuthProvider>
-        </div>
       </div>
     </div>
   );

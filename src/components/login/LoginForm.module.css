@@ -3,22 +3,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 10rem 0;
+  position: relative;
 }
 
-
-.contents {
-  width: 768px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10rem;
+.loginForm > img {
+  position: fixed;
+  top: 265px;
 }
 
 .buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  position: fixed;
+  bottom: 150px;
 }
