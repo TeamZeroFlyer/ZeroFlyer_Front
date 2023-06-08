@@ -1,8 +1,10 @@
-import Advertiser from "../components/home/advertiser.tsx";
+import Advertiser from "../../components/home/Advertiser.tsx";
 
 const Home = () => {
     return(
+        <>
         <Advertiser />
+        </>
     );
 };
 
