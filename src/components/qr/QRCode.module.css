@@ -1,0 +1,129 @@
+.container {
+  height: calc(100vh - 80px);
+  overflow: scroll;
+}
+
+.qrcode {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  
+  margin: 72px auto 34px auto;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.title > p {
+  text-align: center;
+}
+
+.name {
+  background-color: #006c3a;
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 50%;
+  margin-bottom: 1rem;
+}
+
+.name h1 {
+  text-align: center;
+  color: white;
+  margin: 2rem 0 4rem 0;
+}
+
+.scan {
+  position: absolute;
+  border-radius: 100%;
+  background-color: white;
+  width: 5rem;
+  height: 5rem;
+  z-index: 100;
+  left: 50%;
+  transform: translate(-50%, -70%);
+  filter: drop-shadow(0 0 1px black);
+}
+
+.scan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scan > div {
+  border-radius: 100%;
+  background-color: #006c3a;
+  width: 90%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scan > div > p {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 1rem;
+  color: black;
+  height: 70%;
+}
+
+.info {
+  margin: 2rem 0 1rem 0;
+  text-align: center;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.qrcode {
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 480px) {
+  .name {
+    background-color: #006c3a;
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 350px;
+  }
+
+  .title {
+    font-size: 18px;
+    font-weight: 800;
+    text-align: center;
+    margin: 72px 0 34px 0;
+  }
+
+  .qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 1rem;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 1rem;
+    color: black;
+    height: 420px;
+  }
+
+  .info {
+    margin: 2rem 0 1rem 0;
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #e9ecef;
+  }
+}
