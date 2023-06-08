@@ -1,0 +1,70 @@
+.contents {
+  padding: 20px;
+  height: calc(100vh - 160px);
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.userInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.username {
+  font-weight: 700;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.points {
+  font-weight: 800;
+  font-size: 36px;
+  margin-bottom: 6px;
+}
+
+.points > span {
+  color: #006c3a;
+}
+
+.catchphrase {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.camera {
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.tree {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  background-color: #f9f9f9;
+  border-radius: 9px;
+  padding: 16px;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.cardContents {
+  display: flex;
+  justify-content: space-around;
+}
+
+.cardContents > div {
+  margin-right: 10px;
+}

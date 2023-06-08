@@ -1,9 +1,11 @@
-import Advertiser from "../components/home/advertiser.tsx";
+import Advertiser from "../components/home/advertiser";
+import Citizen from "../components/home/citizen/Citizen";
 
 const Home = () => {
-    return(
-        <Advertiser />
-    );
+    return <>
+        {/* <Advertiser /> */}
+        <Citizen />
+    </>;
 };
 
 export default Home;
