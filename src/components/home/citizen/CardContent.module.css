@@ -1,0 +1,30 @@
+.cardContent {
+  display: flex;
+  
+}
+
+.co2 {
+  border-radius: 100%;
+  background-color: #d9d9d9;
+  width: 64px;
+  height: 64px;
+}
+
+.info {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.label {
+  color: #006c3a;
+  font-weight: 800;
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.value {
+  font-weight: 800;
+  font-size: 14px;
+}

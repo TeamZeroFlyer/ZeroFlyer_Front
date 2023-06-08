@@ -1,0 +1,39 @@
+.createQRCode {
+  margin-top: 4.5rem;
+  padding: 1.2rem;
+}
+
+.createQRCode a {
+  text-decoration: none;
+  color: black;
+}
+
+.flyer {
+  margin-top: 2rem;
+}
+
+.action {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title > p {
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.content button {
+  margin-top: 1.2rem;
+  width: 100%;
+}
+
+.cancle {
+  margin-right: 1rem;
+}
