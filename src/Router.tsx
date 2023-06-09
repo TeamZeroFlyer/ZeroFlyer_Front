@@ -64,7 +64,7 @@ const router = createBrowserRouter([
         element: <FlyerDetailPage />,
       },
       {
-        path: 'home',
+        index: true,
         element: <Home />,
       },
       {

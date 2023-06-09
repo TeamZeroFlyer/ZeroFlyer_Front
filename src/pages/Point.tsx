@@ -5,5 +5,3 @@ const PointPage = () => {
 }
 
 export default PointPage;
-
- async
