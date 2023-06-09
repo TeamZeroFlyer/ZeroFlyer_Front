@@ -114,7 +114,6 @@ const FlyerManage = () => {
                         </div>
                     </div>
                 ))}
-                <div className={style.void}></div>
             </div>
         </div>
     );
