@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import style from "./ManageFlyer.module.css";
+import style from "./ManageFlyerAd.module.css";
 import { Link } from 'react-router-dom';
-import Header from "../../components/footer/Header";
+import Header from "../footer/Header";
 
 interface Flyer {
     flyerCode: number;
@@ -34,7 +34,7 @@ const formatDate = (origin: string) => {
     return `${year}.${month}.${day}`;
 }
 
-const FlyerManage = () => {
+const ManageFlyerAd = () => {
     const [now, setNow] = useState("using");
     useEffect(()=>{
         const usingDiv = document.getElementById("using");
@@ -119,7 +119,7 @@ const FlyerManage = () => {
     );
 }
 
-export default FlyerManage;
+export default ManageFlyerAd;
 
 const dummy: Flyer[] = [
     {

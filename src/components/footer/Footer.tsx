@@ -13,7 +13,7 @@ const Footer = () => {
     const isMobile = /Mobi/i.test(window.navigator.userAgent);
     // 로그인 구현시 로그인 정보를 불러와 userState에 담아준다.
     // 0: 비로그인, 1: 소비자, 2: 광고주
-    let userState = 2;
+    let userState = 1;
     useEffect(()=>{
         // footer element 개수에 따라 간격 조정
         if(footerRef.current){
