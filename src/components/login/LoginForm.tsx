@@ -5,8 +5,13 @@ import GoogleLoginButton from "./GoogleLoginButton";
 import KakaoLoginButton from "./KakaoLoginButton";
 import logo from "../../../public/image/login_button/logo.svg";
 
-const url =
-  "https://qrecode-back.shop/oauth2/authorization/kakao?redirect_uri=http://localhost:5173";
+const kakaoUrl =
+"https://qrecode-back.shop/login/oauth2/authorization/kakao?redirect_uri=http://localhost:5173"
+
+
+const googleUrl =
+"https://qrecode-back.shop/login/oauth2/authorization/google?redirect_uri=http://localhost:5173"
+
 
 const LoginForm = () => {
 
@@ -16,10 +21,12 @@ const LoginForm = () => {
         <img src={logo} alt="logo" />
       </div>
       <div className={style.buttons}>
-        <Link to={url}>
+        <Link to={kakaoUrl}>
           <KakaoLoginButton />
         </Link>
+        <Link to={googleUrl}>
         <GoogleLoginButton />
+        </Link>
       </div>
     </div>
   );

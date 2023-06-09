@@ -1,0 +1,30 @@
+.pointItem {
+  display: flex;
+  padding: 14px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #EFEFEF;
+  margin-top: 10px;
+}
+
+.item:nth-child(2) {
+  flex-basis: 200px;
+}
+
+.shop p {
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.shop time {
+  font-weight: 400;
+  font-size: 13px;
+  color: #c8c8c8;
+}
+
+.point p {
+  font-weight: 800;
+  font-size: 18px;
+  color: #006c3a;
+}

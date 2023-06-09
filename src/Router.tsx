@@ -11,6 +11,7 @@ import ManageQRCode from "./pages/qr/ManageQRCode";
 import Setting from "./pages/Setting";
 import LoginPage from "./pages/login/Login";
 import { tokenLoader } from "./util/auth";
+import PointPage from "./pages/Point";
 import Flyer from "./pages/flyer/Flyer";
 import FullFyler from "./pages/flyer/FullFlyer";
 
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: 'map',
         element: <KakaoMap />,
+      },
+      {
+        path: 'point',
+        element: <PointPage />
       },
       {
         path: 'flyer',
@@ -64,7 +69,7 @@ const router = createBrowserRouter([
         element: <FlyerDetailPage />,
       },
       {
-        path: 'home',
+        index: true,
         element: <Home />,
       },
       {
