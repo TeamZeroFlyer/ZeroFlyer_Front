@@ -3,6 +3,8 @@ import { useGesture } from '@use-gesture/react'
 import { animated, useSpring, useSprings } from '@react-spring/web'
 import { styled } from './style/stitches.config.ts'
 import { Link } from "react-router-dom";
+import Hamburger from 'hamburger-react';
+import { useState } from 'react';
 
 const BUTTON_SIZE = 56
 
@@ -12,13 +14,13 @@ const footerList = [["home", "map", "setting"], ["home", "point", "flyer", "map"
 const FooterWeb = () => {
   // 로그인 구현시 로그인 정보를 불러와 userState에 담아준다.
   // 0: 비로그인, 1: 소비자, 2: 광고주
-  let userState = 2;
+  let userState = 1;
 
   const buttonRef = React.useRef<HTMLDivElement>(null!)
   const avatarRefs = React.useRef<HTMLDivElement[]>([])
   const avatarRefInitialPositions = React.useRef<number[]>([])
   const containerRef = React.useRef<HTMLDivElement>(null!)
-
+  const [isOpen, setOpen] = useState(false);
   const isVisible = React.useRef(false)
   const [{ x, y, opacity }, api] = useSpring(
     () => ({
@@ -59,6 +61,7 @@ const FooterWeb = () => {
     {
       onHover: ({ hovering }) => {
         if (hovering) {
+          setOpen(true);
           if (backgroundTimeoutRef.current) {
             clearTimeout(backgroundTimeoutRef.current)
           }
@@ -76,6 +79,7 @@ const FooterWeb = () => {
             y: 0,
           })
         } else {
+          setOpen(false);
           backgroundTimeoutRef.current = setTimeout(() => {
             api.start({
               opacity: 0,
@@ -89,7 +93,7 @@ const FooterWeb = () => {
                 isVisible.current = false
               },
             }))
-          }, 500)
+          }, 100)
         }
       },
     }
@@ -129,7 +133,7 @@ const FooterWeb = () => {
             zIndex: 5
           }}>
             <div>
-            <img src='/public/icons/footerIcon/menu.svg'/>
+            <Hamburger rounded color="#006C3A" toggled={isOpen} />
             </div>
         </FloatingButton>
         {avatarSprings.map((springs, index) => (

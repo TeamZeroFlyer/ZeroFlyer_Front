@@ -12,6 +12,7 @@ const kakaoUrl =
 const googleUrl =
 "https://qrecode-back.shop/login/oauth2/authorization/google?redirect_uri=http://localhost:5173"
 
+
 const LoginForm = () => {
 
   return (

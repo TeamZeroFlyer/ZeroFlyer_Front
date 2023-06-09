@@ -6,7 +6,14 @@
   margin: 0;
   box-sizing: inherit;
 }
-
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
 ::-webkit-scrollbar {
   display: none;
 }

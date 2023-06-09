@@ -1,9 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import App from './App';
-import FlyerManage from "./pages/manageFlyer/ManageFlyer";
-import EditFlyer from "./pages/manageFlyer/EditFlyer";
-import Home from "./pages/home/Home";
+import EditFlyer from "./pages/flyer/EditFlyer";
+import Home from "./pages/Home";
 import KakaoMap from './pages/map/KakaoMap';
 import CreateQRCode from "./pages/qr/CreateQRCode";
 import FlyerDetailPage from "./pages/FlyerDetail";
@@ -13,6 +12,8 @@ import Setting from "./pages/Setting";
 import LoginPage from "./pages/login/Login";
 import { tokenLoader } from "./util/auth";
 import PointPage from "./pages/Point";
+import Flyer from "./pages/flyer/Flyer";
+import FullFyler from "./pages/flyer/FullFlyer";
 
 const router = createBrowserRouter([
   {
@@ -34,11 +35,15 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <FlyerManage />,
+            element: <Flyer />,
           },
           {
             path: ":flyerCode",
             element: <EditFlyer />,
+          },
+          {
+            path: "full/:flyerCode",
+            element: <FullFyler />,
           }
         ],
       },
