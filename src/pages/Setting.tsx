@@ -2,6 +2,9 @@ import Header from "../components/footer/Header";
 import style from "./Setting.module.css";
 
 const Setting = () => { 
+
+    const role = window.localStorage.getItem("role");
+
     return(
         <>
         <Header>설정</Header>
@@ -10,7 +13,7 @@ const Setting = () => {
             <div className={style.element}>
                 가게 정보 <img src="/public/icons/lock.svg"/>
             </div>
-            <div className={style.element}>
+            <div className={style.element} onClick={() => {}}>
             일반 모드로 전환 <img src="/public/icons/smile.svg"/>
             </div>
             <div className={style.element}>

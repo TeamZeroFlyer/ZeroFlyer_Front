@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import style from "./EditFlyer.module.css";
+import style from "./EditFlyerAd.module.css";
 import { KeyboardEventHandler, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ interface Flyer {
     qrTotalViewCount: number;
 }
 
-const EditFlyer = () => {
+const EditFlyerAd = () => {
     const { flyerCode } = useParams();
     const [imgFile, setImgFile] = useState('/public/icons/camera.svg');
     const imgRef = useRef<HTMLInputElement>(null);
@@ -137,7 +137,7 @@ const EditFlyer = () => {
     );
 }
 
-export default EditFlyer;
+export default EditFlyerAd;
 
 let dummy: Flyer = {
     flyerCode: 0,
