@@ -2,10 +2,10 @@ import { useState, useEffect, useRef, KeyboardEventHandler } from "react";
 import { Map, MapMarker, useInjectKakaoMapApi } from "react-kakao-maps-sdk";
 import style from "./KakaoMap.module.css";
 import { Outlet } from 'react-router-dom';
-import useGeoLocation from "../hooks/useGeolocation";
-import ModalPortal from "../components/map/ModalPortal";
+import useGeoLocation from "../../hooks/useGeolocation";
+import ModalPortal from "../../components/map/ModalPortal";
 import { CSSTransition } from "react-transition-group";
-import StoreInformation from "../components/map/StoreInfomation";
+import StoreInformation from "../../components/map/StoreInfomation";
 
 interface Store {
   latlng: {lat: number; lng: number;};

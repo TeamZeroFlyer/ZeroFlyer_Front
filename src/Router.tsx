@@ -1,15 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import App from './App';
-import KakaoMap from './pages/KakaoMap';
+import FlyerManage from "./pages/manageFlyer/ManageFlyer";
+import EditFlyer from "./pages/manageFlyer/EditFlyer";
+import Home from "./pages/home/Home";
+import KakaoMap from './pages/map/KakaoMap';
 import CreateQRCode from "./pages/qr/CreateQRCode";
 import FlyerDetailPage from "./pages/FlyerDetail";
 import QrScanner from "./pages/qr/QrScanner";
 import ManageQRCode from "./pages/qr/ManageQRCode";
-import FlyerManage from "./pages/ManageFlyer";
-import EditFlyer from "./pages/EditFlyer";
 import Setting from "./pages/Setting";
-import Home from "./pages/Home";
 import LoginPage from "./pages/login/Login";
 import { tokenLoader } from "./util/auth";
 

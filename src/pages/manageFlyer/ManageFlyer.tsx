@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import style from "./ManageFlyer.module.css";
 import { Link } from 'react-router-dom';
-import Header from "../components/footer/Header";
+import Header from "../../components/footer/Header";
 
 interface Flyer {
     flyerCode: number;
