@@ -1,17 +1,11 @@
 .loginForm {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  position: relative;
+  height: calc(100vh - 80px);
 }
 
-.loginForm > img {
-  position: fixed;
-  top: 265px;
-}
-
-.buttons {
-  position: fixed;
-  bottom: 150px;
+.buttons > * {
+  margin-top: 8px;
 }

@@ -8,10 +8,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 5rem;
 }
 
 .title {
-  
   margin: 72px auto 34px auto;
   font-size: 18px;
   font-weight: 800;
@@ -21,7 +21,7 @@
   text-align: center;
 }
 
-.name {
+.outline {
   background-color: #006c3a;
   padding: 1rem;
   border-radius: 1rem;
@@ -29,7 +29,7 @@
   margin-bottom: 1rem;
 }
 
-.name h1 {
+.outline h1 {
   text-align: center;
   color: white;
   margin: 2rem 0 4rem 0;
@@ -45,9 +45,6 @@
   left: 50%;
   transform: translate(-50%, -70%);
   filter: drop-shadow(0 0 1px black);
-}
-
-.scan {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,21 +76,15 @@
   border: 1px solid black;
   border-radius: 1rem;
   color: black;
-  height: 70%;
 }
 
 .info {
   margin: 2rem 0 1rem 0;
   text-align: center;
-  border-bottom: 1px solid #e9ecef;
-}
-
-.qrcode {
-  margin-top: 1.5rem;
 }
 
 @media (max-width: 480px) {
-  .name {
+  .outline {
     background-color: #006c3a;
     padding: 1rem;
     border-radius: 1rem;
@@ -124,6 +115,5 @@
     margin: 2rem 0 1rem 0;
     padding: 1rem;
     text-align: center;
-    border-bottom: 1px solid #e9ecef;
   }
 }
