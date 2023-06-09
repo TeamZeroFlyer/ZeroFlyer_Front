@@ -68,3 +68,9 @@
 .cardContents > div {
   margin-right: 10px;
 }
+
+@media (min-width: 767px) {
+  .title {
+   text-align: center;
+  }
+}
