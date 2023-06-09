@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import App from './App';
 import EditFlyer from "./pages/flyer/EditFlyer";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 import KakaoMap from './pages/map/KakaoMap';
 import CreateQRCode from "./pages/qr/CreateQRCode";
 import FlyerDetailPage from "./pages/FlyerDetail";

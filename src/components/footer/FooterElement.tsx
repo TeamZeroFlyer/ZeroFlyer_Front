@@ -18,7 +18,7 @@ const FooterElement: React.FC<FooterProps> = (props) => {
         setIsClicked(props.now === "/" + props.imgSrc ? "green" : "gray");
     }, [props.now]);
     return (
-        <img src={`/public/icons/footerIcon/${isClicked}${props.imgSrc}.svg`} className={style.footerElement} 
+        <img src={`/public/icons/footerIcon/${isClicked}${props.imgSrc === "" ? "home" : props.imgSrc}.svg`} className={style.footerElement} 
         onClick={ ()=>{props.onClick(); navigate(`/${props.imgSrc}`); 
         setIsClicked(window.location.pathname === "/" + props.imgSrc ? "green" : "gray")} }/>
     );
