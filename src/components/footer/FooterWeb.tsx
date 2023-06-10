@@ -3,19 +3,20 @@ import { useGesture } from '@use-gesture/react'
 import { animated, useSpring, useSprings } from '@react-spring/web'
 import { styled } from './style/stitches.config.ts'
 import Hamburger from 'hamburger-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-
+interface FooterProps{
+  status: number
+}
 const BUTTON_SIZE = 56
 
 // 0: 비로그인, 1: 소비자, 2: 광고주
-const footerList = [["", "map", "setting"], ["", "point", "flyer", "map", "setting"], ["", "flyer", "qr", "map", "setting"]];
+const footerList = [["", "map", "setting"], ["", "flyer", "map", "setting"], ["", "flyer", "qr", "map", "setting"]];
 
-const FooterWeb = () => {
-  // 로그인 구현시 로그인 정보를 불러와 userState에 담아준다.
+const FooterWeb: React.FC<FooterProps> = (props) => {
+  // 로그인 구현시 로그인 정보를 불러와 status에 담아준다.
   // 0: 비로그인, 1: 소비자, 2: 광고주
-  let userState = 1;
-
+  const [status, setStatus] = useState(0);
   const buttonRef = React.useRef<HTMLDivElement>(null!)
   const avatarRefs = React.useRef<HTMLDivElement[]>([])
   const avatarRefInitialPositions = React.useRef<number[]>([])
@@ -23,6 +24,10 @@ const FooterWeb = () => {
   const [isOpen, setOpen] = useState(false);
   const isVisible = React.useRef(false);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    setStatus(props.status);
+  }, [props.status, status]);
 
   const [{ x, y, opacity }, api] = useSpring(
     () => ({
@@ -34,7 +39,7 @@ const FooterWeb = () => {
   )
 
   const [avatarSprings, avatarApi] = useSprings(
-    footerList[userState].length,
+    footerList[status].length,
     i => ({
       y: 0,
       boxShadow: `0px 3px 8px 2px rgba(0, 108, 58,${0.2 * 1})`
@@ -43,9 +48,12 @@ const FooterWeb = () => {
   )
 
   React.useLayoutEffect(() => {
-    if (avatarRefInitialPositions.current.length === 0) {
+    if (avatarRefInitialPositions.current.length === 0 || avatarRefInitialPositions.current.length !== avatarRefs.current.length) {
       const { y: buttonY } = buttonRef.current.getBoundingClientRect()
       avatarRefInitialPositions.current = avatarRefs.current.map(node => buttonY - node.getBoundingClientRect().y)
+      avatarRefInitialPositions.current[0] = -64;
+      avatarRefInitialPositions.current[1] = -128;
+      avatarRefInitialPositions.current[2] = -192;
     }
 
     avatarApi.start(i => ({
@@ -54,7 +62,7 @@ const FooterWeb = () => {
     }))
   containerRef.current.style.display = "fixed";
 
-  }, [])
+  }, [status])
 
   const backgroundTimeoutRef = React.useRef<ReturnType<typeof setTimeout>>()
   const avatarTimeoutRef = React.useRef<ReturnType<typeof setTimeout>>()
@@ -104,7 +112,11 @@ const FooterWeb = () => {
   const { onPointerEnter, onPointerLeave, onPointerDown, ...restGestures } = bindGestures();
   const clickAvartar = (index: number) => {
     if (isOpen){
-      navigate(`/${footerList[userState][index]}`);
+      if(status === 1 || status === 2 || footerList[status][index] !== "setting"){
+        navigate(`/${footerList[status][index]}`);
+      }else{
+        navigate(`/login`);
+      }
     }
   }
 
@@ -149,7 +161,7 @@ const FooterWeb = () => {
             onClick={()=>clickAvartar(index)}
             css={{
               backgroundColor: 'white',
-              backgroundImage: 'url(/public/icons/footerIcon/green'+ (footerList[userState][index] === "" ? "home" : footerList[userState][index]) +'.svg)',
+              backgroundImage: 'url(/public/icons/footerIcon/green'+ (footerList[status][index] === "" ? "home" : footerList[status][index]) +'.svg)',
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center',
               zIndex: 4 - index,
