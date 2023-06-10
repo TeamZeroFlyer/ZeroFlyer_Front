@@ -1,0 +1,145 @@
+@media (min-width: 768px) {
+  .container {
+    width: 768px;
+    margin: auto;
+    position: relative;
+    background-color: #f5f5f5;
+    height: calc(100vh);
+    padding: 3rem 2rem 100px 2rem;
+    overflow: scroll;
+  }
+}
+
+@media (max-width: 767px) {
+  /* 모바일 */
+  .container {
+    width: 100vw;
+    margin: auto;
+    position: relative;
+    background-color: #f5f5f5;
+    height: calc(100vh - 80px);
+    padding: 3rem 2rem 100px 2rem;
+    overflow: scroll;
+  }
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 50px;
+}
+.title {
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 20px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.cancel {
+  display: flex;
+  margin-left: auto;
+  justify-content: right;
+  align-items: right;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+}
+.complete {
+  margin-left: 15px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 20px;
+  text-align: right;
+}
+.cancel:hover,
+.complete:hover {
+  cursor: pointer;
+}
+
+.star {
+  color: red;
+}
+
+.forTag {
+  margin: 10px 0 60px 0;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+}
+.tagInfo {
+  margin-bottom: 10px;
+}
+.searchBox2 {
+  background: #ffffff;
+  border-radius: 8px;
+  border: none;
+  text-indent: 20px;
+  font-size: 12pt;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.storeName {
+  margin: 15px 0 5px 0;
+}
+.noHashTag {
+  color: #c8c8c8;
+  border: 1px solid #c8c8c8;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  border-radius: 43px;
+  padding: 5px 10px 5px 10px;
+  margin-right: 5px;
+}
+.storeHashtag {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  color: #006c3a;
+  border: 1px solid #006c3a;
+  border-radius: 43px;
+  padding: 5px 10px 5px 10px;
+  margin-right: 5px;
+}
+.searchBox3 {
+  background: #ffffff;
+  border-radius: 8px;
+  border: none;
+  text-indent: 20px;
+  font-size: 12pt;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.numBox {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.boxInner1 {
+  margin-right: 10px;
+  width: calc(50% - 10px);
+}
+.boxInner2 {
+  width: calc(50% - 10px);
+}
+
+.twolinebox {
+  background: #ffffff;
+  border-radius: 8px;
+  border: none;
+  padding: 20px;
+  font-size: 12pt;
+  height: 80px;
+  width: 100%;
+  margin-bottom: 15px;
+  resize: none;
+}
