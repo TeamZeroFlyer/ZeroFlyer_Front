@@ -4,7 +4,6 @@ import style from "./PointItem.module.css";
 import saving from "../../../public/image/point_history/saving.svg";
 import { History } from "../../pages/Point";
 
-
 const PointItem: React.FC<{
   history: History
 }> = (props) => {
@@ -35,3 +34,4 @@ const formatDate = (date:Date) => {
 
   return `${year}.${month}.${day} ${hours}:${minutes}`;
 }
+

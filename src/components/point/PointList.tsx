@@ -4,8 +4,8 @@ import barcode from "../../../public/image/point_history/barcode.svg";
 import PointItem from "./PointItem";
 import { PointHistory } from "src/pages/Point";
 
-
 const PointList: React.FC<{ pointHistory: PointHistory }> = (props) => {
+
   return (
     <>
       <Header>적립 내역</Header>

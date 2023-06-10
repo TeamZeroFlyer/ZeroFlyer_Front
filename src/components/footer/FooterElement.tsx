@@ -7,6 +7,7 @@ interface FooterProps{
     state: number;
     now: string;
     onClick: () => void;
+    status: number;
 }
 
 const FooterElement: React.FC<FooterProps> = (props) => {
@@ -18,8 +19,8 @@ const FooterElement: React.FC<FooterProps> = (props) => {
         setIsClicked(props.now === "/" + props.imgSrc ? "green" : "gray");
     }, [props.now]);
     return (
-        <img src={`/public/icons/footerIcon/${isClicked}${props.imgSrc}.svg`} className={style.footerElement} 
-        onClick={ ()=>{props.onClick(); navigate(`/${props.imgSrc}`); 
+        <img src={`/public/icons/footerIcon/${isClicked}${props.imgSrc === "" ? "home" : props.imgSrc}.svg`} className={style.footerElement} 
+        onClick={ ()=>{props.onClick(); (props.status === 1 || props.status === 2 || props.imgSrc !== "setting") ? navigate(`/${props.imgSrc}`) : navigate(`/login`); 
         setIsClicked(window.location.pathname === "/" + props.imgSrc ? "green" : "gray")} }/>
     );
 };

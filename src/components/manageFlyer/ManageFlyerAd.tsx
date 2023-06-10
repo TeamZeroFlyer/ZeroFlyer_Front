@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import style from "./ManageFlyerAd.module.css";
+import style from "./ManageFlyer.module.css";
 import { Link } from 'react-router-dom';
 import Header from "../footer/Header";
 
