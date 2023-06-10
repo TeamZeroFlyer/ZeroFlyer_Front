@@ -1,13 +1,6 @@
 .cardContent {
   display: flex;
-  
-}
-
-.co2 {
-  border-radius: 100%;
-  background-color: #d9d9d9;
-  width: 64px;
-  height: 64px;
+  align-items: center;
 }
 
 .info {

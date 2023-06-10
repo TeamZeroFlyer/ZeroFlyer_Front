@@ -14,7 +14,6 @@ import { tokenLoader } from "./util/auth";
 import PointPage from "./pages/Point";
 import Flyer from "./pages/flyer/Flyer";
 import FullFyler from "./pages/flyer/FullFlyer";
-import PointPage from "./pages/Point";
 
 const router = createBrowserRouter([
   {

@@ -1,0 +1,22 @@
+/* CircleProgressBar.module.css */
+
+.circleProgressBarWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.circleProgressBar {
+  transform: rotate(-90deg);
+}
+
+.circleProgressBarBackground {
+  stroke: #f9f9f9;
+}
+
+.circleProgressBarProgress {
+  stroke: #006c3a;
+}
+
+.circleProgressBarEndMarker {
+  fill: #006c3a;
+}
