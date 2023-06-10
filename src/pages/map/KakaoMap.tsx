@@ -15,8 +15,8 @@ interface Store {
   address: string;
   hashTag: string[];
   hasCoupon: boolean;
+  storeDescription: string;
 }
-
 const KakaoMap = () => {
   const location = useGeoLocation();  // 외부 훅 컴포넌트에서 받아온 위치정보
   const [showModal, setShowModal] = useState(false);
@@ -26,7 +26,7 @@ const KakaoMap = () => {
   const [isFlyer, setIsFlyer] = useState(true);
   const [flyerUrl, setFlyerUrl] = useState('/public/image/greenFlyer.svg');
   const [couponUrl, setCouponUrl] = useState('/public/image/whiteCoupon.svg');
-  const [oneStore, setOneStore] = useState<Store>({latlng: {lat: 0,lng: 0}, storeName: '', startTime: '', closeTime: '', address: '', hashTag: [''], hasCoupon: true});
+  const [oneStore, setOneStore] = useState<Store>({latlng: {lat: 0,lng: 0}, storeName: '', startTime: '', closeTime: '', address: '', hashTag: [''], hasCoupon: true, storeDescription: ''});
   const { loading, error } = useInjectKakaoMapApi({ appkey: import.meta.env.VITE_KAKAO_API_KEY, libraries: ['services'] });
   const search = useRef<HTMLInputElement>(null);
   const [stores, setStores] = useState<Store[]>([]); // 초기 좌표 기준으로 설정해두기
@@ -38,6 +38,34 @@ const KakaoMap = () => {
 
   // TODO: 지도의 중심좌표에 따라 서버에 주변 점포 요청해서 set해주기
   useEffect(()=>{
+    let dummy: Store[] = [];
+    fetch("https://qrecode-back.shop/map/stores?lat=" + center.lat + "&lng=" + center.lng, {
+      method: "GET",
+      headers: {
+      Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      "Content-Type": "application/json"
+      }
+      }).then(response => {
+      return response.json()
+      })
+      .then(data => {
+        data.data.map((store: any) => {
+          let tmp = store.storeTag.split("#");
+          tmp.splice(0,1);
+          let tmpdata: Store = {
+            latlng: {lat: store.storeLat, lng: store.storeLong},
+            storeName: store.storeName,
+            startTime: store.storeStart.substring(1, 3) + store.storeStart.substring(3, 5),
+            closeTime: store.storeStart.substring(1, 3) + store.storeStart.substring(3, 5),
+            address: data.storeAddress.split("/")[0],
+            hashTag: tmp,
+            hasCoupon: true,
+            storeDescription: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
+          };
+          dummy.push(tmpdata);
+        });
+      })
+
     setStores(dummy);
     const span = document.getElementById("root")!.querySelectorAll("span");
     for(var i = 0; i < span.length; i++){
@@ -141,114 +169,126 @@ const KakaoMap = () => {
 export default KakaoMap;
 
 
-// 서버 연결 전 더미 데이터
-const dummy = [
-  {
-    latlng: {lat: 35.311526, lng: 128.291077},
-    storeName: "새싹미용실12",
-    startTime: "1000",
-    closeTime: "1200",
-    address: "서울시 새싹구 새싹동 새싹로 123길 53",
-    hashTag: ["합리적인가격", "헤어스1파", "두피1클리닉"],
-    hasCoupon: true,
-  },
-  {
-    latlng: {lat: 35.313526, lng: 128.292077},
-    storeName: "새싹미용실2",
-    startTime: "1000",
-    closeTime: "1900",
-    address: "서울시 새싹구 새싹동 새싹로 123길 53",
-    hashTag: ["합리적인가격", "헤어2스파", "두피클리2닉"],
-    hasCoupon: true,
-  },
-  {
-    latlng: {lat: 35.315526, lng: 128.291077},
-    storeName: "새싹미용실3",
-    startTime: "1000",
-    closeTime: "2400",
-    address: "서울시 새싹구 새싹동 새싹로 123길 53",
-    hashTag: ["합리적인가격", "헤어3스파", "두피클3리닉"],
-    hasCoupon: true,
-  },
-  {
-    latlng: {lat: 35.317526, lng: 128.296077},
-    storeName: "새싹미용실4",
-    startTime: "1000",
-    closeTime: "1100",
-    address: "서울시 새싹구 새싹동 새싹로 123길 53",
-    hashTag: ["합리적인가격", "헤어4스파", "두피클4리닉"],
-    hasCoupon: true,
-  },
-  {
-    latlng: {lat: 35.319526, lng: 128.292077},
-    storeName: "새싹미용실5",
-    startTime: "1000",
-    closeTime: "2400",
-    address: "서울시 새싹구 새싹동 새싹로 123길 53",
-    hashTag: ["합리적인가격", "헤어5스파"],
-    hasCoupon: true,
-  },
-  {
-    latlng: {lat: 35.321526, lng: 128.297077},
-    storeName: "새싹미용실62",
-    startTime: "1000",
-    closeTime: "1500",
-    address: "서울시 새싹구 새싹동 새싹로 123길 53",
-    hashTag: ["합리적인가격"],
-    hasCoupon: true,
-  },
-  {
-    latlng: {lat: 35.331526, lng: 128.291077},
-    storeName: "새싹미용실1",
-    startTime: "1000",
-    closeTime: "1200",
-    address: "서울시 새싹구 새싹동 새싹로 123길 53",
-    hashTag: ["합리적인가격", "헤어스1파", "두피1클리닉"],
-    hasCoupon: true,
-  },
-  {
-    latlng: {lat: 37.4984587, lng: 127.0585077},
-    storeName: "새싹미용실2",
-    startTime: "1000",
-    closeTime: "1900",
-    address: "서울시 새싹구 새싹동 새싹로 123길 53",
-    hashTag: ["합리적인가격", "헤어2스파", "두피클리2닉"],
-    hasCoupon: true,
-  },
-  {
-    latlng: {lat: 35.335526, lng: 128.291077},
-    storeName: "새싹미용실3",
-    startTime: "1000",
-    closeTime: "2400",
-    address: "서울시 새싹구 새싹동 새싹로 123길 53",
-    hashTag: ["합리적인가격", "헤어3스파", "두피클3리닉"],
-    hasCoupon: true,
-  },
-  {
-    latlng: {lat: 35.337526, lng: 128.296077},
-    storeName: "새싹미용실4",
-    startTime: "1000",
-    closeTime: "1100",
-    address: "서울시 새싹구 새싹동 새싹로 123길 53",
-    hashTag: ["합리적인가격", "헤어4스파", "두피클4리닉"],
-    hasCoupon: true,
-  },
-  {
-    latlng: {lat: 35.339526, lng: 128.292077},
-    storeName: "새싹미용실5",
-    startTime: "1000",
-    closeTime: "2400",
-    address: "서울시 새싹구 새싹동 새싹로 123길 53",
-    hashTag: ["합리적인가격", "헤어5스파"],
-    hasCoupon: true,
-  },
-  {
-    latlng: {lat: 35.331526, lng: 128.297077},
-    storeName: "새싹미용실6",
-    startTime: "1000",
-    closeTime: "1500",
-    address: "서울시 새싹구 새싹동 새싹로 123길 53",
-    hashTag: ["합리적인가격"],
-    hasCoupon: true,
-  }
-];
+// // 서버 연결 전 더미 데이터
+// const dummy = [
+//   {
+//     latlng: {lat: 35.311526, lng: 128.291077},
+//     storeName: "새싹미용실12",
+//     startTime: "1000",
+//     closeTime: "1200",
+//     address: "서울시 새싹구 새싹동 새싹로 123길 53",
+//     hashTag: ["합리적인가격", "헤어스1파", "두피1클리닉"],
+//     hasCoupon: true,
+//     storeDescription: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
+//   },
+//   {
+//     latlng: {lat: 35.313526, lng: 128.292077},
+//     storeName: "새싹미용실2",
+//     startTime: "1000",
+//     closeTime: "1900",
+//     address: "서울시 새싹구 새싹동 새싹로 123길 53",
+//     hashTag: ["합리적인가격", "헤어2스파", "두피클리2닉"],
+//     hasCoupon: true,
+//     storeDescription: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
+//   },
+//   {
+//     latlng: {lat: 35.315526, lng: 128.291077},
+//     storeName: "새싹미용실3",
+//     startTime: "1000",
+//     closeTime: "2400",
+//     address: "서울시 새싹구 새싹동 새싹로 123길 53",
+//     hashTag: ["합리적인가격", "헤어3스파", "두피클3리닉"],
+//     hasCoupon: true,
+//     storeDescription: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
+//   },
+//   {
+//     latlng: {lat: 35.317526, lng: 128.296077},
+//     storeName: "새싹미용실4",
+//     startTime: "1000",
+//     closeTime: "1100",
+//     address: "서울시 새싹구 새싹동 새싹로 123길 53",
+//     hashTag: ["합리적인가격", "헤어4스파", "두피클4리닉"],
+//     hasCoupon: true,
+//     storeDescription: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
+//   },
+//   {
+//     latlng: {lat: 35.319526, lng: 128.292077},
+//     storeName: "새싹미용실5",
+//     startTime: "1000",
+//     closeTime: "2400",
+//     address: "서울시 새싹구 새싹동 새싹로 123길 53",
+//     hashTag: ["합리적인가격", "헤어5스파"],
+//     hasCoupon: true,
+//     storeDescription: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
+//   },
+//   {
+//     latlng: {lat: 35.321526, lng: 128.297077},
+//     storeName: "새싹미용실62",
+//     startTime: "1000",
+//     closeTime: "1500",
+//     address: "서울시 새싹구 새싹동 새싹로 123길 53",
+//     hashTag: ["합리적인가격"],
+//     hasCoupon: true,
+//     storeDescription: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
+//   },
+//   {
+//     latlng: {lat: 35.331526, lng: 128.291077},
+//     storeName: "새싹미용실1",
+//     startTime: "1000",
+//     closeTime: "1200",
+//     address: "서울시 새싹구 새싹동 새싹로 123길 53",
+//     hashTag: ["합리적인가격", "헤어스1파", "두피1클리닉"],
+//     hasCoupon: true,
+//     storeDescription: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
+//   },
+//   {
+//     latlng: {lat: 37.4984587, lng: 127.0585077},
+//     storeName: "새싹미용실2",
+//     startTime: "1000",
+//     closeTime: "1900",
+//     address: "서울시 새싹구 새싹동 새싹로 123길 53",
+//     hashTag: ["합리적인가격", "헤어2스파", "두피클리2닉"],
+//     hasCoupon: true,
+//     storeDescription: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
+//   },
+//   {
+//     latlng: {lat: 35.335526, lng: 128.291077},
+//     storeName: "새싹미용실3",
+//     startTime: "1000",
+//     closeTime: "2400",
+//     address: "서울시 새싹구 새싹동 새싹로 123길 53",
+//     hashTag: ["합리적인가격", "헤어3스파", "두피클3리닉"],
+//     hasCoupon: true,
+//     storeDescription: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
+//   },
+//   {
+//     latlng: {lat: 35.337526, lng: 128.296077},
+//     storeName: "새싹미용실4",
+//     startTime: "1000",
+//     closeTime: "1100",
+//     address: "서울시 새싹구 새싹동 새싹로 123길 53",
+//     hashTag: ["합리적인가격", "헤어4스파", "두피클4리닉"],
+//     hasCoupon: true,
+//     storeDescription: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
+//   },
+//   {
+//     latlng: {lat: 35.339526, lng: 128.292077},
+//     storeName: "새싹미용실5",
+//     startTime: "1000",
+//     closeTime: "2400",
+//     address: "서울시 새싹구 새싹동 새싹로 123길 53",
+//     hashTag: ["합리적인가격", "헤어5스파"],
+//     hasCoupon: true,
+//     storeDescription: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
+//   },
+//   {
+//     latlng: {lat: 35.331526, lng: 128.297077},
+//     storeName: "새싹미용실6",
+//     startTime: "1000",
+//     closeTime: "1500",
+//     address: "서울시 새싹구 새싹동 새싹로 123길 53",
+//     hashTag: ["합리적인가격"],
+//     hasCoupon: true,
+//     storeDescription: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
+//   }
+// ];

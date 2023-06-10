@@ -6,29 +6,28 @@ import { Link } from 'react-router-dom';
 interface Flyer {
     flyerCode: number;
     flyerTitle: string;
-    storeName: string;
     startDate: string;
     endDate: string;
-    address: string;
-    detailAddress: string;
-    hashTag: string[];
+    hashTag: string;
     hasCoupon: boolean;
-    phone: string;
-    startTime: string;
-    closeTime: string;
     imgSrc: string;
-    qrNum: number;
-    qrTotalViewCount: number;
 }
 
 const EditFlyerAd = () => {
+    let tmpHash: string[] = [];
+    dummy.hashTag.split('#').map((item, _) => {
+        tmpHash.push(item);
+    });
+    if (tmpHash.length >0){
+        tmpHash.splice(0, 1);
+    }
     const { flyerCode } = useParams();
     const [imgFile, setImgFile] = useState('/public/icons/camera.svg');
     const imgRef = useRef<HTMLInputElement>(null);
     const tag = useRef<HTMLInputElement>(null);
-    const [hashTag, setHashTag] = useState(dummy.hashTag);
+    const [hashTag, setHashTag] = useState(tmpHash);
     const [checked, setChecked] = useState(false);
-    // document.querySelector("body")!.style.backgroundColor = "#f5f5f5";
+
     useEffect(()=>{
         if (flyerCode === "new"){
 
@@ -56,7 +55,11 @@ const EditFlyerAd = () => {
         if(event.key === 'Enter' && tag.current!.value !== ''){
           tag.current!.blur();
           let tmpArr = Array.from(hashTag);
-          tmpArr.push(tag.current!.value);
+          if(!tag.current!.value.includes('#')){
+            tmpArr.push(tag.current!.value);
+            }else{
+          alert('해시태그는 #을 제외하고 입력해주세요.');
+            }
           setHashTag(tmpArr);
           tag.current!.value = '';
         }
@@ -147,7 +150,7 @@ let dummy: Flyer = {
     endDate: "20230630",
     address: "새싹시 새싹동 12번지",
     detailAddress: "12동 191호",
-    hashTag: ["합리적인가격", "여기가최고"],
+    hashTag: "#합리적인가격#여기가최고",
     hasCoupon: true,
     phone: "010-1234-5678",
     startTime: "0700",

@@ -11,7 +11,7 @@ interface FooterProps{
 const BUTTON_SIZE = 56
 
 // 0: 비로그인, 1: 소비자, 2: 광고주
-const footerList = [["", "map", "setting"], ["", "flyer", "map", "setting"], ["", "flyer", "qr", "map", "setting"]];
+const footerList = [["", "map", "login"], ["", "flyer", "map", "setting"], ["", "flyer", "qr", "map", "setting"]];
 
 const FooterWeb: React.FC<FooterProps> = (props) => {
   // 로그인 구현시 로그인 정보를 불러와 status에 담아준다.
