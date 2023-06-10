@@ -4,7 +4,7 @@ import FooterElement from "./FooterElement";
 import FooterWeb from "./FooterWeb";
 
 // 0: 비로그인, 1: 소비자, 2: 광고주
-const footerList = [["home", "map", "setting"], ["home", "point", "flyer", "map", "setting"], ["home", "flyer", "qr", "map", "setting"]];
+const footerList = [["", "map", "setting"], ["", "point", "flyer", "map", "setting"], ["", "flyer", "qr", "map", "setting"]];
 
 const Footer = () => {
     const url = window.location.pathname;

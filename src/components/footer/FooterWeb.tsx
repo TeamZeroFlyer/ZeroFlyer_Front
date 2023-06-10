@@ -2,14 +2,14 @@ import * as React from 'react'
 import { useGesture } from '@use-gesture/react'
 import { animated, useSpring, useSprings } from '@react-spring/web'
 import { styled } from './style/stitches.config.ts'
-import { Link } from "react-router-dom";
 import Hamburger from 'hamburger-react';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const BUTTON_SIZE = 56
 
 // 0: 비로그인, 1: 소비자, 2: 광고주
-const footerList = [["home", "map", "setting"], ["home", "point", "flyer", "map", "setting"], ["home", "flyer", "qr", "map", "setting"]];
+const footerList = [["", "map", "setting"], ["", "point", "flyer", "map", "setting"], ["", "flyer", "qr", "map", "setting"]];
 
 const FooterWeb = () => {
   // 로그인 구현시 로그인 정보를 불러와 userState에 담아준다.
@@ -21,7 +21,9 @@ const FooterWeb = () => {
   const avatarRefInitialPositions = React.useRef<number[]>([])
   const containerRef = React.useRef<HTMLDivElement>(null!)
   const [isOpen, setOpen] = useState(false);
-  const isVisible = React.useRef(false)
+  const isVisible = React.useRef(false);
+  const navigate = useNavigate();
+
   const [{ x, y, opacity }, api] = useSpring(
     () => ({
       x: 0,
@@ -99,7 +101,12 @@ const FooterWeb = () => {
     }
   )
 
-  const { onPointerEnter, onPointerLeave, onPointerDown, ...restGestures } = bindGestures()
+  const { onPointerEnter, onPointerLeave, onPointerDown, ...restGestures } = bindGestures();
+  const clickAvartar = (index: number) => {
+    if (isOpen){
+      navigate(`/${footerList[userState][index]}`);
+    }
+  }
 
   const handlePointerDown = (isBackground: boolean) => (e: React.PointerEvent<HTMLElement>) => {
     if (isBackground && !isVisible.current) {
@@ -126,7 +133,6 @@ const FooterWeb = () => {
           ref={buttonRef}
           onPointerEnter={onPointerEnter}
           onPointerDown={handlePointerDown(false)}
-          onClick={()=>{}}
           {...restGestures}
           style={{
             boxShadow: opacity.to(o => `0px 3px 8px 2px rgba(0, 108, 58,${0.2 * 1})`),
@@ -137,20 +143,19 @@ const FooterWeb = () => {
             </div>
         </FloatingButton>
         {avatarSprings.map((springs, index) => (
-          <Link to={`/${footerList[userState][index]}`}>
           <AvatarIcon
             key={index}
             ref={ref => (avatarRefs.current[index] = ref!)}
-            onClick={(index)=>{}}
+            onClick={()=>clickAvartar(index)}
             css={{
               backgroundColor: 'white',
-              backgroundImage: 'url(/public/icons/footerIcon/green'+ footerList[userState][index] +'.svg)',
+              backgroundImage: 'url(/public/icons/footerIcon/green'+ (footerList[userState][index] === "" ? "home" : footerList[userState][index]) +'.svg)',
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center',
               zIndex: 4 - index,
             }}
             style={springs}
-          /></Link>
+          />
         ))}
 
       </BlurredBackground>
@@ -177,6 +182,7 @@ const AvatarIcon = styled(animated.div, {
   height: BUTTON_SIZE,
   borderRadius: '50%',
   mx: 4,
+  cursor: 'pointer',
 })
 
 const FloatingButton = styled(animated.div, {
