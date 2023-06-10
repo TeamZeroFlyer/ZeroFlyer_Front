@@ -1,9 +1,45 @@
 import Header from "../components/footer/Header";
 import style from "./Setting.module.css";
+import { useOutletContext } from 'react-router-dom';
+
+type ChildProps = {
+    status: number
+  }
 
 const Setting = () => { 
+    const {status} = useOutletContext<ChildProps>();
 
-    const role = window.localStorage.getItem("role");
+    const switchMode = () => {
+        const token = localStorage.getItem("accessToken");
+        console.log(JSON.stringify({"lastStatus" : status === 1 ? "ADVERTISER" : "USER"}));
+        if (token){
+            fetch("https://qrecode-back.shop/user/setstatus", {
+              method: "POST",
+              headers: {
+                Authorization: "Bearer " + token,
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({"lastStatus" : status === 1 ? "ADVERTISER" : "USER"})
+            })
+              .then(response => {
+                return response.json()
+              })
+              .then(data => {
+                if( data.data === "success"){
+                  window.location.href = "/";
+            }})
+              .catch(_ => {
+                localStorage.removeItem("accessToken");
+                window.location.href = "/login";
+              })
+          }
+
+    };
+
+    const logout = () => {
+        localStorage.removeItem("accessToken");
+        window.location.href = "/login";
+    };
 
     return(
         <>
@@ -11,10 +47,10 @@ const Setting = () => {
         <div className={style.general}>
             <div className={style.title}>일반</div>
             <div className={style.element}>
-                가게 정보 <img src="/public/icons/lock.svg"/>
+                {status === 1 ? "로그인 정보" : "가게 정보"} <img src="/public/icons/lock.svg"/>
             </div>
-            <div className={style.element} onClick={() => {}}>
-            일반 모드로 전환 <img src="/public/icons/smile.svg"/>
+            <div className={style.element}  onClick={()=>switchMode()}>
+            {status === 1 ? "광고주" : "일반"} 모드로 전환 <img src="/public/icons/smile.svg"/>
             </div>
             <div className={style.element}>
             상품 구매 <img src="/public/icons/smile.svg"/>
@@ -36,7 +72,7 @@ const Setting = () => {
 
 
         <div className={style.logout}>
-            <span className={style.text}>로그아웃</span>
+            <span className={style.text} onClick={()=>logout()}>로그아웃</span>
         </div>
         </>
     );
