@@ -1,26 +1,35 @@
 import React from "react";
-import { QRCodeCanvas } from "qrcode.react";
 
 import QRCode from "../../components/qr/QRCode";
 
-export type QRType = {
-  qrId: string;
-  flyerLink: string;
-};
-
-const QR: QRType[] = [
-  { qrId: "1", flyerLink: "http://localhost:5173/flyer/1" },
-  { qrId: "2", flyerLink: "http://localhost:5173/flyer/1" },
-  { qrId: "3", flyerLink: "http://localhost:5173/flyer/1" },
-];
-
 const QrScanner: React.FC = () => {
-
   return (
-    <div>
-      <QRCode />
-    </div>
+      <QRCode qr={dummy} />
   );
 };
 
 export default QrScanner;
+
+/**
+ * storeName: string
+ * qrScan: number
+ * qrId: string
+ * qrCreateAt: date
+ * flyerLink: string
+ */
+
+export type QRCodeType = {
+  storeName: string;
+  qrScan: number;
+  qrId: string;
+  qrCreateAt: Date;
+  flyerLink: string;
+};
+
+const dummy: QRCodeType = {
+  storeName: "새싹 미용실",
+  qrScan: 63,
+  qrId: "QR052301",
+  qrCreateAt: new Date("2023-05-23"),
+  flyerLink: "http://localhost:5173/flyer/1",
+};

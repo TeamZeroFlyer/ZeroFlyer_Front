@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 
-import { QRType } from "../../pages/qr/QrScanner";
 import style from "./QRCode.module.css";
 import Header from "../footer/Header";
+import { QRCodeType } from "../../pages/qr/QrScanner";
 
-const QRCode: React.FC<{ qr: QRType }> = (props) => {
+const QRCode: React.FC<{ qr: QRCodeType }> = (props) => {
   const [url, setUrl] = useState<string>("");
 
   useEffect(() => {
@@ -17,24 +17,21 @@ const QRCode: React.FC<{ qr: QRType }> = (props) => {
   return (
     <div className={style.container}>
       <Header>QR 코드</Header>
-      {/* <div className={style.title}>
-        <p>QR 코드</p>
-      </div> */}
       <div className={style.qrcode}>
         <div className={style.outline}>
-          <h1>새싹 미용실</h1>
+          <h1>{props.qr.storeName}</h1>
           <div className={style.qr}>
             <div className={style.scan}>
               <div>
-                <p>63</p>
+                <p>{props.qr.qrScan}</p>
               </div>
             </div>
             <div className={style.info}>
-              <h2>QR052301</h2>
-              <p>2023.05.23</p>
+              <h2>{props.qr.qrId}</h2>
+              <p>{formatDate(props.qr.qrCreateAt)}</p>
             </div>
-            <div>
-              <QRCodeCanvas id="qrCode" value={url} size={200} level={"H"} />
+            <div className={style.code}>
+              <QRCodeCanvas id="qrCode" value={props.qr.flyerLink} size={200} level={"H"} />
             </div>
           </div>
         </div>
@@ -42,5 +39,13 @@ const QRCode: React.FC<{ qr: QRType }> = (props) => {
     </div>
   );
 };
+
+function formatDate(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}.${month}.${day}`;
+}
 
 export default QRCode;

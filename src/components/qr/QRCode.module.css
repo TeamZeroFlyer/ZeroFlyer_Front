@@ -1,14 +1,13 @@
-.container {
-  height: calc(100vh - 80px);
-  overflow: scroll;
-}
-
 .qrcode {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 5rem;
+}
+
+.code {
+  padding: 1rem 0;
 }
 
 .title {
@@ -26,7 +25,6 @@
   padding: 1rem;
   border-radius: 1rem;
   width: 50%;
-  margin-bottom: 1rem;
 }
 
 .outline h1 {
@@ -84,6 +82,12 @@
 }
 
 @media (max-width: 480px) {
+
+  .container {
+    height: calc(100vh - 80px);
+    overflow: scroll;
+  }
+
   .outline {
     background-color: #006c3a;
     padding: 1rem;
@@ -115,5 +119,9 @@
     margin: 2rem 0 1rem 0;
     padding: 1rem;
     text-align: center;
+  }
+
+  .code {
+    padding: 0;
   }
 }

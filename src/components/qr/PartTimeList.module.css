@@ -1,0 +1,52 @@
+.partTimeList {
+  margin-top: 50px;
+  padding: 0 20px;
+}
+
+.partTimeList li {
+  list-style: none;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.requirement {
+  display: flex;
+}
+
+.list {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.list input {
+  font-size: 12px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.right {
+  width: 70%;
+}
+
+.left {
+  width: 30%;
+}
+
+.list .left {
+  margin-right: 8px;
+}
+
+.label {
+  font-weight: 400;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.label span {
+  color: #ff0000;
+}
