@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import App from './App';
+import App from "./App";
 import EditFlyer from "./pages/flyer/EditFlyer";
 import Home from "./pages/Home";
-import KakaoMap from './pages/map/KakaoMap';
+import KakaoMap from "./pages/map/KakaoMap";
 import CreateQRCode from "./pages/qr/CreateQRCode";
 import FlyerDetailPage from "./pages/FlyerDetail";
 import QrScanner from "./pages/qr/QrScanner";
@@ -20,18 +20,18 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     loader: tokenLoader,
-    id: 'root',
+    id: "root",
     children: [
       {
-        path: 'map',
+        path: "map",
         element: <KakaoMap />,
       },
       {
-        path: 'point',
-        element: <PointPage />
+        path: "point",
+        element: <PointPage />,
       },
       {
-        path: 'flyer',
+        path: "flyer",
         children: [
           {
             index: true,
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
           {
             path: "full/:flyerCode",
             element: <FullFyler />,
-          }
+          },
         ],
       },
       {
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
           {
             path: "new",
             element: <CreateQRCode />,
-          }
+          },
         ],
       },
       {
@@ -73,19 +73,15 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: 'setting',
+        path: "setting",
         element: <Setting />,
-      },      {
-        path: 'point',
-        element: <></>,
       },
       {
         path: "/login",
         element: <LoginPage />,
-      }
+      },
     ],
-    
-  }, 
+  },
 ]);
 
 export default router;

@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 import QrGenerator from "../../components/qr/QrGenerator";
-import style from "./CreateQRCode.module.css";
-import Button from "../../UI/Button";
+import QRForm from "../../components/qr/QRForm";
 import FlyerPreview from "../../components/FlyerPreview";
-import Header from "../../components/footer/Header";
+import PartTimeList from "../../components/qr/PartTimeList";
+import style from "./CreateQRCode.module.css"
 
 export type FlyerInf = {
   id: number;
@@ -13,7 +12,7 @@ export type FlyerInf = {
   flyerName: string;
   hashTag: string[];
   alt: string;
-}; 
+};
 
 const CreateQRCode: React.FC = () => {
   const [isQRModalOpen, setIsQRModalOpen] = useState<boolean>(false);
@@ -22,9 +21,8 @@ const CreateQRCode: React.FC = () => {
 
   const qrOpenModalHandler = () => setIsQRModalOpen(true);
   const qrCloseHandler = () => setIsQRModalOpen(false);
-
   return (
-    <>
+    <div className={style.createQRCode}>
       {isQRModalOpen && (
         <QrGenerator
           onConfirm={qrCloseHandler}
@@ -32,31 +30,16 @@ const CreateQRCode: React.FC = () => {
           onSelectQrNumber={setQrNumber}
         />
       )}
-      <div className={style.createQRCode}>
-        <div className={style.title}>
-          <p>QR코드 만들기</p>
-          <div className={style.action}>
-            <span className={style.cancle}>
-              <Link to="/qr">취소</Link>
-            </span>
-            <span style={{ fontWeight: "bold" }}>
-              <Link to="#">생성</Link>
-            </span>
-          </div>
-        </div>
-        <div className={style.flyer}>
-          <Button onClick={qrOpenModalHandler} width="100%">
-            전단지 선택
-          </Button>
-        </div>
-          {seletedFlyer && (
-            <FlyerPreview
-              previewFlyer={seletedFlyer}
-              selectQrNumber={setQrNumber}
-            />
-          )}
-      </div>
-    </>
+      <QRForm onModalClick={qrOpenModalHandler} />
+      {seletedFlyer && (
+        <FlyerPreview
+          previewFlyer={seletedFlyer}
+          selectQrNumber={setQrNumber}
+        />
+      )}
+
+      { seletedFlyer && <PartTimeList ea={qrNumber} />}
+    </div>
   );
 };
 

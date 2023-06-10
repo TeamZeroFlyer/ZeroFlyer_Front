@@ -1,0 +1,35 @@
+.createQRCode {
+  padding: 48px 20px 0px 20px;
+}
+
+.flyer {
+  margin-top: 2rem;
+}
+
+.flyer button {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.header > p {
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.cancel {
+  margin-right: 1rem;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.create {
+  font-weight: 800;
+  font-size: 18px;
+}

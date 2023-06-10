@@ -1,31 +1,39 @@
-import { Link } from "react-router-dom";
-
 import QRList from "../../components/qr/QRList";
-import style from "./ManageQRCode.module.css";
-import Button from "../../UI/Button";
 import Header from "../../components/footer/Header";
+
+type QR = {
+  qrId: string;
+  flyerTitle: string;
+  scan: number;
+};
+
+export type QRManagement = {
+  date: Date;
+  qrcodes: QR[];
+};
+
+const dummy: QRManagement[] = [
+  {
+    date: new Date('2023-05-23'),
+    qrcodes: [
+      { qrId: "QR052301", flyerTitle: "첫 방문 고객 할인", scan: 89 },
+      { qrId: "QR052302", flyerTitle: "첫 방문 고객 할인", scan: 27 },
+    ],
+  }, {
+    date: new Date('2023-05-22'),
+    qrcodes: [
+      { qrId: "QR052201", flyerTitle: "첫 방문 고객 할인", scan: 31 },
+      { qrId: "QR052202", flyerTitle: "첫 방문 고객 할인", scan: 29 },
+      { qrId: "QR052203", flyerTitle: "첫 방문 고객 할인", scan: 3 },
+    ],
+  },     
+];
 
 const ManageQRCode = () => {
   return (
     <>
       <Header>QR코드 관리</Header>
-      <div className={style.contentsHeader}>
-        <h3>QR 목록</h3>
-        <Link to="/qr/new">
-          <Button>QR 만들기</Button>
-        </Link>
-      </div>
-      <hr />
-      <div className={style.contents}>
-        <ul className={style.ul}>
-          <p>6월 3일(토)</p>
-          <li className={style.item}>
-            <Link to={"1"}>
-              <QRList />
-            </Link>
-          </li>
-        </ul>
-      </div>
+      <QRList qrcodes={ dummy} />
     </>
   );
 };
