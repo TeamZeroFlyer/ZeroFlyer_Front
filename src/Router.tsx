@@ -8,13 +8,13 @@ import CreateQRCode from "./pages/qr/CreateQRCode";
 import FlyerDetailPage from "./pages/FlyerDetail";
 import QrScanner from "./pages/qr/QrScanner";
 import ManageQRCode from "./pages/qr/ManageQRCode";
-import Setting from "./pages/Setting";
+import Setting from "./pages/setting/Setting";
 import LoginPage from "./pages/login/Login";
 import { tokenLoader } from "./util/auth";
 import PointPage from "./pages/Point";
 import Flyer from "./pages/flyer/Flyer";
 import FullFyler from "./pages/flyer/FullFlyer";
-import PointPage from "./pages/Point";
+import EditStore from "./pages/setting/EditStore";
 
 const router = createBrowserRouter([
   {
@@ -75,7 +75,16 @@ const router = createBrowserRouter([
       },
       {
         path: "setting",
-        element: <Setting />,
+        children: [
+          {
+            index: true,
+            element: <Setting />,
+          },
+          {
+            path: "edit",
+            element: <EditStore />,
+          },
+        ],
       },
       {
         path: "/login",
