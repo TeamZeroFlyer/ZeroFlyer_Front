@@ -51,7 +51,7 @@ const CitizenPage = () => {
   return (
     <div className={style.citizenPage}>
       <Header>
-        <img src="/public/image/logo.svg" />
+        <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/image/logo.svg" />
       </Header>
       <div className={style.contents}>
         <div className={`${style.item} ${style.userInfo}`}>
