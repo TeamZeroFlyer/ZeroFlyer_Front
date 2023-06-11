@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 const QRItem: React.FC<{
   qrcodes: QRManagement[];
+  isPTchecked: boolean;
 }> = (props) => {
   return (
     <>
@@ -22,8 +23,8 @@ const QRItem: React.FC<{
                     <img src={faceImg} alt="아르바이트생 얼굴" />
                   </div>
                   <div className={`${style.info} ${style.item}`}>
-                    <p className={style.id}>{qr.qrId}</p>
-                    <p className={style.title}>{qr.flyerTitle}</p>
+                    <p className={style.id}>{ props.isPTchecked ? qr.ptj.name : qr.qrId}</p>
+                    <p className={style.title}>{ props.isPTchecked ? qr.ptj.phone : qr.flyerTitle}</p>
                   </div>
                   <div className={`${style.action} ${style.item}`}>
                     <span>{qr.scan}</span>
