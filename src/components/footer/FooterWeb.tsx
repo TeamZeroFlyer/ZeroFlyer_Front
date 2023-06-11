@@ -161,7 +161,7 @@ const FooterWeb: React.FC<FooterProps> = (props) => {
             onClick={()=>clickAvartar(index)}
             css={{
               backgroundColor: 'white',
-              backgroundImage: 'url(../../../public/icons/footerIcon/green'+ (footerList[status][index] === "" ? "home" : footerList[status][index]) +'.svg)',
+              backgroundImage: 'url(https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/footerIcon/green'+ (footerList[status][index] === "" ? "home" : footerList[status][index]) +'.svg)',
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center',
               zIndex: 4 - index,
