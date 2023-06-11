@@ -20,11 +20,7 @@ interface StoreProps{
 }
 
 function formatTime(timeString: string) {
-    console.log(timeString);
-    const hours = Math.floor(parseInt(timeString) / 100);
-    const minutes = parseInt(timeString) % 100;
-    const formattedTime = `${hours}:${minutes.toString().padStart(2, '0')}`;
-    return formattedTime;
+    return timeString.substring(0, 2) + ":" + timeString.substring(2,4);
 }
 
 function isWithinTime(startTime: string, endTime: string){
@@ -43,9 +39,9 @@ const StoreInformation: React.FC<StoreProps> = (props) => {
     return (
         <div className={props.last ? style.storeLastInfo : style.storeInfo} onClick={() => props.move(props.store.latlng)}>
             <div className={props.red ? style.storeTitleRed : style.storeTitle}>{props.store.storeName}</div>
-            <div className={style.storeAddress}>{props.store.address}<img onClick={()=>copy(props.store.address)} className={style.copy} src="/public/icons/copy.svg"/></div>
+            <div className={style.storeAddress}>{props.store.address}<img onClick={()=>copy(props.store.address)} className={style.copy} src="../../../public/icons/copy.svg"/></div>
             <div className={style.storeTime}>
-                {open ? <img src="/public/image/greenCircle.svg"/> : <img src="/public/image/redCircle.svg"/>}
+                {open ? <img src="../../../public/image/greenCircle.svg"/> : <img src="../../../public/image/redCircle.svg"/>}
                 <span className={style.storeIsOpen}>
                 {open ? "영업중" : "영업종료"}
                 </span>

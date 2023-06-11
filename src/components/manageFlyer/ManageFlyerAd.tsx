@@ -70,9 +70,9 @@ const ManageFlyerAd = () => {
                             <div className={style.flyerTitle}>{flyer.flyerTitle}</div>
                             <div className={style.flyerValidDate}>{formatDate(flyer.startDate)} ~ {formatDate(flyer.endDate)}</div>
                             <div className={style.flyerCount}>
-                                <img src="/public/icons/smallFace.svg" />
+                                <img src="../../../public/icons/smallFace.svg" />
                                 {flyer.qrNum}
-                                <img src="/public/icons/smallFlyer.svg" />
+                                <img src="../../../public/icons/smallFlyer.svg" />
                                 {flyer.qrTotalViewCount}
                             </div>
                             <div className={style.flyerBtn}>
@@ -90,7 +90,7 @@ const ManageFlyerAd = () => {
                 {now === "using" &&
                 <Link to="/flyer/new">
                 <div className={style.addFlyer}>
-                    <img src="/public/image/addFlyer.svg" />
+                    <img src="../../../public/image/addFlyer.svg" />
                 </div>
                 </Link>}
                 {now === "used" && dummy.map((flyer, i)=>(
@@ -100,9 +100,9 @@ const ManageFlyerAd = () => {
                             <div className={style.flyerTitle}>{flyer.flyerTitle}</div>
                             <div className={style.flyerValidDate}>{formatDate(flyer.startDate)} ~ {formatDate(flyer.endDate)}</div>
                             <div className={style.flyerCount}>
-                                <img src="/public/icons/smallFace.svg" />
+                                <img src="../../../public/icons/smallFace.svg" />
                                 {flyer.qrNum}
-                                <img src="/public/icons/smallFlyer.svg" />
+                                <img src="../../../public/icons/smallFlyer.svg" />
                                 {flyer.qrTotalViewCount}
                             </div>
                             <div className={style.flyerBtn}>
@@ -135,7 +135,7 @@ const dummy: Flyer[] = [
         phone: "010-1234-5678",
         startTime: "0700",
         closeTime: "2400",
-        imgSrc: "/public/flyer/flyerExample.png",
+        imgSrc: "../../../public/flyer/flyerExample.png",
         qrNum: 2,
         qrTotalViewCount: 172,
     },
@@ -152,7 +152,7 @@ const dummy: Flyer[] = [
         phone: "010-1234-5678",
         startTime: "0700",
         closeTime: "2400",
-        imgSrc: "/public/flyer/flyerExample.png",
+        imgSrc: "../../../public/flyer/flyerExample.png",
         qrNum: 2,
         qrTotalViewCount: 172,
     },
@@ -169,7 +169,7 @@ const dummy: Flyer[] = [
         phone: "010-1234-5678",
         startTime: "0700",
         closeTime: "2400",
-        imgSrc: "/public/flyer/flyerExample.png",
+        imgSrc: "../../../public/flyer/flyerExample.png",
         qrNum: 2,
         qrTotalViewCount: 172,
     },
@@ -186,7 +186,7 @@ const dummy: Flyer[] = [
         phone: "010-1234-5678",
         startTime: "0700",
         closeTime: "2400",
-        imgSrc: "/public/flyer/flyerExample.png",
+        imgSrc: "../../../public/flyer/flyerExample.png",
         qrNum: 2,
         qrTotalViewCount: 172,
     },
@@ -203,7 +203,7 @@ const dummy: Flyer[] = [
         phone: "010-1234-5678",
         startTime: "0700",
         closeTime: "2400",
-        imgSrc: "/public/flyer/flyerExample.png",
+        imgSrc: "../../../public/flyer/flyerExample.png",
         qrNum: 2,
         qrTotalViewCount: 172,
     },
@@ -220,7 +220,7 @@ const dummy: Flyer[] = [
         phone: "010-1234-5678",
         startTime: "0700",
         closeTime: "2400",
-        imgSrc: "/public/flyer/flyerExample.png",
+        imgSrc: "../../../public/flyer/flyerExample.png",
         qrNum: 2,
         qrTotalViewCount: 172,
     },
@@ -237,7 +237,7 @@ const dummy: Flyer[] = [
         phone: "010-1234-5678",
         startTime: "0700",
         closeTime: "2400",
-        imgSrc: "/public/flyer/flyerExample.png",
+        imgSrc: "../../../public/flyer/flyerExample.png",
         qrNum: 2,
         qrTotalViewCount: 172,
     },
@@ -254,7 +254,7 @@ const dummy: Flyer[] = [
         phone: "010-1234-5678",
         startTime: "0700",
         closeTime: "2400",
-        imgSrc: "/public/flyer/flyerExample.png",
+        imgSrc: "../../../public/flyer/flyerExample.png",
         qrNum: 2,
         qrTotalViewCount: 172,
     },

@@ -53,10 +53,10 @@ const Setting = () => {
         <div className={style.general}>
             <div className={style.title}>일반</div>
             <div className={style.element}  onClick={()=>editStore()}>
-                {status === 1 ? "로그인 정보" : "가게 정보"} <img src="/public/icons/lock.svg"/>
+                {status === 1 ? "로그인 정보" : "가게 정보"} <img src="../../../public/icons/lock.svg"/>
             </div>
             <div className={style.element}  onClick={()=>switchMode()}>
-            {status === 1 ? "광고주" : "일반"} 모드로 전환 <img src="/public/icons/smile.svg"/>
+            {status === 1 ? "광고주" : "일반"} 모드로 전환 <img src="../../../public/icons/smile.svg"/>
             </div>
             <div className={style.element}>
             상품 구매
@@ -66,13 +66,13 @@ const Setting = () => {
         <div className={style.general}>
             <div className={style.title}>정보</div>
             <div className={style.element}>
-                QR:ECOde 소개 <img src="/public/icons/plant.svg"/>
+                QR:ECOde 소개 <img src="../../../public/icons/plant.svg"/>
             </div>
             <div className={style.element}>
-                이용약관 <img src="/public/icons/guard.svg"/>
+                이용약관 <img src="../../../public/icons/guard.svg"/>
             </div>
             <div className={style.element}>
-                개인정보처리방침 <img src="/public/icons/page.svg"/>
+                개인정보처리방침 <img src="../../../public/icons/page.svg"/>
             </div>
         </div>
 
