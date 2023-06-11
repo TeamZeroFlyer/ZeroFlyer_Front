@@ -31,7 +31,7 @@ const EditStore = () => {
     let storeDescription = (document.getElementById('storeDescription') as HTMLInputElement);
     let phone = (document.getElementById('phone') as HTMLInputElement);
     let timeStr = (document.getElementById('timeStr') as HTMLInputElement);
-    const { loading, error } = useInjectKakaoMapApi({ appkey: import.meta.env.VITE_KAKAO_API_KEY, libraries: ['services'] });
+    const { loading } = useInjectKakaoMapApi({ appkey: import.meta.env.VITE_KAKAO_API_KEY, libraries: ['services'] });
     useEffect(()=>{
         fetch("https://qrecode-back.shop/store/info", {
             method: "GET",

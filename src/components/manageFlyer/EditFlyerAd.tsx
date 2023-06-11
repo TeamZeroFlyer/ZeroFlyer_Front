@@ -91,12 +91,6 @@ const EditFlyerAd = () => {
             </div>
             <div className={style.infoTitle}>
                 <div>전단지 정보</div>
-                
-                
-                <div className={style.box} onClick={()=>checked ? setChecked(false) :  setChecked(true)}>
-                    <img className={style.check} src={checked ? `/public/image/checkedBox.svg` : `/public/image/checkBox.svg`} />
-                    쿠폰포함
-                </div>
             </div>
 
             <div className={style.twoInput}>
@@ -126,6 +120,11 @@ const EditFlyerAd = () => {
                         <span key={i} className={style.storeHashtag} onClick={()=>{removeTag(i)}}>#{hashtag}</span>
                     ))}
                 </div>
+            </div>
+
+            <div className={style.box} onClick={()=>checked ? setChecked(false) :  setChecked(true)}>
+                    <img className={style.check} src={checked ? `/public/image/checkedBox.svg` : `/public/image/checkBox.svg`} />
+                    쿠폰포함
             </div>
 
             <div className={style.infoTitle}>
