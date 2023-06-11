@@ -24,8 +24,8 @@ const KakaoMap = () => {
   const [center, setCenter] = useState({lat: 37.575813, lng: 126.976849});
   const [level, setLevel] = useState(4);
   const [isFlyer, setIsFlyer] = useState(true);
-  const [flyerUrl, setFlyerUrl] = useState('/public/image/greenFlyer.svg');
-  const [couponUrl, setCouponUrl] = useState('/public/image/whiteCoupon.svg');
+  const [flyerUrl, setFlyerUrl] = useState('../../../public/image/greenFlyer.svg');
+  const [couponUrl, setCouponUrl] = useState('../../../public/image/whiteCoupon.svg');
   const [oneStore, setOneStore] = useState<Store>({latlng: {lat: 0,lng: 0}, storeName: '', startTime: '', closeTime: '', address: '', hashTag: [''], hasCoupon: true, storeDescription: ''});
   const { loading, error } = useInjectKakaoMapApi({ appkey: import.meta.env.VITE_KAKAO_API_KEY, libraries: ['services'] });
   const search = useRef<HTMLInputElement>(null);
@@ -55,8 +55,8 @@ const KakaoMap = () => {
           let tmpdata: Store = {
             latlng: {lat: store.storeLat, lng: store.storeLng},
             storeName: store.storeName,
-            startTime: store.storeStart.substring(0, 2) + store.storeStart.substring(3, 5),
-            closeTime: store.storeEnd.substring(0, 2) + store.storeEnd.substring(3, 5),
+            startTime: store.storeStart,
+            closeTime: store.storeEnd,
             address: store.storeAddress.split("/")[0],
             hashTag: tmp,
             hasCoupon: store.hasCoupon,
@@ -95,15 +95,15 @@ const KakaoMap = () => {
   const changeToFlyer = () => {
     if (!isFlyer){
       setIsFlyer(true);
-      setFlyerUrl('/public/image/greenFlyer.svg');
-      setCouponUrl('/public/image/whiteCoupon.svg');
+      setFlyerUrl('../../../public/image/greenFlyer.svg');
+      setCouponUrl('../../../public/image/whiteCoupon.svg');
     }
   };
   const changeToCoupon = () => {
     if (isFlyer){
       setIsFlyer(false);
-      setFlyerUrl('/public/image/whiteFlyer.svg');
-      setCouponUrl('/public/image/greenCoupon.svg');
+      setFlyerUrl('../../../public/image/whiteFlyer.svg');
+      setCouponUrl('../../../public/image/greenCoupon.svg');
     }
   };
   const getLocation = () => {
@@ -141,8 +141,8 @@ const KakaoMap = () => {
             let tmpdata: Store = {
               latlng: {lat: store.storeLat, lng: store.storeLng},
               storeName: store.storeName,
-              startTime: store.storeStart.substring(0, 2) + store.storeStart.substring(3, 5),
-              closeTime: store.storeEnd.substring(0, 2) + store.storeEnd.substring(3, 5),
+              startTime: store.storeStart,
+              closeTime: store.storeEnd,
               address: store.storeAddress.split("/")[0],
               hashTag: tmp,
               hasCoupon: store.hasCoupon,
@@ -162,7 +162,7 @@ const KakaoMap = () => {
     <div className={style.map}>
       <Map center={center} style={{ width: "100%", height: "100%" }} level={level} onZoomChanged={(map) => {setLevel(map.getLevel()); setCenter({ lat: map.getCenter().getLat(), lng: map.getCenter().getLng() });} } onDragEnd={(map) => setCenter({ lat: map.getCenter().getLat(), lng: map.getCenter().getLng() })}>
         {stores.map((position, i) => (
-          <MapMarker key={`${position.storeName}-${position.latlng.lat}-${position.latlng.lng}`} position={position.latlng} image={!isFlyer && !position.hasCoupon ? { src: "/public/image/mapMarkerNoCoupon.svg", size: { width: 48, height: 48 }} : { src: "/public/image/mapMarker.svg", size: { width: 48, height: 48 }}} onClick={() => getModalOneInfo(i)}>
+          <MapMarker key={`${position.storeName}-${position.latlng.lat}-${position.latlng.lng}`} position={position.latlng} image={!isFlyer && !position.hasCoupon ? { src: "../../../public/image/mapMarkerNoCoupon.svg", size: { width: 48, height: 48 }} : { src: "../../../public/image/mapMarker.svg", size: { width: 48, height: 48 }}} onClick={() => getModalOneInfo(i)}>
             <span className={!isFlyer && !position.hasCoupon ? style.markerNameNo : style.markerName}>{position.storeName}</span>
           </MapMarker>
         ))}
@@ -170,15 +170,15 @@ const KakaoMap = () => {
     </div>
     <div className={style.divForShadow}/>
     <input className={style.searchBox} placeholder="가게 이름을 검색하세요" ref={search} onKeyUpCapture={enterSearch}/>
-    <img src="/public/image/searchIcon.svg" className={style.searchIcon}/>
+    <img src="../../../public/image/searchIcon.svg" className={style.searchIcon}/>
     <img src={flyerUrl} className={style.flyer} onClick={() => changeToFlyer()} />
     <img src={couponUrl} className={style.coupon} onClick={() => changeToCoupon()} />
-    <img src="/public/image/findMyGeo.svg" className={style.findMyGeo} onClick={() => getLocation()} />
-    <img src="/public/image/slideUpBtn.svg" className={style.slideUpBtn} onClick={() => setShowModal(true)} />
+    <img src="../../../public/image/findMyGeo.svg" className={style.findMyGeo} onClick={() => getLocation()} />
+    <img src="../../../public/image/slideUpBtn.svg" className={style.slideUpBtn} onClick={() => setShowModal(true)} />
     <ModalPortal show={showModal} onClick={onClickHandler}>
         <CSSTransition mountOnEnter unmountOnExit in={showModal} timeout={{ enter: 300, exit: 300 }} classNames="modal">
           <div className="modal">
-          <img src="/public/image/modalHandle.svg" className={style.modalHandle}/>
+          <img src="../../../public/image/modalHandle.svg" className={style.modalHandle}/>
           {stores.map((store, i) => (
             <StoreInformation key={i} store={store} red={!isFlyer && !store.hasCoupon} last={stores.length === i + 1 ? true : false} move = {onClickCenterMove}/>
           ))}
@@ -188,7 +188,7 @@ const KakaoMap = () => {
     <ModalPortal show={showModalOne} onClick={onClickHandlerOne}>
         <CSSTransition mountOnEnter unmountOnExit in={showModalOne} timeout={{ enter: 300, exit: 300 }} classNames="modal">
           <div className="modalOne">
-            <img src="/public/image/modalHandle.svg" className={style.modalHandle}/>
+            <img src="../../../public/image/modalHandle.svg" className={style.modalHandle}/>
             <StoreInformation store={oneStore} red={!isFlyer && !oneStore.hasCoupon} last={true} move = {onClickCenterMove} />
           </div>
         </CSSTransition>

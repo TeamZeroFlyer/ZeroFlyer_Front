@@ -7,7 +7,7 @@ import style from "./Advertiser.module.css";
 const Advertiser = () => {
     return(
         <>
-        <Header><img src="/public/image/logo.svg"/></Header>
+        <Header><img src="../../../public/image/logo.svg"/></Header>
 
 
         <div className={style.headTextBox}>
@@ -16,7 +16,7 @@ const Advertiser = () => {
                 <div className={style.headText}><span className={style.bold}>172장</span>의 전단지를 아꼈어요</div>
             </div>
             <div className={style.headImg}>
-                <img src="/public/flyer/flyerExample.png" />
+                <img src="../../../public/flyer/flyerExample.png" />
             </div>
         </div>
 
@@ -27,7 +27,7 @@ const Advertiser = () => {
             </div>
             <div className={style.greenInfoTwo}>
                 <div className={style.greenImg}>
-                    <img src="/public/flyer/flyerExample.png" />
+                    <img src="../../../public/flyer/flyerExample.png" />
                 </div>
                 <div className={style.greenText}>
                     <div className={style.greenText1}>새싹미용실</div>
