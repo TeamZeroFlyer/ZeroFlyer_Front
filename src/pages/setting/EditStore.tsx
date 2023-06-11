@@ -4,16 +4,16 @@ import { Link } from 'react-router-dom';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 
-interface Store {
-    storeName: string;
-    storeDescription: string;
-    address: string;
-    detailAddress: string;
-    hashTag: string;
-    phone: string;
-    startTime: string;
-    closeTime: string;
-}
+// interface Store {
+//     storeName: string;
+//     storeDescription: string;
+//     address: string;
+//     detailAddress: string;
+//     hashTag: string;
+//     phone: string;
+//     startTime: string;
+//     closeTime: string;
+// }
 interface Address{
     roadAddress: string;
 }
@@ -32,7 +32,6 @@ const EditStore = () => {
     let phone = (document.getElementById('phone') as HTMLInputElement);
     let timeStr = (document.getElementById('timeStr') as HTMLInputElement);
     const { loading, error } = useInjectKakaoMapApi({ appkey: import.meta.env.VITE_KAKAO_API_KEY, libraries: ['services'] });
-
     useEffect(()=>{
         fetch("https://qrecode-back.shop/store/info", {
             method: "GET",
@@ -211,13 +210,13 @@ const EditStore = () => {
 
 export default EditStore;
 
-let dummy: Store = {
-    storeName: "새싹미용실",
-    storeDescription: "미용실입니다~",
-    address: "서울 강서구 강서로 266",
-    detailAddress: "12동 191호",
-    hashTag: "#합리적인가격#여기가최고",
-    phone: "010-1234-5678",
-    startTime: "0700",
-    closeTime: "2300",
-}
+// let dummy: Store = {
+//     storeName: "새싹미용실",
+//     storeDescription: "미용실입니다~",
+//     address: "서울 강서구 강서로 266",
+//     detailAddress: "12동 191호",
+//     hashTag: "#합리적인가격#여기가최고",
+//     phone: "010-1234-5678",
+//     startTime: "0700",
+//     closeTime: "2300",
+// }

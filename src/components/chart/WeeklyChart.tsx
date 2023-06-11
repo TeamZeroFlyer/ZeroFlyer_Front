@@ -34,9 +34,6 @@ const WeeklyChart: React.FC = () => {
         labels: {
           show: false, // y축 데이터 설명 숨김
         },
-      dataLabels: {
-        enabled: true,
-      },
     }};
 
     const chart = new ApexCharts(chartRef.current, options);
