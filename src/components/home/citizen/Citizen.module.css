@@ -1,10 +1,14 @@
+.citizenPage {
+  overflow: scroll;
+  height: 100vh;
+}
+
 .contents {
   padding: 0 20px;
-  overflow: scroll;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: calc(100vh - 8vh - 26px);
+  height: 80%;
 }
 
 .userInfo {
@@ -114,11 +118,10 @@
 @media (max-width: 768px) {
   .contents {
     padding: 0 20px;
-    overflow: scroll;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: calc(100vh - 8vh - 80px - 25.4px);
+    height: calc(80%);
   }
 
   .contents {
