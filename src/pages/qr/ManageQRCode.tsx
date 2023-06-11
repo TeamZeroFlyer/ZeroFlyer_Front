@@ -1,3 +1,6 @@
+import { json, useLoaderData } from "react-router-dom";
+import { getAuthToken } from "../../util/auth";
+
 import QRList from "../../components/qr/QRList";
 import Header from "../../components/footer/Header";
 
@@ -14,28 +17,45 @@ export type QRManagement = {
 
 const dummy: QRManagement[] = [
   {
-    date: new Date('2023-05-23'),
+    date: new Date("2023-05-23"),
     qrcodes: [
       { qrId: "QR052301", flyerTitle: "첫 방문 고객 할인", scan: 89 },
       { qrId: "QR052302", flyerTitle: "첫 방문 고객 할인", scan: 27 },
     ],
-  }, {
-    date: new Date('2023-05-22'),
+  },
+  {
+    date: new Date("2023-05-22"),
     qrcodes: [
       { qrId: "QR052201", flyerTitle: "첫 방문 고객 할인", scan: 31 },
       { qrId: "QR052202", flyerTitle: "첫 방문 고객 할인", scan: 29 },
       { qrId: "QR052203", flyerTitle: "첫 방문 고객 할인", scan: 3 },
     ],
-  },     
+  },
 ];
 
 const ManageQRCode = () => {
+  //const qrList = useLoaderData() as QRManagement[];
   return (
     <>
       <Header>QR코드 관리</Header>
-      <QRList qrcodes={ dummy} />
+      <QRList qrcodes={dummy} />
     </>
   );
+};
+
+export const loader = async () => {
+  const token = getAuthToken();
+  const response = await fetch("https://qrecode-back.shop/qr", {
+    headers: { Authentication: `Bearer ${token}` },
+  });
+  if (!response.ok) {
+    throw json(
+      { message: "QR코드를 가져오는데 실패했습니다." },
+      { status: 500 },
+    );
+  } else {
+    return response;
+  }
 };
 
 export default ManageQRCode;

@@ -1,24 +1,56 @@
-import React from "react";
+import React, { Dispatch, useState } from "react";
 
 import style from "./PartTimeList.module.css";
+import { PTJob } from "../../pages/qr/CreateQRCode";
 
 const PartTimeList: React.FC<{
   ea: number;
+  onSelectPT: Dispatch<PTJob[]>;
 }> = (props) => {
-    
+  const [entries, setEntries] = useState<PTJob[]>([]);
+
   const inputRender = () => {
     if (props.ea > 0) {
       const result = [];
       for (let i = 0; i < props.ea; i++) {
         result.push(
           <li key={i} className={style.list}>
-            <input type="text" className={`${style.name} ${style.left}`} />
-            <input type="text" className={`${style.phone} ${style.right}`} />
+            <input
+              name={"ptname" + i}
+              type="text"
+              className={`${style.name} ${style.left}`}
+              onChange={(event) => handleInputChange(event, i, "name")}
+            />
+            <input
+              name={"ptphone" + i}
+              type="text"
+              className={`${style.phone} ${style.right}`}
+              onChange={(event) => handleInputChange(event, i, "phone")}
+            />
           </li>
         );
       }
-      return result;
+      return (
+        <form>
+          {result}
+        </form>
+      );
     }
+  };
+
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+    field: "name" | "phone"
+  ) => {
+    const { value } = event.target;
+    setEntries((prevEntries) => {
+      const updatedEntry = { ...prevEntries[index], [field]: value };
+      const updatedEntries = [...prevEntries];
+      updatedEntries[index] = updatedEntry;
+      return updatedEntries;
+    });
+    props.onSelectPT(entries);
   };
 
   return (
@@ -34,13 +66,7 @@ const PartTimeList: React.FC<{
           </p>
         </div>
         <div>
-          <ul>
-            {/* <li className={style.list}>
-              <input type="text" className={`${style.name} ${style.left}`} />
-              <input type="text" className={`${style.phone} ${style.right}`} />
-            </li> */}
-            {inputRender()}
-          </ul>
+          <ul>{inputRender()}</ul>
         </div>
       </div>
     </div>

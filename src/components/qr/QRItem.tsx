@@ -4,6 +4,7 @@ import style from "./QRItem.module.css";
 import faceImg from "../../../public/image/qr/parttime.svg";
 import threedot from "../../../public/icons/threedot.svg";
 import { QRManagement } from "../../pages/qr/ManageQRCode";
+import { Link } from "react-router-dom";
 
 const QRItem: React.FC<{
   qrcodes: QRManagement[];
@@ -15,19 +16,21 @@ const QRItem: React.FC<{
           <ul className={style.qrItem}>
             <p key={idx}>{getFormattedDate(qrManagement.date)}</p>
             {qrManagement.qrcodes.map((qr) => (
-              <li key={qr.qrId} className={style.li}>
-                <div className={`${style.img} ${style.item}`}>
-                  <img src={faceImg} alt="아르바이트생 얼굴" />
-                </div>
-                <div className={`${style.info} ${style.item}`}>
-                  <p className={style.id}>{qr.qrId}</p>
-                  <p className={style.title}>{qr.flyerTitle}</p>
-                </div>
-                <div className={`${style.action} ${style.item}`}>
-                  <span>{qr.scan}</span>
-                  <img src={threedot} />
-                </div>
-              </li>
+              <Link to={`/qr/${qr.qrId}`}>
+                <li key={qr.qrId} className={style.li}>
+                  <div className={`${style.img} ${style.item}`}>
+                    <img src={faceImg} alt="아르바이트생 얼굴" />
+                  </div>
+                  <div className={`${style.info} ${style.item}`}>
+                    <p className={style.id}>{qr.qrId}</p>
+                    <p className={style.title}>{qr.flyerTitle}</p>
+                  </div>
+                  <div className={`${style.action} ${style.item}`}>
+                    <span>{qr.scan}</span>
+                    <img src={threedot} />
+                  </div>
+                </li>
+              </Link>
             ))}
           </ul>
         ))}
