@@ -1,6 +1,7 @@
 import style from "./StoreInfomation.module.css"
 
 interface StoreProps{
+    red: boolean;
     store: {
         latlng: {
         lat: number;
@@ -34,7 +35,7 @@ const StoreInformation: React.FC<StoreProps> = (props) => {
     const open = isWithinTime(props.store.startTime, props.store.closeTime);
     return (
         <div className={props.last ? style.storeLastInfo : style.storeInfo} onClick={() => props.move(props.store.latlng)}>
-            <div className={style.storeTitle}>{props.store.storeName}</div>
+            <div className={props.red ? style.storeTitleRed : style.storeTitle}>{props.store.storeName}</div>
             <div className={style.storeTime}>
                 {open ? <img src="/public/image/greenCircle.svg"/> : <img src="/public/image/redCircle.svg"/>}
                 <span className={style.storeIsOpen}>

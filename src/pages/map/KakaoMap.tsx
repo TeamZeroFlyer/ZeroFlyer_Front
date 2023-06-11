@@ -53,20 +53,22 @@ const KakaoMap = () => {
           let tmp = store.storeTag.split("#");
           tmp.splice(0,1);
           let tmpdata: Store = {
-            latlng: {lat: store.storeLat, lng: store.storeLong},
+            latlng: {lat: store.storeLat, lng: store.storeLng},
             storeName: store.storeName,
-            startTime: store.storeStart.substring(1, 3) + store.storeStart.substring(3, 5),
-            closeTime: store.storeStart.substring(1, 3) + store.storeStart.substring(3, 5),
-            address: data.storeAddress.split("/")[0],
+            startTime: store.storeStart.substring(0, 2) + store.storeStart.substring(3, 5),
+            closeTime: store.storeEnd.substring(0, 2) + store.storeEnd.substring(3, 5),
+            address: store.storeAddress.split("/")[0],
             hashTag: tmp,
-            hasCoupon: true,
-            storeDescription: "안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
+            hasCoupon: store.hasCoupon,
+            storeDescription: store.storeDescription,
           };
           dummy.push(tmpdata);
         });
-      })
+        setStores(dummy);
+      });
+  }, [center, isFlyer, level]);
 
-    setStores(dummy);
+  useEffect(()=>{
     const span = document.getElementById("root")!.querySelectorAll("span");
     for(var i = 0; i < span.length; i++){
       const parent = span[i]?.parentElement;
@@ -83,7 +85,7 @@ const KakaoMap = () => {
         span[i].style.display = "block";
       }
     }
-  }, [center, isFlyer, level]);
+  }, [stores]);
   
   if (loading || error) return <></>;
 
@@ -119,8 +121,38 @@ const KakaoMap = () => {
   const enterSearch: KeyboardEventHandler<HTMLInputElement> = (event) => {
     if(event.key === 'Enter' && search.current!.value !== ''){
       search.current!.blur();
+
       // TODO: search.current!.value 연관검색어 리스트 서버에 받아와서 아래 set 해주기
-      // setStores(searchResult);
+      let dummy: Store[] = [];
+      fetch("https://qrecode-back.shop/map/search?keyword=" + search.current!.value, {
+        method: "GET",
+        headers: {
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        "Content-Type": "application/json"
+        }
+        }).then(response => {
+        return response.json()
+        })
+        .then(data => {
+          data.data.map((store: any) => {
+            if(store.storeTag === null) store.storeTag = "";
+            let tmp = store.storeTag.split("#");
+            tmp.splice(0,1);
+            let tmpdata: Store = {
+              latlng: {lat: store.storeLat, lng: store.storeLng},
+              storeName: store.storeName,
+              startTime: store.storeStart.substring(0, 2) + store.storeStart.substring(3, 5),
+              closeTime: store.storeEnd.substring(0, 2) + store.storeEnd.substring(3, 5),
+              address: store.storeAddress.split("/")[0],
+              hashTag: tmp,
+              hasCoupon: store.hasCoupon,
+              storeDescription: store.storeDescription,
+            };
+            dummy.push(tmpdata);
+          });
+          setStores(dummy);
+          search.current!.value = '';
+        });
       setShowModal(true);
     }
   };
@@ -130,8 +162,8 @@ const KakaoMap = () => {
     <div className={style.map}>
       <Map center={center} style={{ width: "100%", height: "100%" }} level={level} onZoomChanged={(map) => {setLevel(map.getLevel()); setCenter({ lat: map.getCenter().getLat(), lng: map.getCenter().getLng() });} } onDragEnd={(map) => setCenter({ lat: map.getCenter().getLat(), lng: map.getCenter().getLng() })}>
         {stores.map((position, i) => (
-          <MapMarker key={`${position.storeName}-${position.latlng.lat}-${position.latlng.lng}`} position={position.latlng} image={{ src: "/public/image/mapMarker.png", size: { width: 27.73, height: 33 }}} onClick={() => getModalOneInfo(i)}>
-            <span className={style.markerName}>{position.storeName}</span>
+          <MapMarker key={`${position.storeName}-${position.latlng.lat}-${position.latlng.lng}`} position={position.latlng} image={!isFlyer && !position.hasCoupon ? { src: "/public/image/mapMarkerNoCoupon.svg", size: { width: 48, height: 48 }} : { src: "/public/image/mapMarker.svg", size: { width: 48, height: 48 }}} onClick={() => getModalOneInfo(i)}>
+            <span className={!isFlyer && !position.hasCoupon ? style.markerNameNo : style.markerName}>{position.storeName}</span>
           </MapMarker>
         ))}
       </Map>
@@ -148,7 +180,7 @@ const KakaoMap = () => {
           <div className="modal">
           <img src="/public/image/modalHandle.svg" className={style.modalHandle}/>
           {stores.map((store, i) => (
-            <StoreInformation key={i} store={store} last={stores.length === i + 1 ? true : false} move = {onClickCenterMove}/>
+            <StoreInformation key={i} store={store} red={!isFlyer && !store.hasCoupon} last={stores.length === i + 1 ? true : false} move = {onClickCenterMove}/>
           ))}
           </div>
         </CSSTransition>
@@ -157,7 +189,7 @@ const KakaoMap = () => {
         <CSSTransition mountOnEnter unmountOnExit in={showModalOne} timeout={{ enter: 300, exit: 300 }} classNames="modal">
           <div className="modalOne">
             <img src="/public/image/modalHandle.svg" className={style.modalHandle}/>
-            <StoreInformation store={oneStore} last={true} move = {onClickCenterMove} />
+            <StoreInformation store={oneStore} red={!isFlyer && !oneStore.hasCoupon} last={true} move = {onClickCenterMove} />
           </div>
         </CSSTransition>
     </ModalPortal>

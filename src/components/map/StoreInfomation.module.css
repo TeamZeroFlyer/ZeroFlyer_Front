@@ -17,6 +17,13 @@
   font-size: 15px;
   line-height: 17px;
 }
+.storeTitleRed {
+  height: 35px;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 17px;
+  color: rgb(235, 0, 0);
+}
 .storeIsOpen {
   font-weight: 800;
   font-size: 12px;

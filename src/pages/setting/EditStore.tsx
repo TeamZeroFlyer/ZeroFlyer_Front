@@ -2,6 +2,7 @@ import style from "./EditStore.module.css";
 import { KeyboardEventHandler, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
+import { useInjectKakaoMapApi } from 'react-kakao-maps-sdk';
 
 interface Store {
     storeName: string;
@@ -19,42 +20,55 @@ interface Address{
 
 
 const EditStore = () => {
-    let tmpHash: string[] = [];
-    dummy.hashTag.split('#').map((item, _) => {
-        tmpHash.push(item);
-    });
-    if (tmpHash.length >0){
-        tmpHash.splice(0, 1);
-    }
-
     const tag = useRef<HTMLInputElement>(null);
-    const [hashTag, setHashTag] = useState(tmpHash);
+    const [hashTag, setHashTag] = useState<string[]>([]);
+    const [latlng, setLatlng] =useState<number[]>([0, 0]);
     const open = useDaumPostcodePopup("https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
+    
+    let storeName = (document.getElementById('storeName') as HTMLInputElement);
+    let readAddress = (document.getElementById('roadAddress') as HTMLInputElement);
+    let detailAddress = (document.getElementById('detailAddress') as HTMLInputElement);
+    let storeDescription = (document.getElementById('storeDescription') as HTMLInputElement);
+    let phone = (document.getElementById('phone') as HTMLInputElement);
+    let timeStr = (document.getElementById('timeStr') as HTMLInputElement);
+    const { loading, error } = useInjectKakaoMapApi({ appkey: import.meta.env.VITE_KAKAO_API_KEY, libraries: ['services'] });
 
-    let storeName: HTMLInputElement;
-    let readAddress: HTMLInputElement;
-    let detailAddress: HTMLInputElement;
-    let storeDescription: HTMLInputElement;
-    let phone: HTMLInputElement;
-    let timeStr: HTMLInputElement;
-    let lat: number;
-    let lng: number;
     useEffect(()=>{
-        storeName = (document.getElementById('storeName') as HTMLInputElement);
-        readAddress = (document.getElementById('roadAddress') as HTMLInputElement);
-        detailAddress = (document.getElementById('detailAddress') as HTMLInputElement);
-        storeDescription = (document.getElementById('storeDescription') as HTMLInputElement);
-        phone = (document.getElementById('phone') as HTMLInputElement);
-        timeStr = (document.getElementById('timeStr') as HTMLInputElement);
-        getLatLng(dummy.address);
+        fetch("https://qrecode-back.shop/store/info", {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("accessToken"),
+                "Content-Type": "application/json"
+                },
+            })
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                !loading && getLatLng(data.data[0].storeAddress);
+                if (data.data[0]){
+                storeName.value = data.data[0].storeName;
+                readAddress.value = data.data[0].storeAddress;
+                detailAddress.value = data.data[0].detailAddress;
+                storeDescription.value = data.data[0].storeDescription;
+                phone.value = data.data[0].storePhone;
+                timeStr.value = data.data[0].storeStart.substring(0, 2) + data.data[0].storeStart.substring(2) + "~" + data.data[0].storeEnd.substring(0, 2)+ data.data[0].storeEnd.substring(2);
 
-        storeName.value = dummy.storeName;
-        readAddress.value = dummy.address;
-        detailAddress.value = dummy.detailAddress;
-        storeDescription.value = dummy.storeDescription;
-        phone.value = dummy.phone;
-        timeStr.value = dummy.startTime.substring(0, 2) + ":" + dummy.startTime.substring(2) + "~" + dummy.closeTime.substring(0, 2) + ":" + dummy.closeTime.substring(2);
-    }, []);
+                let tmpHash: string[] = [];
+                data.data[0].storeTag.split('#').map((item: string) => {
+                    tmpHash.push(item);
+                });
+                if (tmpHash.length >0){
+                    tmpHash.splice(0, 1);
+                }
+                setHashTag(tmpHash);
+                }else{
+                    console.log("가게 정보가 없습니다.");
+                }
+            });
+                        
+        
+    }, [loading]);
 
     const enterTag: KeyboardEventHandler<HTMLInputElement> = (event) => {
         if(hashTag.length >= 3){
@@ -84,24 +98,16 @@ const EditStore = () => {
         const add: HTMLInputElement = document.getElementById('roadAddress') as HTMLInputElement;
         if(add){
             add.value = data.roadAddress;
-
             getLatLng(data.roadAddress);
         }
     };
     const getLatLng = (add: string) => {
-        const script = document.createElement("script");
-        script.type = "text/javascript";
-        script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${import.meta.env.VITE_KAKAO_API_KEY}&autoload=false`;
-        document.head.appendChild(script);
-        script.onload = () => {
-          new window.kakao.maps.services.Geocoder().addressSearch(add, function (result, status) {
-            if (status === kakao.maps.services.Status.OK) {
-                lat = parseFloat(result[0].y);
-                lng = parseFloat(result[0].x);
-            }
-          })
-        };
-        script.remove();
+        const geocoder = new window.kakao.maps.services.Geocoder();
+        geocoder.addressSearch(add, function (result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            setLatlng([parseFloat(result[0].y), parseFloat(result[0].x)]);
+        }
+        })
     };
     const submit = () => {
         const regex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]~(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
@@ -115,23 +121,34 @@ const EditStore = () => {
             return;
         }
 
-        fetch("https://qrecode-back.shop/store/setstatus", {
+        // 사업자등록번호 같은걸로 넣어도 에러나는 중이라 임시로 랜덤값 넣어둠
+        let randomString = '';
+        for (let i = 0; i < 20; i++) {
+            if (i === 4 || i === 9) {
+            randomString += '-';
+            } else {
+            randomString += Math.floor(Math.random() * 10).toString();
+            }
+        }
+
+        fetch("https://qrecode-back.shop/store/setstore", {
             method: "POST",
             headers: {
             Authorization: "Bearer " + localStorage.getItem("accessToken"),
             "Content-Type": "application/json"
             },
             body: JSON.stringify({
-            storeName: storeName.value,
-            address: readAddress.value,
-            detailAddress: detailAddress.value,
-            lat: lat,
-            lng: lng,
-            storeDescription: storeDescription.value,
-            phone: phone.value,
-            startTime: timeStr.value.substring(0, 2) + timeStr.value.substring(3, 5),
-            closeTime: timeStr.value.substring(6, 8) + timeStr.value.substring(9, 11),
-            hashTag: '#' + hashTag.join('#')
+            "storeName": storeName.value,
+            "storeAddress": readAddress.value,
+            "detailAddress": detailAddress.value,
+            "storeNum": randomString,
+            "lat": latlng[0],
+            "lng": latlng[1],
+            "storeDescription": storeDescription.value,
+            "storePhone": phone.value,
+            "storeStart": timeStr.value.substring(0, 2) + timeStr.value.substring(3, 5),
+            "storeEnd": timeStr.value.substring(6, 8) + timeStr.value.substring(9, 11),
+            "storeTag": '#' + hashTag.join('#')
             })
         })
             .then(response => {
@@ -168,11 +185,11 @@ const EditStore = () => {
             <div className={style.numBox}>
                 <div className={style.boxInner1}>
                     <div className={style.storeName}><span className={style.star}>* </span>전화번호</div>
-                    <input id="phone"  className={style.searchBox3} minLength={1} maxLength={10}/>
+                    <input id="phone"  className={style.searchBox3} minLength={1} maxLength={13}/>
                 </div>
                 <div className={style.boxInner2}>
                     <div className={style.storeName}><span className={style.star}>* </span>영업시간</div>
-                    <input id="timeStr" className={style.searchBox3} minLength={1} maxLength={10}/>
+                    <input id="timeStr" className={style.searchBox3} minLength={11} maxLength={11}/>
                 </div>
             </div>
             <div className={style.storeName}><span className={style.star}>* </span>한줄 설명</div>
