@@ -19,19 +19,15 @@ interface StoreProps{
     move: (center: {lat: number, lng: number}) => void;
 }
 
-function formatTime(timeString: string) {
-    return timeString.substring(0, 2) + ":" + timeString.substring(2,4);
-}
-
 function isWithinTime(startTime: string, endTime: string){
     const now = new Date();
     const currentHour = now.getHours() * 100 + now.getMinutes();
-    return currentHour >= parseInt(startTime) && currentHour < parseInt(endTime);
+    return currentHour >= parseInt(startTime.substring(0,2)+startTime.substring(3,5)) && currentHour < parseInt(endTime.substring(0,2)+endTime.substring(3,5));
 }
 
 const StoreInformation: React.FC<StoreProps> = (props) => {
     const open = isWithinTime(props.store.startTime, props.store.closeTime);
-
+    console.log(props)
     const copy = async (address: string) => {
         await navigator.clipboard.writeText(address);
         alert('클립보드에 복사되었습니다.');
@@ -45,7 +41,7 @@ const StoreInformation: React.FC<StoreProps> = (props) => {
                 <span className={style.storeIsOpen}>
                 {open ? "영업중" : "영업종료"}
                 </span>
-                {formatTime(props.store.startTime)} ~ {formatTime(props.store.closeTime)}
+                {props.store.startTime} ~ {props.store.closeTime}
             </div>
             <div className={style.desc}>
                 {props.store.storeDescription}

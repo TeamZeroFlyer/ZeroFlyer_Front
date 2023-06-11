@@ -145,8 +145,8 @@ const EditStore = () => {
             "lng": latlng[1],
             "storeDescription": storeDescription.value,
             "storePhone": phone.value,
-            "storeStart": timeStr.value.substring(0, 2) + timeStr.value.substring(3, 5),
-            "storeEnd": timeStr.value.substring(6, 8) + timeStr.value.substring(9, 11),
+            "storeStart": timeStr.value.substring(0, 2) + ":" + timeStr.value.substring(3, 5),
+            "storeEnd": timeStr.value.substring(6, 8) + ":" + timeStr.value.substring(9, 11),
             "storeTag": '#' + hashTag.join('#')
             })
         })
