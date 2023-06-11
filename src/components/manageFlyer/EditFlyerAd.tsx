@@ -13,6 +13,17 @@ interface Flyer {
     imgSrc: string;
 }
 
+interface Store {
+    storeName: string;
+    storeDescription: string;
+    address: string;
+    detailAddress: string;
+    hashTag: string;
+    phone: string;
+    startTime: string;
+    closeTime: string;
+}
+
 const EditFlyerAd = () => {
     let tmpHash: string[] = [];
     dummy.hashTag.split('#').map((item, _) => {
@@ -121,18 +132,18 @@ const EditFlyerAd = () => {
                 사업장 정보
             </div>
             <div className={style.storeName}><span className={style.star}>* </span>상호명</div>
-            <input readOnly className={style.searchBox2} minLength={1} maxLength={10} placeholder={dummy.storeName}/>
+            <input readOnly className={style.searchBox2} minLength={1} maxLength={10} placeholder={dummy2.storeName}/>
             <div className={style.storeName}><span className={style.star}>* </span>주소</div>
-            <input readOnly className={style.searchBox3} minLength={1} maxLength={10} placeholder={dummy.address}/>
-            <input readOnly className={style.searchBox2} minLength={1} maxLength={10} placeholder={dummy.detailAddress}/>
+            <input readOnly className={style.searchBox3} minLength={1} maxLength={10} placeholder={dummy2.address}/>
+            <input readOnly className={style.searchBox2} minLength={1} maxLength={10} placeholder={dummy2.detailAddress}/>
             <div className={style.numBox}>
                 <div className={style.boxInner1}>
                     <div className={style.storeName}><span className={style.star}>* </span>전화번호</div>
-                    <input readOnly className={style.searchBox3} minLength={1} maxLength={10} placeholder={dummy.phone}/>
+                    <input readOnly className={style.searchBox3} minLength={1} maxLength={10} placeholder={dummy2.phone}/>
                 </div>
                 <div className={style.boxInner2}>
                     <div className={style.storeName}><span className={style.star}>* </span>영업시간</div>
-                    <input readOnly className={style.searchBox3} minLength={1} maxLength={10} placeholder={`${dummy.startTime.substring(0, 2) + ":" + dummy.startTime.substring(2)}~${dummy.closeTime.substring(0, 2) + ":" + dummy.closeTime.substring(2)}`}/>
+                    <input readOnly className={style.searchBox3} minLength={1} maxLength={10} placeholder={`${dummy2.startTime.substring(0, 2) + ":" + dummy2.startTime.substring(2)}~${dummy2.closeTime.substring(0, 2) + ":" + dummy2.closeTime.substring(2)}`}/>
                 </div>
             </div>
             {flyerCode !== "new" && <div className={style.deleteBtn}>전단지삭제</div>}
@@ -145,17 +156,20 @@ export default EditFlyerAd;
 let dummy: Flyer = {
     flyerCode: 0,
     flyerTitle: "첫 방문 고객 할인",
-    storeName: "새싹미용실",
     startDate: "20230522",
     endDate: "20230630",
-    address: "새싹시 새싹동 12번지",
-    detailAddress: "12동 191호",
     hashTag: "#합리적인가격#여기가최고",
     hasCoupon: true,
-    phone: "010-1234-5678",
-    startTime: "0700",
-    closeTime: "2400",
     imgSrc: "/public/flyer/flyerExample.png",
-    qrNum: 2,
-    qrTotalViewCount: 172,
+}
+
+let dummy2: Store = {
+    closeTime: "2400",
+    startTime: "0700",
+    phone: "010-1234-5678",
+    detailAddress: "12동 191호",
+    address: "새싹시 새싹동 12번지",
+    storeName: "새싹미용실",
+    storeDescription: "string",
+    hashTag: "#string",
 }
