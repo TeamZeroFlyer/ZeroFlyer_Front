@@ -6,11 +6,11 @@ import KakaoLoginButton from "./KakaoLoginButton";
 import logo from "../../../public/image/login_button/logo.svg";
 
 const kakaoUrl =
-"https://qrecode-back.shop/login/oauth2/authorization/kakao?redirect_uri=http://localhost:5173"
+"https://qrecode-back.shop/login/oauth2/authorization/kakao?redirect_uri=https://www.qrecode.site/"
 
 
 const googleUrl =
-"https://qrecode-back.shop/login/oauth2/authorization/google?redirect_uri=http://localhost:5173"
+"https://qrecode-back.shop/login/oauth2/authorization/google?redirect_uri=https://www.qrecode.site/"
 
 const LoginForm = () => {
 
