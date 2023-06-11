@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 
-import { FlyerInf } from "../../pages/CreateQRCode";
+import { FlyerInf } from "../../pages/qr/CreateQRCode";
 import { slides } from "../../data/carouselData.json";
 import style from "./QrGenerator.module.css";
 import Card from "../../UI/Card";
 import FlyerCarousel from "../FlyerCarousel";
-import FlyerPreview from "../FlyerPreview";
 
 const Backdrop: React.FC<{ onConfirm: () => void }> = (props) => {
   return <div className={style.backdrop} onClick={props.onConfirm} />;
@@ -17,14 +16,6 @@ const ModalOverlay: React.FC<{
   onSelectFlyer: (flyer: FlyerInf) => void;
   onSelectQrNumber: (qrNumber: number) => void;
 }> = (props) => {
-  const [previewFlyer, setPreviewFlyer] = useState<FlyerInf>();
-  const [qrNumber, setQrNumber] = useState<number>(1);
-
-  const onConfirmHandler = (event: React.MouseEvent) => {
-    event.preventDefault();
-    props.onSelectFlyer(previewFlyer!);
-    props.onSelectQrNumber(qrNumber);
-  };
 
   const selectPreviewFlyer = (flyerId: number) => {
     const selectedFlyer = slides.find((slide) => slide.id === flyerId)!;

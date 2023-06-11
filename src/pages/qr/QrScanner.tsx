@@ -1,16 +1,16 @@
 import React from "react";
-import { LoaderFunctionArgs, json, useLoaderData } from "react-router-dom";
+import { LoaderFunctionArgs, json} from "react-router-dom";
 
 import QRCode from "../../components/qr/QRCode";
 
 const QrScanner: React.FC = () => {
-  const qr = useLoaderData() as QRCodeType;
+  //const qr = useLoaderData() as QRCodeType;
   return <QRCode qr={dummy} />;
 };
 
 export default QrScanner;
 
-export const loader = async ({ request, params }: LoaderFunctionArgs) => {
+export const loader = async ({ params }: LoaderFunctionArgs) => {
   const qrId = params.qrId;
   const response = await fetch(`https://qrecode-back.shop/qr/${qrId}`);
   if (!response.ok) {

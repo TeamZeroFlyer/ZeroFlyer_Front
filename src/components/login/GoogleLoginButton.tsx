@@ -1,5 +1,3 @@
-import { useGoogleLogin } from "@react-oauth/google";
-
 import googleButtonImg from "../../../public/image/login_button/google.png";
 import style from "./GoogleLoginButton.module.css";
 

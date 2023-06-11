@@ -4,7 +4,7 @@ import Header from "../../../components/footer/Header";
 import style from "./Citizen.module.css";
 import cameraImg from "../../../../public/image/home/camera.svg";
 import minitreeImg from "../../../../public/image/home/minitree.svg";
-import plantedTreeImg from "../../../../public/image/home/plantedTree.svg";
+//import plantedTreeImg from "../../../../public/image/home/plantedTree.svg";
 import CardContent from "./CardContent";
 import CircleProgressBar from "./CircleProgressBar";
 

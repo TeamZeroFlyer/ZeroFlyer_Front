@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { QRCodeCanvas } from "qrcode.react";
 
 import style from "./QRCode.module.css";
@@ -6,13 +6,13 @@ import Header from "../footer/Header";
 import { QRCodeType } from "../../pages/qr/QrScanner";
 
 const QRCode: React.FC<{ qr: QRCodeType }> = (props) => {
-  const [url, setUrl] = useState<string>("");
+  // const [url, setUrl] = useState<string>("");
 
-  useEffect(() => {
-    if (props.qr) {
-      setUrl(props.qr.flyerLink);
-    }
-  }, [props.qr]);
+  // useEffect(() => {
+  //   if (props.qr) {
+  //     setUrl(props.qr.flyerLink);
+  //   }
+  // }, [props.qr]);
 
   return (
     <div className={style.container}>

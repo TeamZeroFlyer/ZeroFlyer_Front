@@ -1,4 +1,4 @@
-import { json, useLoaderData } from "react-router-dom";
+import { json } from "react-router-dom";
 import { getAuthToken } from "../../util/auth";
 
 import QRList from "../../components/qr/QRList";
