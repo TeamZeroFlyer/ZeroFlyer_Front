@@ -8,7 +8,7 @@ interface AppProps{
 }
 
 // 0: 비로그인, 1: 소비자, 2: 광고주
-const footerList = [["", "map", "setting"], ["", "flyer", "map", "setting"], ["", "flyer", "qr", "map", "setting"]];
+const footerList = [["", "map", "login"], ["", "flyer", "map", "setting"], ["", "flyer", "qr", "map", "setting"]];
 
 const Footer: React.FC<AppProps> = (props) => {
     const url = window.location.pathname;
@@ -22,7 +22,7 @@ const Footer: React.FC<AppProps> = (props) => {
         setStatus(props.status);
         // footer element 개수에 따라 간격 조정
         if(footerRef.current){
-        footerRef.current.style.gap = `calc((100% - 115px) / ${footerList[status].length})`;
+        footerRef.current.style.gap = `calc((100% - 145px) / ${footerList[status].length})`;
         }
     }, [props.status, status])
     return (

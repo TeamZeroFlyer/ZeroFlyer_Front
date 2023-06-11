@@ -6,6 +6,7 @@ import Button from "../../UI/Button";
 
 const QRForm: React.FC<{
   onModalClick: () => void;
+  onCreateClick: () => void;
 }> = (props) => {
   return (
     <div className={style.createQRCode}>
@@ -15,9 +16,9 @@ const QRForm: React.FC<{
           <Link className={style.cancel} to="/qr">
             취소
           </Link>
-          <Link className={style.create} to="#">
+          <span className={style.create} onClick={props.onCreateClick}>
             생성
-          </Link>
+          </span>
         </div>
       </div>
       <div className={style.flyer}>

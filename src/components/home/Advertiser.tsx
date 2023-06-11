@@ -23,7 +23,7 @@ const Advertiser = () => {
 
         <div className={style.greenInfoBox}>
             <div className={style.greenInfoTitle}>
-                My Store 1 <img src="/public/icons/plus.svg" />
+                My Store
             </div>
             <div className={style.greenInfoTwo}>
                 <div className={style.greenImg}>

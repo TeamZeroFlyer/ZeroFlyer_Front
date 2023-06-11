@@ -1,6 +1,6 @@
-import Header from "../components/footer/Header";
+import Header from "../../components/footer/Header";
 import style from "./Setting.module.css";
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 
 type ChildProps = {
     status: number
@@ -8,6 +8,12 @@ type ChildProps = {
 
 const Setting = () => { 
     const {status} = useOutletContext<ChildProps>();
+    const navigate = useNavigate();
+    const editStore = () => {
+      if (status === 2){
+        navigate("/setting/edit");
+      }
+    };
 
     const switchMode = () => {
         const token = localStorage.getItem("accessToken");
@@ -46,14 +52,14 @@ const Setting = () => {
         <Header>설정</Header>
         <div className={style.general}>
             <div className={style.title}>일반</div>
-            <div className={style.element}>
+            <div className={style.element}  onClick={()=>editStore()}>
                 {status === 1 ? "로그인 정보" : "가게 정보"} <img src="/public/icons/lock.svg"/>
             </div>
             <div className={style.element}  onClick={()=>switchMode()}>
             {status === 1 ? "광고주" : "일반"} 모드로 전환 <img src="/public/icons/smile.svg"/>
             </div>
             <div className={style.element}>
-            상품 구매 <img src="/public/icons/smile.svg"/>
+            상품 구매
             </div>
         </div>
 

@@ -33,3 +33,7 @@
   font-weight: 800;
   font-size: 18px;
 }
+
+.create:hover {
+  cursor: pointer;
+}
