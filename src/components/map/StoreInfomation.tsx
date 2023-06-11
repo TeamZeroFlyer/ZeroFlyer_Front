@@ -13,12 +13,14 @@ interface StoreProps{
         address: string;
         hashTag: string[];
         hasCoupon: boolean;
+        storeDescription: string;
     },
     last: boolean;
     move: (center: {lat: number, lng: number}) => void;
 }
 
 function formatTime(timeString: string) {
+    console.log(timeString);
     const hours = Math.floor(parseInt(timeString) / 100);
     const minutes = parseInt(timeString) % 100;
     const formattedTime = `${hours}:${minutes.toString().padStart(2, '0')}`;
@@ -33,9 +35,15 @@ function isWithinTime(startTime: string, endTime: string){
 
 const StoreInformation: React.FC<StoreProps> = (props) => {
     const open = isWithinTime(props.store.startTime, props.store.closeTime);
+
+    const copy = async (address: string) => {
+        await navigator.clipboard.writeText(address);
+        alert('클립보드에 복사되었습니다.');
+    }
     return (
         <div className={props.last ? style.storeLastInfo : style.storeInfo} onClick={() => props.move(props.store.latlng)}>
             <div className={props.red ? style.storeTitleRed : style.storeTitle}>{props.store.storeName}</div>
+            <div className={style.storeAddress}>{props.store.address}<img onClick={()=>copy(props.store.address)} className={style.copy} src="/public/icons/copy.svg"/></div>
             <div className={style.storeTime}>
                 {open ? <img src="/public/image/greenCircle.svg"/> : <img src="/public/image/redCircle.svg"/>}
                 <span className={style.storeIsOpen}>
@@ -43,7 +51,9 @@ const StoreInformation: React.FC<StoreProps> = (props) => {
                 </span>
                 {formatTime(props.store.startTime)} ~ {formatTime(props.store.closeTime)}
             </div>
-            <div className={style.storeAddress}>{props.store.address}</div>
+            <div className={style.desc}>
+                {props.store.storeDescription}
+            </div>
             <div className={style.storeHashtags}>
             {props.store.hashTag.map((hashtag, i) => (
                 <span key={i} className={style.storeHashtag}>#{hashtag}</span>
