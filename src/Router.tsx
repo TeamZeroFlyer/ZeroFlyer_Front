@@ -3,7 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import EditFlyer from "./pages/flyer/EditFlyer";
 import Home from "./pages/home/Home";
-import KakaoMap from './pages/map/KakaoMap';
+import KakaoMap from "./pages/map/KakaoMap";
 import CreateQRCode from "./pages/qr/CreateQRCode";
 import FlyerDetailPage from "./pages/FlyerDetail";
 import QrScanner from "./pages/qr/QrScanner";
@@ -15,6 +15,7 @@ import PointPage from "./pages/Point";
 import Flyer from "./pages/flyer/Flyer";
 import FullFyler from "./pages/flyer/FullFlyer";
 import EditStore from "./pages/setting/EditStore";
+import NoneMember from "./pages/home/noneMember/NoneMember";
 
 const router = createBrowserRouter([
   {
@@ -28,11 +29,11 @@ const router = createBrowserRouter([
         element: <KakaoMap />,
       },
       {
-        path: 'point',
-        element: <PointPage />
+        path: "point",
+        element: <PointPage />,
       },
       {
-        path: 'flyer',
+        path: "flyer",
         children: [
           {
             index: true,
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <LoginPage />,
+      },
+      {
+        path: "mode-select",
+        element: <NoneMember />,
       },
     ],
   },

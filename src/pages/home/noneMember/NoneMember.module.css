@@ -1,0 +1,50 @@
+.noneMember {
+  padding: 0 32px;
+  height: 100vh;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  text-align: center;
+  padding: 200px 0 160px;
+}
+
+.citizen,
+.advertizer {
+  height: 100px;
+  margin-bottom: 30px;
+}
+
+.nav a {
+  display: inline-block;
+  padding: 18px 62px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 72px;
+  font-weight: 800;
+  font-size: 20px;
+  text-decoration: none;
+  margin-bottom: 15px;
+}
+
+.citizen a {
+  color: white;
+  background-color: #006c3a;
+}
+
+.advertizer a {
+  color: #006c3a;
+}
+
+.phrase {
+  font-weight: 700;
+  font-size: 15px;
+  color: #797979;
+  text-align: center;
+  line-height: 130.5%;
+}
