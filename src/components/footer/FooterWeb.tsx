@@ -40,7 +40,7 @@ const FooterWeb: React.FC<FooterProps> = (props) => {
 
   const [avatarSprings, avatarApi] = useSprings(
     footerList[status].length,
-    i => ({
+    _ => ({
       y: 0,
       boxShadow: `0px 3px 8px 2px rgba(0, 108, 58,${0.2 * 1})`
     }),
@@ -147,7 +147,7 @@ const FooterWeb: React.FC<FooterProps> = (props) => {
           onPointerDown={handlePointerDown(false)}
           {...restGestures}
           style={{
-            boxShadow: opacity.to(o => `0px 3px 8px 2px rgba(0, 108, 58,${0.2 * 1})`),
+            boxShadow: opacity.to(_ => `0px 3px 8px 2px rgba(0, 108, 58,${0.2 * 1})`),
             zIndex: 5
           }}>
             <div>

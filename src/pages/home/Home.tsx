@@ -1,4 +1,3 @@
-import { useRouteLoaderData, useSearchParams } from "react-router-dom";
 import Advertiser from "../../components/home/Advertiser.tsx";
 import Citizen from "../../components/home/citizen/Citizen";
 
