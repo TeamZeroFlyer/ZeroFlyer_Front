@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import Header from "../../../components/footer/Header";
 import style from "./Citizen.module.css";
-import cameraImg from "../../../../public/image/home/camera.svg";
+import barcodeImg from "../../../../public/image/home/barcode.svg";
 import minitreeImg from "../../../../public/image/home/minitree.svg";
+import bigtreeImg from "../../../../public/image/home/bigtree.svg";
 import plantedTreeImg from "../../../../public/image/home/plantedTree.svg";
 import CardContent from "./CardContent";
 import CircleProgressBar from "./CircleProgressBar";
@@ -11,45 +12,20 @@ import CircleProgressBar from "./CircleProgressBar";
 type User = {
   name: string;
   point: number;
-  leftTreeNum: number;
-  plantedTree: number;
-  co2: number;
-  totlaTree: number;
-  progress: number;
+  totalScan: number;
 };
 
 const dummy: User = {
   name: "김새싹",
   point: 3600,
-  leftTreeNum: 8,
-  plantedTree: 3,
-  co2: 0,
-  totlaTree: 0,
-  progress: 30,
+  totalScan: 18,
 };
 
-const CitizenPage = () => {
-  const [cameraEnabled, setCameraEnabled] = useState<boolean>(false);
-  const [stream, setStream] = useState<MediaStream | null>(null);
-  const handleCameraToggle = async () => {
-    try {
-      if (cameraEnabled) {
-        // 카메라 비디오 스트림 중지
-        stream!.getTracks().forEach((track) => track.stop());
-        setStream(null);
-      } else {
-        // 카메라 비디오 스트림 가져오기
-        const mediaStream = await navigator.mediaDevices.getUserMedia({
-          video: true,
-        });
-        setStream(mediaStream);
-      }
-      setCameraEnabled(!cameraEnabled);
-    } catch (error) {
-      console.log("카메라를 사용할 수 없습니다.", error);
-    }
-  };
+const calcCo2 = (totalScan: number) => totalScan * 2.88;
+const calcLeftTree = (totalScan: number) => 10 - (totalScan % 10);
+const calcPlantedTree = (totalScan: number) => Math.floor(totalScan / 10);
 
+const CitizenPage = () => {
   return (
     <div className={style.citizenPage}>
       <Header>
@@ -63,26 +39,38 @@ const CitizenPage = () => {
               <span>{dummy.point.toLocaleString()}</span> 포인트
             </p>
             <p className={style.catchphrase}>
-              나무 심기까지 {dummy.leftTreeNum}개 남았어요
+              나무 심기까지 {calcLeftTree(dummy.totalScan)}개 남았어요
             </p>
           </div>
-          <div className={style.camera} onClick={handleCameraToggle}>
-            <img src={cameraImg} alt="카메라" />
+          <div className={style.action}>
+            <Link to="#">
+            <div className={style.barcode}>
+              <img src={barcodeImg} alt="포인트 사용버튼" />
+            </div>
+            </Link>
+            <p>포인트 사용</p>
           </div>
         </div>
         <div className={`${style.tree} ${style.item}`}>
           <CircleProgressBar
-            progress={dummy.progress}
+            progress={(10 - calcLeftTree(dummy.totalScan)) * 10}
             strokeWidth={8}
             circleRadius={150}
           >
             <div className={style.treeImageWrapper}>
-              <img src={minitreeImg} alt="나무 이미지" />
+              <img
+                src={
+                  10 - calcLeftTree(dummy.totalScan) > 6
+                    ? bigtreeImg
+                    : minitreeImg
+                }
+                alt="나무 이미지"
+              />
             </div>
           </CircleProgressBar>
           <div className={style.plantedTree}>
             <img src={plantedTreeImg} alt="내가 심은 나무 이미지" />
-            <p className={style.treenum}>3</p>
+            <p className={style.treenum}>{calcPlantedTree(dummy.totalScan)}</p>
             <p className={style.treelabel}>심은나무</p>
           </div>
         </div>
@@ -90,8 +78,11 @@ const CitizenPage = () => {
           <div className={style.card}>
             <p className={style.title}>QR 전단지 효과</p>
             <div className={style.cardContents}>
-              <CardContent label="co2" value={dummy.co2} />
-              <CardContent label="tree" value={dummy.plantedTree} />
+              <CardContent label="co2" value={calcCo2(dummy.totalScan)} />
+              <CardContent
+                label="tree"
+                value={calcPlantedTree(dummy.totalScan)}
+              />
             </div>
           </div>
         </div>
