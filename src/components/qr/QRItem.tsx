@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import style from "./QRItem.module.css";
 import faceImg from "../../../public/image/qr/parttime.svg";
 import threedot from "../../../public/icons/threedot.svg";
 import { QRManagement } from "../../pages/qr/ManageQRCode";
 import { Link } from "react-router-dom";
+import Dropdown from "./QrDropdown";
 
 const QRItem: React.FC<{
   qrcodes: QRManagement[];
-  isPTchecked: boolean;
 }> = (props) => {
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [selectedQRId, setSelectedQRId] = useState("");
+  const toggleDropdown = (qrId: string) => {
+    if (selectedQRId === qrId) {
+      setSelectedQRId("");
+    } else {
+      setSelectedQRId(qrId);
+    }
+    setDropdownVisible(!dropdownVisible);
+  };
+
   return (
     <>
       {props.qrcodes &&
@@ -17,21 +28,28 @@ const QRItem: React.FC<{
           <ul className={style.qrItem}>
             <p key={idx}>{getFormattedDate(qrManagement.date)}</p>
             {qrManagement.qrcodes.map((qr) => (
-              <Link to={`/qr/${qr.qrId}`}>
-                <li key={qr.qrId} className={style.li}>
-                  <div className={`${style.img} ${style.item}`}>
+              <li key={qr.qrId} className={style.li}>
+                <Link
+                  to={`/qr/${qr.qrId}`}
+                  className={`${style.item} ${style.link}`}
+                >
+                  <div className={`${style.img} ${style.linkItem}`}>
                     <img src={faceImg} alt="아르바이트생 얼굴" />
                   </div>
-                  <div className={`${style.info} ${style.item}`}>
-                    <p className={style.id}>{ props.isPTchecked ? qr.ptj.name : qr.qrId}</p>
-                    <p className={style.title}>{ props.isPTchecked ? qr.ptj.phone : qr.flyerTitle}</p>
+                  <div className={`${style.linkItem} ${style.info}`}>
+                    <p className={style.id}>{qr.qrId}</p>
+                    <p className={style.title}>{qr.flyerTitle}</p>
                   </div>
-                  <div className={`${style.action} ${style.item}`}>
-                    <span>{qr.scan}</span>
-                    <img src={threedot} />
-                  </div>
-                </li>
-              </Link>
+                </Link>
+                <div
+                  className={`${style.action} ${style.item}`}
+                  onClick={toggleDropdown.bind(null, qr.qrId)}
+                >
+                  <span>{qr.scan}</span>
+                  <img src={threedot} />
+                  {selectedQRId === qr.qrId && <Dropdown qrId={qr.qrId} />}
+                </div>
+              </li>
             ))}
           </ul>
         ))}

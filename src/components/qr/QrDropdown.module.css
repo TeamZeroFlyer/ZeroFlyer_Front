@@ -1,0 +1,30 @@
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 10;
+}
+
+.li:hover {
+  background-color: #e9ecef;
+}
+
+.li:nth-child(1) {
+  margin-bottom: 10px;
+}
+
+.li {
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .li {
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
