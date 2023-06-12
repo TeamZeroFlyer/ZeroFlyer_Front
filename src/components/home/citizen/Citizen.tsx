@@ -4,7 +4,7 @@ import Header from "../../../components/footer/Header";
 import style from "./Citizen.module.css";
 import cameraImg from "../../../../public/image/home/camera.svg";
 import minitreeImg from "../../../../public/image/home/minitree.svg";
-//import plantedTreeImg from "../../../../public/image/home/plantedTree.svg";
+import plantedTreeImg from "../../../../public/image/home/plantedTree.svg";
 import CardContent from "./CardContent";
 import CircleProgressBar from "./CircleProgressBar";
 
@@ -15,6 +15,7 @@ type User = {
   plantedTree: number;
   co2: number;
   totlaTree: number;
+  progress: number;
 };
 
 const dummy: User = {
@@ -24,6 +25,7 @@ const dummy: User = {
   plantedTree: 3,
   co2: 0,
   totlaTree: 0,
+  progress: 30,
 };
 
 const CitizenPage = () => {
@@ -69,15 +71,20 @@ const CitizenPage = () => {
           </div>
         </div>
         <div className={`${style.tree} ${style.item}`}>
-          <CircleProgressBar progress={50} strokeWidth={8} circleRadius={150}>
+          <CircleProgressBar
+            progress={dummy.progress}
+            strokeWidth={8}
+            circleRadius={150}
+          >
             <div className={style.treeImageWrapper}>
               <img src={minitreeImg} alt="나무 이미지" />
             </div>
           </CircleProgressBar>
-          {/* <div className={style.plantedTree}>
+          <div className={style.plantedTree}>
             <img src={plantedTreeImg} alt="내가 심은 나무 이미지" />
-            <p>3</p>
-          </div> */}
+            <p className={style.treenum}>3</p>
+            <p className={style.treelabel}>심은나무</p>
+          </div>
         </div>
         <div className={`${style.effect} ${style.itm}`}>
           <div className={style.card}>

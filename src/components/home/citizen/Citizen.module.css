@@ -1,12 +1,16 @@
 .citizenPage {
   overflow: scroll;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .contents {
+  flex: 1;
   padding: 0 20px;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
 
 .userInfo {
@@ -43,7 +47,7 @@
   width: 64px;
   height: 64px;
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
-  background-color: #E1F4EB;
+  background-color: #e1f4eb;
 }
 
 .camera:hover {
@@ -57,21 +61,22 @@
 
 .tree {
   margin: 0 auto;
+  position: relative;
 }
 
 .plantedTree {
-  position: relative;
-  bottom: 0px;
-  right: 50px;
+  position: absolute;
+  bottom: 10px;
   display: inline-block;
+  width: 56px;
 }
-.plantedTree p {
+.treenum {
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
   bottom: 0px;
-  right: -10px;
+  right: 0px;
   font-weight: 800;
   font-size: 16px;
   border-radius: 100%;
@@ -81,10 +86,17 @@
   color: #006c3a;
 }
 
+.treelabel {
+  color: #a6a6a6;
+  font-weight: 700;
+  font-size: 12px;
+  position: absolute;
+}
+
 .card {
   background-color: #f9f9f9;
   border-radius: 9px;
-  padding: 16px;
+  padding: 20px;
 }
 
 .title {
@@ -95,7 +107,7 @@
 
 .cardContents {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .cardContents > div {
@@ -114,6 +126,13 @@
 }
 
 @media (max-width: 768px) {
+  .citizenPage {
+    overflow: scroll;
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+  }
+
   .contents {
     padding: 0 20px;
     display: flex;
@@ -131,5 +150,18 @@
     font-size: 14px;
     text-align: start;
     margin-bottom: 5px;
+  }
+
+  .cardContents {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .plantedTree {
+    position: absolute;
+    bottom: 0px;
+    right: -10px;
+    display: inline-block;
+    width: 56px;
   }
 }
