@@ -15,9 +15,6 @@ const Advertiser = () => {
                 <div className={style.headText}><span className={style.boldGreen}>김나무</span>님,</div>
                 <div className={style.headText}><span className={style.bold}>172장</span>의 전단지를 아꼈어요</div>
             </div>
-            <div className={style.headImg}>
-                <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png" />
-            </div>
         </div>
 
 
