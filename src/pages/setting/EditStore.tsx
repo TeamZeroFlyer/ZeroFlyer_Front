@@ -44,17 +44,17 @@ const EditStore = () => {
                 return response.json()
             })
             .then(data => {
-                !loading && getLatLng(data.data[0].storeAddress);
-                if (data.data[0]){
-                storeName.value = data.data[0].storeName;
-                readAddress.value = data.data[0].storeAddress;
-                detailAddress.value = data.data[0].detailAddress;
-                storeDescription.value = data.data[0].storeDescription;
-                phone.value = data.data[0].storePhone;
-                timeStr.value = data.data[0].storeStart.substring(0, 2) + data.data[0].storeStart.substring(2) + "~" + data.data[0].storeEnd.substring(0, 2)+ data.data[0].storeEnd.substring(2);
+                !loading && getLatLng(data.data.storeAddress);
+                if (data.data){
+                storeName.value = data.data.storeName;
+                readAddress.value = data.data.storeAddress;
+                detailAddress.value = data.data.detailAddress;
+                storeDescription.value = data.data.storeDescription;
+                phone.value = data.data.storePhone;
+                timeStr.value = data.data.storeStart.substring(0, 2) + data.data.storeStart.substring(2) + "~" + data.data.storeEnd.substring(0, 2)+ data.data.storeEnd.substring(2);
 
                 let tmpHash: string[] = [];
-                data.data[0].storeTag.split('#').map((item: string) => {
+                data.data.storeTag.split('#').map((item: string) => {
                     tmpHash.push(item);
                 });
                 if (tmpHash.length >0){
@@ -140,7 +140,6 @@ const EditStore = () => {
             "storeName": storeName.value,
             "storeAddress": readAddress.value,
             "detailAddress": detailAddress.value,
-            "storeNum": randomString,
             "lat": latlng[0],
             "lng": latlng[1],
             "storeDescription": storeDescription.value,
@@ -177,22 +176,22 @@ const EditStore = () => {
                 <div onClick={()=>submit()} className={style.complete}>완료</div>
             </div>
             <div className={style.storeName}><span className={style.star}>* </span>상호명</div>
-            <input id="storeName"  className={style.searchBox2} minLength={1} maxLength={10}/>
+            <input id="storeName"  className={style.searchBox2} placeholder="가게 이름을 적어주세요" minLength={1} maxLength={10}/>
             <div className={style.storeName}><span className={style.star}>* </span>주소</div>
-            <input id="roadAddress" onClick={()=>{handleClick()}} readOnly className={style.searchBox3}/>
-            <input id="detailAddress"  className={style.searchBox2} minLength={1} maxLength={10}/>
+            <input id="roadAddress" placeholder="클릭하여 주소 찾기" onClick={()=>{handleClick()}} readOnly className={style.searchBox3}/>
+            <input id="detailAddress" placeholder="상세 주소를 적어주세요"  className={style.searchBox2} minLength={1} maxLength={10}/>
             <div className={style.numBox}>
                 <div className={style.boxInner1}>
                     <div className={style.storeName}><span className={style.star}>* </span>전화번호</div>
-                    <input id="phone"  className={style.searchBox3} minLength={1} maxLength={13}/>
+                    <input id="phone" placeholder="010-xxxx-xxxx" className={style.searchBox3} minLength={1} maxLength={13}/>
                 </div>
                 <div className={style.boxInner2}>
                     <div className={style.storeName}><span className={style.star}>* </span>영업시간</div>
-                    <input id="timeStr" className={style.searchBox3} minLength={11} maxLength={11}/>
+                    <input id="timeStr" placeholder="07:00~16:00" className={style.searchBox3} minLength={11} maxLength={11}/>
                 </div>
             </div>
             <div className={style.storeName}><span className={style.star}>* </span>한줄 설명</div>
-            <textarea id="storeDescription" className={style.twolinebox} minLength={1} maxLength={40}></textarea>
+            <textarea id="storeDescription" className={style.twolinebox} minLength={1} maxLength={40} placeholder="간단하게 가게를 소개하세요."></textarea>
             <div className={style.forTag}>
                 <div className={style.tagInfo}>태그 (최대 3개)</div>
                 <input ref={tag} onKeyUpCapture={enterTag} className={style.searchBox2} minLength={1} maxLength={6} placeholder='키워드 입력 후 Enter'/>
