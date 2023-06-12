@@ -9,6 +9,7 @@ import Dropdown from "./QrDropdown";
 
 const QRItem: React.FC<{
   qrcodes: QRManagement[];
+  isPTchecked: boolean;
 }> = (props) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [selectedQRId, setSelectedQRId] = useState("");
@@ -37,8 +38,8 @@ const QRItem: React.FC<{
                     <img src={faceImg} alt="아르바이트생 얼굴" />
                   </div>
                   <div className={`${style.linkItem} ${style.info}`}>
-                    <p className={style.id}>{qr.qrId}</p>
-                    <p className={style.title}>{qr.flyerTitle}</p>
+                    <p className={style.id}>{props.isPTchecked ? qr.ptj.name : qr.qrId}</p>
+                    <p className={style.title}>{props.isPTchecked ? qr.ptj.phone : qr.flyerTitle}</p>
                   </div>
                 </Link>
                 <div

@@ -19,12 +19,12 @@
 }
 
 .li {
-  font-weight: 700;
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {
   .li {
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 500;
   }
 }
