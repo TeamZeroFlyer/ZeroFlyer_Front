@@ -1,6 +1,7 @@
 .qrList {
   padding: 20px;
   overflow: scroll;
+  height: calc(100vh - 120px - 3vh);
 }
 
 hr {
