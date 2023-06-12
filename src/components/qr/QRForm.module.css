@@ -1,5 +1,7 @@
 .createQRCode {
   padding: 48px 20px 0px 20px;
+  overflow: scroll;
+  height: 100vh;
 }
 
 .flyer {
@@ -36,4 +38,12 @@
 
 .create:hover {
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .createQRCode {
+    padding: 48px 20px 0px 20px;
+    overflow: scroll;
+    height: calc(100vh - 80px);
+  }
 }
