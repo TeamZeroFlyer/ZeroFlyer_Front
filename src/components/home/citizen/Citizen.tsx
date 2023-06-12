@@ -43,7 +43,7 @@ const CitizenPage = () => {
             </p>
           </div>
           <div className={style.action}>
-            <Link to="#">
+            <Link to="/point">
             <div className={style.barcode}>
               <img src={barcodeImg} alt="포인트 사용버튼" />
             </div>

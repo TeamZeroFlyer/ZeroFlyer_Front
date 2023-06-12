@@ -5,11 +5,11 @@ import PointItem from "./PointItem";
 import { PointHistory } from "src/pages/Point";
 
 const PointList: React.FC<{ pointHistory: PointHistory }> = (props) => {
-
   return (
     <>
-      <Header>적립 내역</Header>
       <div className={style.pointList}>
+        <Header>적립 내역</Header>
+
         <div className={style.head}>
           <div className={style.scan}>
             <p className={style.label}>스캔 횟수</p>
@@ -20,7 +20,9 @@ const PointList: React.FC<{ pointHistory: PointHistory }> = (props) => {
           </div>
           <div className={style.points}>
             <p className={style.label}>적립 포인트</p>
-            <p className={style.value}>{props.pointHistory.totalPoint.toLocaleString()}</p>
+            <p className={style.value}>
+              {props.pointHistory.totalPoint.toLocaleString()}
+            </p>
           </div>
         </div>
         <div className={style.history}>
@@ -28,7 +30,7 @@ const PointList: React.FC<{ pointHistory: PointHistory }> = (props) => {
             {props.pointHistory.histories?.map((history, idx) => {
               return <PointItem key={idx} history={history} />;
             })}
-          </ul> 
+          </ul>
         </div>
       </div>
     </>
