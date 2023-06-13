@@ -2,7 +2,7 @@ import React from "react";
 
 import style from "./PointItem.module.css";
 import saving from "../../../public/image/point_history/saving.svg";
-import { History } from "../../pages/Point";
+import { History } from "../../pages/point/Point";
 
 const PointItem: React.FC<{
   history: History

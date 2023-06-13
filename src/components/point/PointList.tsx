@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import style from "./PointList.module.css";
 import barcode from "../../../public/image/point_history/barcode.svg";
 import PointItem from "./PointItem";
-import { PointHistory } from "src/pages/Point";
+import { PointHistory } from "src/pages/point/Point";
 import leftArrowImg from "../../../public/icons/leftArrow.svg";
 
 const PointList: React.FC<{ pointHistory: PointHistory }> = (props) => {

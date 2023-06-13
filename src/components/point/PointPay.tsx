@@ -24,6 +24,7 @@ const Barcode: React.FC<{
 
 const PointPay = () => {
   return (
+    <div className={style.container}>
     <div className={style.pointPay}>
       <header className={`${style.head}`}>
         <Link to=".." relative="path" className={style.backspace}>
@@ -43,6 +44,7 @@ const PointPay = () => {
           </Link>
         </div>
       </div>
+    </div>
     </div>
   );
 };

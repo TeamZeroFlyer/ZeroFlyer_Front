@@ -1,6 +1,9 @@
+.container {
+  text-align: center;
+}
+
 .pointPay {
-  display: flex;
-  flex-direction: column;
+  display: inline-block;
   height: 100vh;
 }
 
@@ -16,13 +19,14 @@
 
 .backspace {
   position: absolute;
-  left: 24px;
+  left: 0;
 }
 
 .backspace > img {
   width: 24px;
   height: 24px;
 }
+
 .barcode {
   margin: 20vh auto 0 auto;
   padding: 20px;
@@ -32,6 +36,7 @@
   border-radius: 9px;
   min-width: 350px;
 }
+
 .info {
   display: flex;
   justify-content: space-between;
