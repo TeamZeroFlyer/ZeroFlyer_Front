@@ -93,11 +93,11 @@
 .dailyChartBox {
   padding: 20px;
   margin: 20px;
-  height: 209px;
+  height: 219px;
   border: 1px solid #f3f3f3;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
 }
@@ -108,29 +108,37 @@
   margin-bottom: 90px;
 }
 .twoChartBox1 {
-  padding: 5px;
+  padding: 15px;
   width: 50%;
   margin: 0 5px 0 20px;
   height: 209px;
   border: 1px solid #f3f3f3;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
 .twoChartBox2 {
   width: 50%;
-  padding: 5px;
+  padding: 15px;
   margin: 0 20px 0 5px;
   height: 209px;
   border: 1px solid #f3f3f3;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
 .dsf {
   color: #6c0000;
+}
+.legendBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chartTitle {
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 14px;
 }

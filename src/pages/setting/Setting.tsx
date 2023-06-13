@@ -17,7 +17,6 @@ const Setting = () => {
 
     const switchMode = () => {
         const token = localStorage.getItem("accessToken");
-        console.log(JSON.stringify({"lastStatus" : status === 1 ? "ADVERTISER" : "USER"}));
         if (token){
             fetch("https://qrecode-back.shop/user/setstatus", {
               method: "POST",

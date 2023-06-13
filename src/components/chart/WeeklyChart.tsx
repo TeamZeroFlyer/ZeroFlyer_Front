@@ -18,23 +18,52 @@ const WeeklyChart: React.FC = () => {
         {
           name: '총 합',
           data: [9, 12, 15],
-          color: '#006C3A',
         }
       ],
       xaxis: {
-        categories: ["2주전", "저번주", "이번주"],
-      },
-      yaxis: {
+        categories: ["2W", "1W", "NOW"],
+        axisTicks: {
+          show: false, // Y축 눈금선 숨기기
+        },
         axisBorder: {
           show: false,
-        },
-        axisTicks: {
-          show: false,
-        },
+        }
+      },
+      yaxis: {
         labels: {
           show: false, // y축 데이터 설명 숨김
         },
-    }};
+    },
+    plotOptions: {
+      bar: {
+        colors: {
+          ranges: [
+            {
+              from: 0,
+              to: 9,
+              color: '#E6E6E6',
+            },
+            {
+              from: 10,
+              to: 12,
+              color: '#E6E6E6',
+            },
+            {
+              from: 13,
+              to: 15,
+              color: '#33A771',
+            },
+          ],
+        },
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    grid: {
+      show: false
+    }
+  };
 
     const chart = new ApexCharts(chartRef.current, options);
     chart.render();
