@@ -1,15 +1,21 @@
-import Header from "../footer/Header";
+import { Link } from "react-router-dom";
+
 import style from "./PointList.module.css";
 import barcode from "../../../public/image/point_history/barcode.svg";
 import PointItem from "./PointItem";
 import { PointHistory } from "src/pages/Point";
+import leftArrowImg from "../../../public/icons/leftArrow.svg";
 
 const PointList: React.FC<{ pointHistory: PointHistory }> = (props) => {
   return (
     <>
       <div className={style.pointList}>
-        <Header>적립 내역</Header>
-
+        <header className={style.header}>
+          <Link to=".." relative="path" className={style.backspace}>
+            <img src={leftArrowImg} alt="뒤로 가기" />
+          </Link>
+          <p>적립 내역</p>
+        </header>
         <div className={style.head}>
           <div className={style.scan}>
             <p className={style.label}>스캔 횟수</p>
