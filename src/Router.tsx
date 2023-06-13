@@ -16,6 +16,7 @@ import Flyer from "./pages/flyer/Flyer";
 import FullFyler from "./pages/flyer/FullFlyer";
 import EditStore from "./pages/setting/EditStore";
 import NoneMember from "./pages/home/noneMember/NoneMember";
+import UsingPoinPage from "./pages/home/UsingPoint";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,16 @@ const router = createBrowserRouter([
       },
       {
         path: "point",
-        element: <PointPage />,
+        children: [
+          {
+            index: true,
+            element: <UsingPoinPage />
+          }, 
+          {
+            path: "history",
+            element: <PointPage />
+          }
+        ]
       },
       {
         path: "flyer",

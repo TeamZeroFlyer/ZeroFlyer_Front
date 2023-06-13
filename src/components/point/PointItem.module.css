@@ -28,3 +28,22 @@
   font-size: 18px;
   color: #006c3a;
 }
+
+@media (min-width: 768px) {
+  .item {
+    flex-grow: 1;
+  }
+  
+  .item:nth-child(1) {
+    flex-grow: 1;
+  }
+  
+  .item:nth-child(2) {
+    flex-grow: 4;
+  }
+  
+  .item:nth-child(3) {
+    flex-grow: 1;
+    text-align: end;
+  }
+}

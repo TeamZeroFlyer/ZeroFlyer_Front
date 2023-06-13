@@ -1,0 +1,71 @@
+.pointPay {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  font-size: 18px;
+  padding: 5vh 24px 0 24px;
+  position: relative;
+}
+
+.backspace {
+  position: absolute;
+  left: 0;
+}
+.barcode {
+  margin: 20vh auto 0 auto;
+  padding: 20px;
+  text-align: center;
+  background: #f9f9f9;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 9px;
+  min-width: 350px;
+}
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.label {
+  font-weight: 700;
+  font-size: 16px;
+  align-self: center;
+}
+
+.value {
+  font-weight: 800;
+  font-size: 32px;
+  color: #006c3a;
+}
+
+.value > span {
+  font-weight: 800;
+  font-size: 32px;
+  color: black;
+}
+
+.info > a {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.payBackspace {
+  width: 16px;
+  height: 16px;
+  transform: rotate(180deg);
+  margin-left: 5px;
+}
+
+@media (max-width: 768px) {
+  .barcode {
+    margin: 100px auto 0 auto;
+  }
+}

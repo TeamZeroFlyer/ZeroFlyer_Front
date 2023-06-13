@@ -1,7 +1,6 @@
 .pointList {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: 0 20px;
   overflow: scroll;
@@ -11,11 +10,11 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 350px;
+  width: 70%;
   height: 75px;
   background-color: #ececec;
   border-radius: 10px;
-  margin-top: 50px;
+  margin-top: calc(50px - 3vh) ;
 }
 
 .barcode {
@@ -46,7 +45,18 @@
 }
 
 .history {
-    width: 350px;
-    margin-top: 25px;
+  width: 70%;
+  margin-top: 25px;
 }
 
+@media (max-width: 768px) {
+  .head {
+    width: 350px;
+  }
+  .history {
+    width: 100%;
+  }
+  .pointList {
+    height: calc(100vh - 80px);
+  }
+}
