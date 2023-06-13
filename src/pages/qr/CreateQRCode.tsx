@@ -69,6 +69,7 @@ const CreateQRCode: React.FC = () => {
       {seletedFlyer && (
         <FlyerPreview
           previewFlyer={seletedFlyer}
+          qrNumber={qrNumber}
           selectQrNumber={setQrNumber}
         />
       )}

@@ -20,12 +20,15 @@ const PartTimeList: React.FC<{
               type="text"
               className={`${style.name} ${style.left}`}
               onChange={(event) => handleInputChange(event, i, "name")}
+              placeholder="이름"
             />
             <input
               name={"ptphone" + i}
               type="text"
               className={`${style.phone} ${style.right}`}
               onChange={(event) => handleInputChange(event, i, "phone")}
+              placeholder="000-0000-0000"
+
             />
           </li>
         );
