@@ -17,11 +17,13 @@ import FullFyler from "./pages/flyer/FullFlyer";
 import EditStore from "./pages/setting/EditStore";
 import NoneMember from "./pages/home/noneMember/NoneMember";
 import UsingPoinPage from "./pages/point/UsingPoint";
+import ErrorPage from "./pages/error/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     loader: tokenLoader,
     id: "root",
     children: [
