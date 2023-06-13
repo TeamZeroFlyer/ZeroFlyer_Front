@@ -70,7 +70,15 @@ const router = createBrowserRouter([
           },
           {
             path: ":qrId",
-            element: <QrScanner />,
+            children: [
+              {
+                index: true,
+                element: <QrScanner />,
+              },
+              {
+                path: 'edit',
+              }
+            ]
           },
           {
             path: "new",

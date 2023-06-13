@@ -5,7 +5,9 @@ import { PTJob } from "../../pages/qr/CreateQRCode";
 
 const PartTimeList: React.FC<{
   ea: number;
-  onSelectPT: Dispatch<PTJob[]>;
+  onSelectPT?: Dispatch<PTJob[]>;
+  onEditPt?: Dispatch<PTJob>;
+  pt?: PTJob;
 }> = (props) => {
   const [entries, setEntries] = useState<PTJob[]>([]);
 
@@ -21,6 +23,7 @@ const PartTimeList: React.FC<{
               className={`${style.name} ${style.left}`}
               onChange={(event) => handleInputChange(event, i, "name")}
               placeholder="이름"
+              defaultValue={props.pt ? props.pt.name : ""}
             />
             <input
               name={"ptphone" + i}
@@ -28,7 +31,7 @@ const PartTimeList: React.FC<{
               className={`${style.phone} ${style.right}`}
               onChange={(event) => handleInputChange(event, i, "phone")}
               placeholder="000-0000-0000"
-
+              defaultValue={props.pt ? props.pt.phone : ""}
             />
           </li>
         );
@@ -53,8 +56,12 @@ const PartTimeList: React.FC<{
       updatedEntries[index] = updatedEntry;
       return updatedEntries;
     });
-    props.onSelectPT(entries);
   };
+
+  React.useEffect(() => {
+    if (props.onSelectPT)
+      props.onSelectPT(entries);
+  }, [entries, props.onSelectPT]);
 
   return (
     <div className={style.partTimeList}>

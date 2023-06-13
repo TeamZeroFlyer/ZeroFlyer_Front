@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import style from "./FlyerPreview.module.css";
 import { FlyerInf } from "../pages/qr/CreateQRCode";
