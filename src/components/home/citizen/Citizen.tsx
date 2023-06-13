@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getAuthToken } from "../../../util/auth";
 
 import Header from "../../../components/footer/Header";
 import style from "./Citizen.module.css";
@@ -10,22 +12,50 @@ import CardContent from "./CardContent";
 import CircleProgressBar from "./CircleProgressBar";
 
 type User = {
-  name: string;
-  point: number;
-  totalScan: number;
-};
-
-const dummy: User = {
-  name: "김새싹",
-  point: 3600,
-  totalScan: 18,
+  userName: string;
+  userPoint: number;
+  userScanCount: number;
 };
 
 const calcCo2 = (totalScan: number) => totalScan * 2.88;
 const calcLeftTree = (totalScan: number) => 10 - (totalScan % 10);
 const calcPlantedTree = (totalScan: number) => Math.floor(totalScan / 10);
+const calcProgress = (totalScan: number) => 10 - calcLeftTree(totalScan);
 
 const CitizenPage = () => {
+  const token = getAuthToken();
+  const [userData, setUserData] = useState<User>({
+    userName: "",
+    userPoint: 0,
+    userScanCount: 0,
+  });
+  useEffect(() => {
+    const fetchHomeData = async () => {
+      const response = await fetch("https://qrecode-back.shop/user", {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+
+      if (!response.ok) {
+        throw json(
+          { message: "서버에서 에러가 발생했습니다." },
+          { status: 500 }
+        );
+      } else {
+        const { data } = await response.json();
+        console.log(data);
+        setUserData({
+          userName: data.userName,
+          userPoint: data.userPoint,
+          userScanCount: data.userScanCount,
+        });
+      }
+    };
+    fetchHomeData();
+
+  }, []);
   return (
     <div className={style.citizenPage}>
       <Header>
@@ -34,33 +64,33 @@ const CitizenPage = () => {
       <div className={style.contents}>
         <div className={`${style.item} ${style.userInfo}`}>
           <div>
-            <p className={style.username}>{dummy.name}</p>
+            <p className={style.username}>{userData.userName} 님</p>
             <p className={style.points}>
-              <span>{dummy.point.toLocaleString()}</span> 포인트
+              <span>{userData.userPoint.toLocaleString()}</span> 포인트
             </p>
             <p className={style.catchphrase}>
-              나무 심기까지 {calcLeftTree(dummy.totalScan)}개 남았어요
+              나무 심기까지 {calcLeftTree(userData.userScanCount)}개 남았어요
             </p>
           </div>
           <div className={style.action}>
             <Link to="/point">
-            <div className={style.barcode}>
-              <img src={barcodeImg} alt="포인트 사용버튼" />
-            </div>
+              <div className={style.barcode}>
+                <img src={barcodeImg} alt="포인트 사용버튼" />
+              </div>
             </Link>
             <p>포인트 사용</p>
           </div>
         </div>
         <div className={`${style.tree} ${style.item}`}>
           <CircleProgressBar
-            progress={(10 - calcLeftTree(dummy.totalScan)) * 10}
+            progress={calcProgress(userData.userScanCount)}
             strokeWidth={8}
             circleRadius={150}
           >
             <div className={style.treeImageWrapper}>
               <img
                 src={
-                  10 - calcLeftTree(dummy.totalScan) > 6
+                  10 - calcLeftTree(userData.userScanCount) > 6
                     ? bigtreeImg
                     : minitreeImg
                 }
@@ -70,7 +100,9 @@ const CitizenPage = () => {
           </CircleProgressBar>
           <div className={style.plantedTree}>
             <img src={plantedTreeImg} alt="내가 심은 나무 이미지" />
-            <p className={style.treenum}>{calcPlantedTree(dummy.totalScan)}</p>
+            <p className={style.treenum}>
+              {calcPlantedTree(userData.userScanCount)}
+            </p>
             <p className={style.treelabel}>심은나무</p>
           </div>
         </div>
@@ -78,10 +110,13 @@ const CitizenPage = () => {
           <div className={style.card}>
             <p className={style.title}>QR 전단지 효과</p>
             <div className={style.cardContents}>
-              <CardContent label="co2" value={calcCo2(dummy.totalScan)} />
+              <CardContent
+                label="co2"
+                value={calcCo2(userData.userScanCount)}
+              />
               <CardContent
                 label="tree"
-                value={calcPlantedTree(dummy.totalScan)}
+                value={calcPlantedTree(userData.userScanCount)}
               />
             </div>
           </div>
