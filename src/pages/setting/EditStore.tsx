@@ -151,7 +151,8 @@ const EditStore = () => {
         })
             .then(response => {
                 if(!response.ok){
-                    alert("실패하였습니다. 다시 시도해주세요.");
+                    //TODO: 지금 최초저장만 되고 수정은 안되는 상황
+                    alert("가게 정보 수정은 추후 제공되는 기능입니다.");
                     window.location.href = "/setting";
                 }
             return response.json()

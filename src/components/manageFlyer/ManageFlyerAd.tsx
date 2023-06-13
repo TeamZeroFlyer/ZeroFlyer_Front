@@ -32,17 +32,6 @@ const ManageFlyerAd = () => {
     const [now, setNow] = useState("using");
     const [dummy, setDummy] = useState<Flyer[]>([]);
     useEffect(()=>{
-        flyerEnd : "20230629"
-        flyerName :  "ㅇㅇ"
-        flyerQrCount :  0
-        flyerScanCount :  0
-        flyerStart :  "20230602"
-        flyerTag :  "#테스트#입니다"
-        flyerUrl :  "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png"
-        hasCoupon :  true
-        idx :  7
-        
-
         fetch("https://qrecode-back.shop/store/flyer", {
             method: "GET",
             headers: {
@@ -90,7 +79,7 @@ const ManageFlyerAd = () => {
                             <div className={style.flyerTitle}>{flyer.flyerName}</div>
                             <div className={style.flyerValidDate}>{formatDate(flyer.flyerStart)} ~ {formatDate(flyer.flyerEnd)}</div>
                             <div className={style.flyerCount}>
-                                <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/smallFace.svg" />
+                                <img src={"https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/smallFace.svg"} />
                                 {flyer.flyerQrCount}
                                 <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/smallFlyer.svg" />
                                 {flyer.flyerScanCount}

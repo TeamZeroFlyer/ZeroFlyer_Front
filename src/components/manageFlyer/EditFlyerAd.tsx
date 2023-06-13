@@ -60,7 +60,6 @@ const EditFlyerAd = () => {
         });
 
         if (!(flyerCode === "new")){
-            // TODO: flyerCode로 flyer정보 불러오기
             fetch("https://qrecode-back.shop/store/flyer?flyerid=" + flyerCode, {
                 method: "GET",
                 headers: {
@@ -145,12 +144,11 @@ const EditFlyerAd = () => {
         // 이미지 업로드 필요한 경우
         if(!(!imageInput.files || imageInput.files?.length === 0)){
 
-            formData.append('image2', imageInput!.files![0]);
+            formData.append('image', imageInput!.files![0]);
             fetch("https://qrecode-back.shop/store/uploadflyer", {
                 method: "POST",
                 headers: {
                 Authorization: "Bearer " + localStorage.getItem("accessToken"),
-                'Content-Type': 'multipart/form-data',
                 },
                 body: formData,
             })
@@ -159,12 +157,10 @@ const EditFlyerAd = () => {
                     alert("실패하였습니다. 다시 시도해주세요.");
                 }
                 // 아래도 리턴 해주기
-            // return response.json()
+            return response.json()
             })
             .then(data => {
                 // 이미지 업로드 성공 후, 이미지 경로 가지도 전단지 전체정보 업로드
-                // TODO: S3 이미지 업로드 정상화되면 이미지 링크 받은거 제대로 넘기기
-    
                 if (flyerCode === "new"){
                     fetch("https://qrecode-back.shop/store/uploadflyer/info", {
                         method: "POST",
@@ -173,7 +169,7 @@ const EditFlyerAd = () => {
                         'Content-Type': "application/json",
                         },
                         body: JSON.stringify({
-                            "flyerUrl": "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/image/mapMarker.png",
+                            "flyerUrl": data.data,
                             "flyerName": (document.getElementById('title') as HTMLInputElement).value,
                             "flyerTag": tmpHashTag,
                             "flyerStart": (document.getElementById('start') as HTMLInputElement).value,
@@ -182,7 +178,6 @@ const EditFlyerAd = () => {
                             })
                     })
                     .then(response => {
-                        console.log(response);
                         if(!response.ok){
                             alert("실패하였습니다. 다시 시도해주세요.");
                         }
@@ -195,7 +190,6 @@ const EditFlyerAd = () => {
                         }
                     });
                 }else{
-    
                     fetch("https://qrecode-back.shop/store/updateflyer/info?flyerid="+flyerCode, {
                         method: "POST",
                         headers: {
@@ -203,7 +197,7 @@ const EditFlyerAd = () => {
                         'Content-Type': "application/json",
                         },
                         body: JSON.stringify({
-                            "flyerUrl": "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+                            "flyerUrl": data.data,
                             "flyerName": (document.getElementById('title') as HTMLInputElement).value,
                             "flyerTag": tmpHashTag,
                             "flyerStart": (document.getElementById('start') as HTMLInputElement).value,
@@ -212,7 +206,6 @@ const EditFlyerAd = () => {
                             })
                     })
                     .then(response => {
-                        console.log(response);
                         if(!response.ok){
                             alert("실패하였습니다. 다시 시도해주세요.");
                         }
@@ -246,7 +239,6 @@ const EditFlyerAd = () => {
                     })
             })
             .then(response => {
-                console.log(response);
                 if(!response.ok){
                     alert("실패하였습니다. 다시 시도해주세요.");
                 }
