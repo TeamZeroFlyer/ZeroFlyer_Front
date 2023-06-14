@@ -1,10 +1,38 @@
 import React, { useEffect, useRef } from 'react';
 import ApexCharts from 'apexcharts';
 
-const CircleChart: React.FC = () => {
+interface HomeElement {
+  "chartData" : {
+    "yesterday": {
+        "nine": number,
+        "twelve": number,
+        "fifteen": number,
+        "eighteen": number,
+        "twentyOne": number,
+    },
+    "today": {
+        "nine": number,
+        "twelve": number,
+        "fifteen": number,
+        "eighteen": number,
+        "twentyOne": number,
+    },
+    "percent": number,
+    "first_week": number,
+    "second_week": number,
+    "third_week": number,
+  }
+}
+
+const CircleChart: React.FC<HomeElement> = (props) => {
   const chartRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+
+    const perc = Math.round(props.chartData.percent);
+    const result = perc >= 0 ? perc+'%↑' : perc+'%↓';
+
+  
     const options: ApexCharts.ApexOptions = {
       chart: {
         type: 'radialBar',
@@ -14,8 +42,8 @@ const CircleChart: React.FC = () => {
         },
         fontFamily: 'Nanum Square',
       },
-      series: [70],
-      labels: ['4%↑'],
+      series: [Math.abs(perc)],
+      labels: [result],
       colors: ['#33A771'],
       plotOptions: {
         radialBar: {
@@ -44,7 +72,7 @@ const CircleChart: React.FC = () => {
     return () => {
       chart.destroy();
     };
-  }, []);
+  }, [props.chartData.percent]);
 
   return <div ref={chartRef} />;
 };
