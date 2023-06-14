@@ -150,12 +150,14 @@
   border: none;
   width: 50%;
   max-width: 150px;
+  font-size: 10px;
 }
 .date2 {
   margin-left: 10px;
   border: none;
   width: 50%;
   max-width: 150px;
+  font-size: 10px;
 }
 
 .forTag {
