@@ -9,7 +9,10 @@ const ErrorPage = () => {
   const [errorObj, setErrorObj] = useState<{
     status: number;
     message: string;
-  }>();
+  }>({
+    status: 500,
+    message: "알 수 없는 문제가 발생했습니다."
+  });
   useEffect(() => {
     if (isRouteErrorResponse(error)) {
       setErrorObj({
@@ -20,7 +23,7 @@ const ErrorPage = () => {
             : error.data.message,
       });
     }
-  }, [errorObj]);
+  }, []);
 
   return (
     <div className={style.errorPage}>

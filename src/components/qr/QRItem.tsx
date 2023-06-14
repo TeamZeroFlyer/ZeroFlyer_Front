@@ -26,8 +26,8 @@ const QRItem: React.FC<{
     <>
       {props.qrcodes &&
         props.qrcodes.map((qrManagement, idx) => (
-          <ul className={style.qrItem}>
-            <p key={idx}>{getFormattedDate(qrManagement.date)}</p>
+          <ul key={idx} className={style.qrItem}>
+            <p>{getFormattedDate(qrManagement.date)}</p>
             {qrManagement.qrcodes.map((qr) => (
               <li key={qr.qrId} className={style.li}>
                 <Link

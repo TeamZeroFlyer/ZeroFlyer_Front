@@ -33,7 +33,7 @@ const dummy: QRManagement[] = [
     ],
   },
 ];
-
+ 
 const ManageQRCode = () => {
   //const qrList = useLoaderData() as QRManagement[];
   return (

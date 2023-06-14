@@ -4,7 +4,7 @@ import App from "./App";
 import EditFlyer from "./pages/flyer/EditFlyer";
 import Home from "./pages/home/Home";
 import KakaoMap from "./pages/map/KakaoMap";
-import CreateQRCode from "./pages/qr/CreateQRCode";
+import CreateQRCode, { loader as flyerLoader} from "./pages/qr/CreateQRCode";
 import FlyerDetailPage from "./pages/FlyerDetail";
 import QrScanner from "./pages/qr/QrScanner";
 import ManageQRCode from "./pages/qr/ManageQRCode";
@@ -82,6 +82,7 @@ const router = createBrowserRouter([
           },
           {
             path: "new",
+            loader: flyerLoader,
             element: <CreateQRCode />,
           },
         ],
