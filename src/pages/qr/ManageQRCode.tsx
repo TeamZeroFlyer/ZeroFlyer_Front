@@ -14,12 +14,13 @@ type QR = {
 };
 
 export type QRManagement = {
-  date: Date;
-  qrcodes: QR[];
+  date: string;
+  qrList: QR[];
 };
 
 const ManageQRCode = () => {
   const qrList = useLoaderData() as QRManagement[];
+  console.log(qrList)
   return (
     <>
       <Header>QR코드 관리</Header>
@@ -31,12 +32,12 @@ const ManageQRCode = () => {
 export const loader = async () => {
   const token = getAuthToken();
   const response = await fetch("https://qrecode-back.shop/qr", {
-    headers: { Authentication: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${token}` },
   });
   if (!response.ok) {
     throw json(
       { message: "QR코드를 가져오는데 실패했습니다." },
-      { status: 500 },
+      { status: 500 }
     );
   } else {
     const { data } = await response.json();

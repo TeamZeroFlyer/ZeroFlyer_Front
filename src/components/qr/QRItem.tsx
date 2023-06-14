@@ -28,7 +28,7 @@ const QRItem: React.FC<{
         props.qrcodes.map((qrManagement, idx) => (
           <ul key={idx} className={style.qrItem}>
             <p>{getFormattedDate(qrManagement.date)}</p>
-            {qrManagement.qrcodes.map((qr) => (
+            {qrManagement.qrList.map((qr) => (
               <li key={qr.qrNum} className={style.li}>
                 <Link
                   to={`/qr/${qr.idx}`}
@@ -60,7 +60,8 @@ const QRItem: React.FC<{
 
 export default QRItem;
 
-const getFormattedDate = (date: Date) => {
+const getFormattedDate = (input: string) => {
+  const date = new Date(input);
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
   const month = date.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줍니다.
   const day = date.getDate();
