@@ -1,21 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
 import style from "./FlyerPreview.module.css";
 import { FlyerInf } from "../pages/qr/CreateQRCode";
 import Hashtag from "../UI/Hashtag";
+import QuantityInput from "../UI/QuantityInput";
 
 const FlyerPreview: React.FC<{
   previewFlyer: FlyerInf;
-  selectQrNumber: (qrNumber: number) => void;
+  qrNumber: number;
+  selectQrNumber: React.Dispatch<React.SetStateAction<number>>;
 }> = (props) => {
-  const [qrNumber, setQrNumber] = useState<number>(1);
-  const onNumberInputChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const inputNumber = Number(event.target.value);
-    setQrNumber(inputNumber);
-    props.selectQrNumber(inputNumber);
-  };
 
   return (
     <div className={style.flyerPreview}>
@@ -34,11 +28,9 @@ const FlyerPreview: React.FC<{
             </div>
             <div className={style.input}>
               <label htmlFor="number">개수:</label>
-              <input
-                id="number"
-                type="number"
-                onChange={onNumberInputChangeHandler}
-                value={qrNumber}
+              <QuantityInput
+                value={props.qrNumber}
+                onNumberChange={props.selectQrNumber}
               />
             </div>
           </div>

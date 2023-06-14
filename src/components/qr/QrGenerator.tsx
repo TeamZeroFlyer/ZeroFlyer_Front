@@ -26,7 +26,7 @@ const ModalOverlay: React.FC<{
   return (
     <Card className={style.modal}>
       <header>
-        <h3>전단지 선택</h3>
+        <h4>전단지 선택</h4>
         <span onClick={props.onConfirm}>x</span>
       </header>
       <div className={style.carouselContainer}>

@@ -43,8 +43,9 @@
   height: 138px;
 }
 
-.input input {
-  width: 5rem;
+.input {
+  display: flex;
+  align-items: center;
 }
 
 .hashtag {

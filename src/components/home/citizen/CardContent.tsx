@@ -25,7 +25,6 @@ const CardContent: React.FC<{
 };
 
 function co2Fomatter(number: number) {
-  console.log(number)
   const formattedNumber = String(Math.floor(number)).padStart(8, "0");
   const parts = [];
   for (let i = formattedNumber.length - 1; i >= 0; i -= 3) {
