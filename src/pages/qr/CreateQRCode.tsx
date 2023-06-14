@@ -51,7 +51,7 @@ const CreateQRCode: React.FC = () => {
       const response = await fetch("https://qrecode-back.shop/qr/insert", {
         method: "POST",
         headers: {
-          Authentication: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
