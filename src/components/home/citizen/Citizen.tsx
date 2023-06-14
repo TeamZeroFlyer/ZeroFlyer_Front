@@ -45,7 +45,6 @@ const CitizenPage = () => {
         );
       } else {
         const { data } = await response.json();
-        console.log(data);
         setUserData({
           userName: data.userName,
           userPoint: data.userPoint,
@@ -53,7 +52,8 @@ const CitizenPage = () => {
         });
       }
     };
-    fetchHomeData();
+    if (getAuthToken())
+      fetchHomeData();
 
   }, []);
   return (
