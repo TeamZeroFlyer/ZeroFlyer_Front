@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getAuthToken } from "../../util/auth";
-import { redirect, json, useLoaderData } from "react-router-dom";
+import { redirect, json, useLoaderData, useNavigate } from "react-router-dom";
 
 import QrGenerator from "../../components/qr/QrGenerator";
 import QRForm from "../../components/qr/QRForm";
@@ -16,8 +16,8 @@ export type FlyerInf = {
 };
 
 export type PTJob = {
-  name: string;
-  phone: string;
+  ptjName: string;
+  ptjPhone: string;
 };
 
 const CreateQRCode: React.FC = () => {
@@ -26,6 +26,7 @@ const CreateQRCode: React.FC = () => {
   const [seletedFlyer, setSelectedFlyer] = useState<FlyerInf>();
   const [qrNumber, setQrNumber] = useState<number>(1);
   const [ptJob, setPtJob] = useState<PTJob[]>([]);
+  const navigate = useNavigate();
 
   const qrOpenModalHandler = () => setIsQRModalOpen(true);
   const qrCloseHandler = () => setIsQRModalOpen(false);
@@ -39,6 +40,7 @@ const CreateQRCode: React.FC = () => {
       alert("아르바이트생은 한 명 이상 필요합니다.");
       return;
     }
+    console.log(ptJob);
     if (!validateForm(ptJob)) {
       alert("아르바이트생 정보를 입력해 주세요.");
       return;
@@ -46,28 +48,24 @@ const CreateQRCode: React.FC = () => {
 
     if (seletedFlyer && qrNumber > 0 && validateForm(ptJob)) {
       const token = getAuthToken();
-      console.log({
-        flyerId: seletedFlyer.idx,
-        ptj: ptJob,
-      })
-      const reponse = await fetch("https://qrecode-back.shop/qr/new", {
+      const response = await fetch("https://qrecode-back.shop/qr/insert", {
         method: "POST",
-        headers: { Authentication: `Bearer ${token}` },
+        headers: {
+          Authentication: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-          flyerId: seletedFlyer.idx,
-          ptj: ptJob,
+          qrFlyerIdx: seletedFlyer.idx,
+          qrPtj: ptJob,
         }),
       });
-
-      if (!reponse.ok) {
-        //TODO: 에러처리.
-        //throw new Error("QR을 생성하는데 문제가 발생했습니다.");
-        // throw json(
-        //   { message: "QR을 생성하는데 문제가 발생했습니다." },
-        //   { status: 500 }
-        // );
+      if (!response.ok) {
+        // TODO: 998이면 토큰 리프레시하기
+        const error = await response.json();
+        console.log(error);
+        alert("QR을 생성하는데 문제가 발생했습니다.");
       } else {
-        return redirect("/qr");
+        return navigate("/qr");
       }
     }
   };
@@ -101,7 +99,10 @@ const validateForm = (ptList: PTJob[]) => {
   if (ptList.length === 0) return false;
   const isValid = ptList.every(
     (entry) =>
-      entry.name !== "" && entry.name && entry.phone !== "" && entry.phone
+      entry.ptjName !== "" &&
+      entry.ptjName &&
+      entry.ptjPhone !== "" &&
+      entry.ptjPhone
   );
   return isValid;
 };

@@ -12,10 +12,10 @@ const QRItem: React.FC<{
   isPTchecked: boolean;
 }> = (props) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [selectedQRId, setSelectedQRId] = useState("");
-  const toggleDropdown = (qrId: string) => {
+  const [selectedQRId, setSelectedQRId] = useState<number>();
+  const toggleDropdown = (qrId: number) => {
     if (selectedQRId === qrId) {
-      setSelectedQRId("");
+      setSelectedQRId(-1);
     } else {
       setSelectedQRId(qrId);
     }
@@ -29,26 +29,26 @@ const QRItem: React.FC<{
           <ul key={idx} className={style.qrItem}>
             <p>{getFormattedDate(qrManagement.date)}</p>
             {qrManagement.qrcodes.map((qr) => (
-              <li key={qr.qrId} className={style.li}>
+              <li key={qr.qrNum} className={style.li}>
                 <Link
-                  to={`/qr/${qr.qrId}`}
+                  to={`/qr/${qr.idx}`}
                   className={`${style.item} ${style.link}`}
                 >
                   <div className={`${style.img} ${style.linkItem}`}>
                     <img src={faceImg} alt="아르바이트생 얼굴" />
                   </div>
                   <div className={`${style.linkItem} ${style.info}`}>
-                    <p className={style.id}>{props.isPTchecked ? qr.ptj.name : qr.qrId}</p>
-                    <p className={style.title}>{props.isPTchecked ? qr.ptj.phone : qr.flyerTitle}</p>
+                    <p className={style.id}>{props.isPTchecked ? qr.ptjName : qr.qrNum}</p>
+                    <p className={style.title}>{props.isPTchecked ? qr.ptjPhone : qr.flyerName}</p>
                   </div>
                 </Link>
                 <div
                   className={`${style.action} ${style.item}`}
-                  onClick={toggleDropdown.bind(null, qr.qrId)}
+                  onClick={toggleDropdown.bind(null, qr.idx)}
                 >
-                  <span>{qr.scan}</span>
+                  <span>{qr.scanCount}</span>
                   <img src={threedot} />
-                  {selectedQRId === qr.qrId && <Dropdown qrId={qr.qrId} />}
+                  {selectedQRId === qr.idx && <Dropdown qrId={qr.idx} />}
                 </div>
               </li>
             ))}

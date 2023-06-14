@@ -2,6 +2,7 @@ import React from "react";
 import { LoaderFunctionArgs, json} from "react-router-dom";
 
 import QRCode from "../../components/qr/QRCode";
+import { getAuthToken } from "src/util/auth";
 
 const QrScanner: React.FC = () => {
   //const qr = useLoaderData() as QRCodeType;
