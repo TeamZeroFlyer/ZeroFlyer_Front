@@ -172,4 +172,22 @@
     display: inline-block;
     width: 56px;
   }
+  @media (max-height: 700px) {
+    .username {
+      font-size: 20px;
+    }    
+    .points {
+      font-size: 28px;
+    }
+    .action p {
+      margin-top: 8px
+    }
+    .plantedTree {
+      position: absolute;
+      bottom: 8px;
+      right: -15px;
+      display: inline-block;
+      width: 56px;
+    }
+  }
 }
