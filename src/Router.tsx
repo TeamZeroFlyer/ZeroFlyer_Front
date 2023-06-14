@@ -11,17 +11,19 @@ import ManageQRCode from "./pages/qr/ManageQRCode";
 import Setting from "./pages/setting/Setting";
 import LoginPage from "./pages/login/Login";
 import { tokenLoader } from "./util/auth";
-import PointPage from "./pages/Point";
+import PointPage from "./pages/point/Point";
 import Flyer from "./pages/flyer/Flyer";
 import FullFyler from "./pages/flyer/FullFlyer";
 import EditStore from "./pages/setting/EditStore";
 import NoneMember from "./pages/home/noneMember/NoneMember";
-import UsingPoinPage from "./pages/home/UsingPoint";
+import UsingPoinPage from "./pages/point/UsingPoint";
+import ErrorPage from "./pages/error/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     loader: tokenLoader,
     id: "root",
     children: [

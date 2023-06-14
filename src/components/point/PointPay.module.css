@@ -1,6 +1,9 @@
+.container {
+  text-align: center;
+}
+
 .pointPay {
-  display: flex;
-  flex-direction: column;
+  display: inline-block;
   height: 100vh;
 }
 
@@ -10,14 +13,20 @@
   align-items: center;
   font-weight: 800;
   font-size: 18px;
-  padding: 5vh 24px 0 24px;
   position: relative;
+  padding: 5vh 24px 0 24px;
 }
 
 .backspace {
   position: absolute;
   left: 0;
 }
+
+.backspace > img {
+  width: 24px;
+  height: 24px;
+}
+
 .barcode {
   margin: 20vh auto 0 auto;
   padding: 20px;
@@ -27,6 +36,7 @@
   border-radius: 9px;
   min-width: 350px;
 }
+
 .info {
   display: flex;
   justify-content: space-between;

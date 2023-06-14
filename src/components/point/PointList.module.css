@@ -4,6 +4,35 @@
   align-items: center;
   padding: 0 20px;
   overflow: scroll;
+  height: 100vh;
+
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  font-size: 18px;
+  position: relative;
+  padding-top: 5vh;
+  width: 70%;
+}
+
+.backspace {
+  position: absolute;
+  left: 0;
+}
+
+.backspace > img{
+  width: 24px;
+  height: 24px;
+}
+
+.header p{
+  text-align: center;
+  font-weight: 800;
+  font-size: 18px;
 }
 
 .head {
@@ -14,7 +43,7 @@
   height: 75px;
   background-color: #ececec;
   border-radius: 10px;
-  margin-top: calc(50px - 3vh) ;
+  margin-top: 50px;
 }
 
 .barcode {
@@ -50,6 +79,10 @@
 }
 
 @media (max-width: 768px) {
+  .header {
+    width: 350px;
+  }
+
   .head {
     width: 350px;
   }
