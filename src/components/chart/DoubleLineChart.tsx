@@ -1,7 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ApexCharts from 'apexcharts';
 
-const DoubleLineChart: React.FC = () => {
+interface HomeElement {
+  "chartData" : {
+    "yesterday": {
+        "nine": number,
+        "twelve": number,
+        "fifteen": number,
+        "eighteen": number,
+        "twentyOne": number,
+    },
+    "today": {
+        "nine": number,
+        "twelve": number,
+        "fifteen": number,
+        "eighteen": number,
+        "twentyOne": number,
+    },
+    "percent": number,
+    "first_week": number,
+    "second_week": number,
+    "third_week": number,
+  }
+}
+
+const DoubleLineChart: React.FC<HomeElement> = (props) => {
   const chartRef = useRef<HTMLDivElement>(null);
   const [graphWidth, setGraphWidth] = useState(window.innerWidth >= 768 ? 768 - 80 : window.innerWidth - 80);
   window.addEventListener('resize', ()=>{setGraphWidth(window.innerWidth >= 768 ? 768 - 80 : window.innerWidth - 80)});
@@ -19,12 +42,12 @@ const DoubleLineChart: React.FC = () => {
       series: [
         {
           name: '어제',
-          data: [null, 30, 10, 20, 50, 19, null],
+          data: [null, props.chartData.yesterday.nine, props.chartData.yesterday.twelve, props.chartData.yesterday.fifteen, props.chartData.yesterday.eighteen, props.chartData.yesterday.twentyOne, null],
           color: '#E6E6E6',
         },
         {
           name: '오늘',
-          data: [null, 9, 12, 40, 18, 41, null],
+          data: [null, props.chartData.today.nine, props.chartData.today.twelve, props.chartData.today.fifteen, props.chartData.today.eighteen, props.chartData.today.twentyOne, null],
           color: '#33A771',
         },    
       ],
@@ -57,7 +80,7 @@ const DoubleLineChart: React.FC = () => {
     return () => {
       chart.destroy();
     };
-  }, [graphWidth]);
+  }, [graphWidth, props.chartData]);
 
   return <div ref={chartRef} />;
 };

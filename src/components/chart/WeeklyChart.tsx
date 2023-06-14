@@ -1,7 +1,30 @@
 import React, { useEffect, useRef } from 'react';
 import ApexCharts from 'apexcharts';
 
-const WeeklyChart: React.FC = () => {
+interface HomeElement {
+  "chartData" : {
+    "yesterday": {
+        "nine": number,
+        "twelve": number,
+        "fifteen": number,
+        "eighteen": number,
+        "twentyOne": number,
+    },
+    "today": {
+        "nine": number,
+        "twelve": number,
+        "fifteen": number,
+        "eighteen": number,
+        "twentyOne": number,
+    },
+    "percent": number,
+    "first_week": number,
+    "second_week": number,
+    "third_week": number,
+  }
+}
+
+const WeeklyChart: React.FC<HomeElement> = (props) => {
   const chartRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -17,7 +40,7 @@ const WeeklyChart: React.FC = () => {
       series: [
         {
           name: '총 합',
-          data: [9, 12, 15],
+          data: [props.chartData.third_week, props.chartData.second_week, props.chartData.first_week],
         }
       ],
       xaxis: {
@@ -72,7 +95,7 @@ const WeeklyChart: React.FC = () => {
     return () => {
       chart.destroy();
     };
-  }, []);
+  }, [props.chartData]);
 
   return <div ref={chartRef} />;
 };
