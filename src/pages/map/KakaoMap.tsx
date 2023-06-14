@@ -36,7 +36,6 @@ const KakaoMap = () => {
     setLevel(4);
   }, [location.loaded]);
 
-  // TODO: 지도의 중심좌표에 따라 서버에 주변 점포 요청해서 set해주기
   useEffect(()=>{
     let dummy: Store[] = [];
     fetch("https://qrecode-back.shop/map/stores?lat=" + center.lat + "&lng=" + center.lng, {
@@ -122,7 +121,6 @@ const KakaoMap = () => {
     if(event.key === 'Enter' && search.current!.value !== ''){
       search.current!.blur();
 
-      // TODO: search.current!.value 연관검색어 리스트 서버에 받아와서 아래 set 해주기
       let dummy: Store[] = [];
       fetch("https://qrecode-back.shop/map/search?keyword=" + search.current!.value, {
         method: "GET",

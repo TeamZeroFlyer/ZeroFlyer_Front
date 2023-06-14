@@ -15,18 +15,26 @@ const CircleChart: React.FC = () => {
         fontFamily: 'Nanum Square',
       },
       series: [70],
-      labels: ['증가'],
-      colors: ['#006c3a'],
-      title: {
-        text: '지난주 대비 증감률',
-        align: 'center',
-        offsetY: 20,
-        style: {
-            fontSize: '15px',
-            fontFamily: 'Nanum Square',
-            color: '#006c3a'
+      labels: ['4%↑'],
+      colors: ['#33A771'],
+      plotOptions: {
+        radialBar: {
+         
+          dataLabels: {
+            name: {
+              offsetY: 5,
+              show: true,
+              color: "black",
+              fontSize: "20px",
+              fontWeight: "800",
+            },
+            value: {
+              show: false
+            }
           }
+        }
       },
+
     };
 
     const chart = new ApexCharts(chartRef.current, options);

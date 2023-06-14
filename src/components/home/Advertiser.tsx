@@ -3,6 +3,7 @@ import DoubleLineChart from "../chart/DoubleLineChart.tsx";
 import WeeklyChart from "../chart/WeeklyChart.tsx";
 import Header from "../footer/Header.tsx";
 import style from "./Advertiser.module.css";
+import legend from "../../../public/image/legend.svg";
 
 const Advertiser = () => {
     return(
@@ -14,9 +15,6 @@ const Advertiser = () => {
             <div>
                 <div className={style.headText}><span className={style.boldGreen}>김나무</span>님,</div>
                 <div className={style.headText}><span className={style.bold}>172장</span>의 전단지를 아꼈어요</div>
-            </div>
-            <div className={style.headImg}>
-                <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png" />
             </div>
         </div>
 
@@ -38,13 +36,23 @@ const Advertiser = () => {
 
 
         <div className={style.dailyChartBox}>
+            <div className={style.legendBox}>
+                <div className={style.chartTitle}>일간 차트</div>
+                <img src={legend}/>
+            </div>
             <DoubleLineChart/>
         </div>
 
         
         <div className={style.twoChartBox}>
-            <div className={style.twoChartBox1}><CircleChart/></div>
-            <div className={style.twoChartBox2}><WeeklyChart/></div>
+            <div className={style.twoChartBox1}>
+                <div className={style.chartTitle}>전주 대비 증감비율</div>
+                <CircleChart/>
+            </div>
+            <div className={style.twoChartBox2}>
+                <div className={style.chartTitle}>주간 차트</div>
+                <WeeklyChart/>
+            </div>
         </div>
         </>
     );

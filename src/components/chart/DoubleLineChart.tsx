@@ -18,21 +18,35 @@ const DoubleLineChart: React.FC = () => {
       },
       series: [
         {
-          name: '이번주',
-          data: [null, 9, 12, 15, 18, 21, null],
-          color: '#006C3A',
-        },        
-        {
-          name: '지난주',
-          data: [null, 30, 40, 35, 50, 49, null],
-          color: '#6c0000',
+          name: '어제',
+          data: [null, 30, 10, 20, 50, 19, null],
+          color: '#E6E6E6',
         },
+        {
+          name: '오늘',
+          data: [null, 9, 12, 40, 18, 41, null],
+          color: '#33A771',
+        },    
       ],
       xaxis: {
-        categories: ['', "9시", "12시", "15시", "18시", "21시", ''],
+        categories: ['', "9h", "12h", "15h", "18h", "21h", ''],
+        axisTicks: {
+          show: false, // Y축 눈금선 숨기기
+        },
+        axisBorder: {
+          show: false,
+        }
+      },
+      yaxis: {
+        labels: {
+          show: false, // y축 데이터 설명 숨김
+        },
       },
       dataLabels: {
-        enabled: true,
+        enabled: false,
+      },
+      legend: {
+        show: false, // 범례 숨김
       },
     };
 

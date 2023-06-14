@@ -27,7 +27,6 @@ function isWithinTime(startTime: string, endTime: string){
 
 const StoreInformation: React.FC<StoreProps> = (props) => {
     const open = isWithinTime(props.store.startTime, props.store.closeTime);
-    console.log(props)
     const copy = async (address: string) => {
         await navigator.clipboard.writeText(address);
         alert('클립보드에 복사되었습니다.');
