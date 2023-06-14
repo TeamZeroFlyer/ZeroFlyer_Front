@@ -120,7 +120,7 @@ const KakaoMap = () => {
   const enterSearch: KeyboardEventHandler<HTMLInputElement> = (event) => {
     if(event.key === 'Enter' && search.current!.value !== ''){
       search.current!.blur();
-
+      changeToFlyer();
       let dummy: Store[] = [];
       fetch("https://qrecode-back.shop/map/search?keyword=" + search.current!.value, {
         method: "GET",
@@ -160,7 +160,7 @@ const KakaoMap = () => {
     <div className={style.map}>
       <Map center={center} style={{ width: "100%", height: "100%" }} level={level} onZoomChanged={(map) => {setLevel(map.getLevel()); setCenter({ lat: map.getCenter().getLat(), lng: map.getCenter().getLng() });} } onDragEnd={(map) => setCenter({ lat: map.getCenter().getLat(), lng: map.getCenter().getLng() })}>
         {stores.map((position, i) => (
-          <MapMarker key={`${position.storeName}-${position.latlng.lat}-${position.latlng.lng}`} position={position.latlng} image={!isFlyer && !position.hasCoupon ? { src: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/image/mapMarkerNoCoupon.svg", size: { width: 48, height: 48 }} : { src: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/image/mapMarker.svg", size: { width: 48, height: 48 }}} onClick={() => getModalOneInfo(i)}>
+          isFlyer && <MapMarker key={`${position.storeName}-${position.latlng.lat}-${position.latlng.lng}`} position={position.latlng} image={!isFlyer && !position.hasCoupon ? { src: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/image/mapMarkerNoCoupon.svg", size: { width: 48, height: 48 }} : { src: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/image/mapMarker.svg", size: { width: 48, height: 48 }}} onClick={() => getModalOneInfo(i)}>
             <span className={!isFlyer && !position.hasCoupon ? style.markerNameNo : style.markerName}>{position.storeName}</span>
           </MapMarker>
         ))}

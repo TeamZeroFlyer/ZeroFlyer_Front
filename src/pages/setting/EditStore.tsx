@@ -141,8 +141,7 @@ const EditStore = () => {
         })
             .then(response => {
                 if(!response.ok){
-                    //TODO: 지금 최초저장만 되고 수정은 안되는 상황
-                    alert("가게 정보 수정은 추후 제공되는 기능입니다.");
+                    alert("실패하였습니다. 다시 시도해주세요.");
                     window.location.href = "/setting";
                 }
             return response.json()
@@ -184,7 +183,7 @@ const EditStore = () => {
             <div className={style.storeName}><span className={style.star}>* </span>한줄 설명</div>
             <textarea id="storeDescription" className={style.twolinebox} minLength={1} maxLength={40} placeholder="간단하게 가게를 소개하세요."></textarea>
             <div className={style.forTag}>
-                <div className={style.tagInfo}>태그 (최대 3개)</div>
+                <div className={style.tagInfo}>태그 (최대 3개, 6글자)</div>
                 <input ref={tag} onKeyUpCapture={enterTag} className={style.searchBox2} minLength={1} maxLength={6} placeholder='키워드 입력 후 Enter'/>
                 <div>
                     {hashTag.length === 0 && <span className={style.noHashTag}>ex) #합리적인가격</span>}
