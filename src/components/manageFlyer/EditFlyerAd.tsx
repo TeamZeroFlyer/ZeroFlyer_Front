@@ -3,15 +3,15 @@ import style from "./EditFlyerAd.module.css";
 import { KeyboardEventHandler, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-interface Flyer {
-    flyerCode: number;
-    flyerTitle: string;
-    startDate: string;
-    endDate: string;
-    hashTag: string;
-    hasCoupon: boolean;
-    imgSrc: string;
-}
+// interface Flyer {
+//     flyerCode: number;
+//     flyerTitle: string;
+//     startDate: string;
+//     endDate: string;
+//     hashTag: string;
+//     hasCoupon: boolean;
+//     imgSrc: string;
+// }
 
 interface Store {
     storeName: string;

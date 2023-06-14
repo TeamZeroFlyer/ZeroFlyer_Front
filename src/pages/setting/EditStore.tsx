@@ -120,16 +120,6 @@ const EditStore = () => {
             return;
         }
 
-        // 사업자등록번호 같은걸로 넣어도 에러나는 중이라 임시로 랜덤값 넣어둠
-        let randomString = '';
-        for (let i = 0; i < 20; i++) {
-            if (i === 4 || i === 9) {
-            randomString += '-';
-            } else {
-            randomString += Math.floor(Math.random() * 10).toString();
-            }
-        }
-
         fetch("https://qrecode-back.shop/store/setstore", {
             method: "POST",
             headers: {
