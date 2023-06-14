@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 
 import style from "./FlyerCarousel.module.css";
-import { slides } from "../data/carouselData.json";
 import { FlyerInf } from "../pages/qr/CreateQRCode";
 import { Link } from "react-router-dom";
 
