@@ -5,6 +5,7 @@ import Header from "../footer/Header.tsx";
 import style from "./Advertiser.module.css";
 import legend from "../../../public/image/legend.svg";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 interface HomeElement {
     "yesterday": {
@@ -31,7 +32,8 @@ interface StoreData {
     "store_name": string,
     "url": string,
     "qrCount": number,
-    "scanCount": number
+    "scanCount": number,
+    "userName": string,
 }
 
 const Advertiser = () => {
@@ -63,7 +65,8 @@ const Advertiser = () => {
             "store_name": '',
             "url": '',
             "qrCount": 0,
-            "scanCount": 0
+            "scanCount": 0,
+            "userName": '',
         }
     )
 
@@ -86,7 +89,8 @@ const Advertiser = () => {
                         "store_name": data.data.storeName,
                         "url": data.data.storeUrl,
                         "qrCount": data.data.storeQrCount,
-                        "scanCount": data.data.storeScanCount
+                        "scanCount": data.data.storeScanCount,
+                        "userName": data.data.userName
                     }
                 )
                 setElement(
@@ -123,7 +127,7 @@ const Advertiser = () => {
 
         <div className={style.headTextBox}>
             <div>
-                <div className={style.headText}><span className={style.boldGreen}>{storeData.store_name}</span>님,</div>
+                <div className={style.headText}><span className={style.boldGreen}>{storeData.userName}</span>님,</div>
                 <div className={style.headText}><span className={style.bold}>{storeData.scanCount}장</span>의 전단지를 아꼈어요</div>
             </div>
         </div>
@@ -131,16 +135,22 @@ const Advertiser = () => {
 
         <div className={style.greenInfoBox}>
             <div className={style.greenInfoTitle}>
-                My Store
+                My Store {!storeData.store_name  && <Link to='/setting'><img src="/public/icons/plus.svg" /></Link>}
             </div>
             <div className={style.greenInfoTwo}>
+                { storeData.store_name ?
+                <>
                 <div className={style.greenImg}>
                     <img src={storeData.url} />
                 </div>
                 <div className={style.greenText}>
-                    <div className={style.greenText1}>새싹미용실</div>
+                    <div className={style.greenText1}>{storeData.store_name}</div>
                     <div className={style.greenText2}>QR 생성 {storeData.qrCount} | QR 스캔 {storeData.scanCount}</div>
                 </div>
+                </>
+                :
+                <div className={style.noStore}>가게를 등록해주세요.</div>
+                }
             </div>
         </div>
 

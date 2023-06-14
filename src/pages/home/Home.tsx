@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Advertiser from "../../components/home/Advertiser.tsx";
 import Citizen from "../../components/home/citizen/Citizen";
 
@@ -9,7 +10,11 @@ type ChildProps = {
 
 const Home = () => {
   const {status} = useOutletContext<ChildProps>();
-    
+  useEffect(() => {
+    if (status === 0){
+      window.location.href = "/login";
+    }
+  },[status]);
   return (
     <>
       {status !== 2 && <Citizen />}
