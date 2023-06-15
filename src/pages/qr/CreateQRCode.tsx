@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getAuthToken } from "../../util/auth";
-import { redirect, json, useLoaderData, useNavigate } from "react-router-dom";
+import { redirect, json, useNavigate, useRouteLoaderData } from "react-router-dom";
 
 import QrGenerator from "../../components/qr/QrGenerator";
 import QRForm from "../../components/qr/QRForm";
@@ -21,7 +21,7 @@ export type PTJob = {
 };
 
 const CreateQRCode: React.FC = () => {
-  const flyers = useLoaderData() as FlyerInf[];
+  const flyers = useRouteLoaderData("flyer") as FlyerInf[];
   const [isQRModalOpen, setIsQRModalOpen] = useState<boolean>(false);
   const [seletedFlyer, setSelectedFlyer] = useState<FlyerInf>();
   const [qrNumber, setQrNumber] = useState<number>(1);
