@@ -2,13 +2,19 @@ import React, { useEffect } from "react";
 import { Link, useOutletContext, useParams } from "react-router-dom";
 import { getAuthToken } from "../../util/auth";
 import style from "./FlyerDetail.module.css";
+
 type ChildProps = {
   status: number;
 };
+
+type Client = {
+  flyerId: string;
+  qrId: string;
+}
+
 const FlyerDetailPage: React.FC = () => {
   const { flyerId, qrId, storeIdx } = useParams();
   const token = getAuthToken();
-  const client = getDupClient();
   const [imgUrl, setImgUrl] = React.useState<string>("");
   const { status } = useOutletContext<ChildProps>();
 
@@ -31,7 +37,7 @@ const FlyerDetailPage: React.FC = () => {
         throw new Error("서버에서 문제가 발생했습니다.");
       }
     };
-    if (flyerId && qrId && client === null) {
+    if (flyerId && qrId && !isDupClient(flyerId, qrId)) {
       setDupClient(flyerId, qrId);
       scanCode();
     }
@@ -115,8 +121,12 @@ const setDupClient = (flyerId: string, qrId: string) => {
     JSON.stringify({ flyerId: flyerId, qrId: qrId })
   );
 };
-const getDupClient = () => {
-  return localStorage.getItem("client");
+const isDupClient = (scanFlyerId: string, scanQrId: string) => {
+  const data = localStorage.getItem("client");
+  if (data === null) return false;
+  const client = JSON.parse(data) as Client;
+  if (client.flyerId === scanFlyerId && client.qrId === scanQrId) return true;
+  else return false;
 };
 
 export default FlyerDetailPage;
