@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useOutletContext, useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import { getAuthToken } from "../../util/auth";
 import style from "./FlyerDetail.module.css";
 
