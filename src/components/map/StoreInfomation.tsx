@@ -34,9 +34,9 @@ const StoreInformation: React.FC<StoreProps> = (props) => {
     return (
         <div className={props.last ? style.storeLastInfo : style.storeInfo} onClick={() => props.move(props.store.latlng)}>
             <div className={props.red ? style.storeTitleRed : style.storeTitle}>{props.store.storeName}</div>
-            <div className={style.storeAddress}>{props.store.address}<img onClick={()=>copy(props.store.address)} className={style.copy} src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/copy.svg"/></div>
+            <div className={style.storeAddress}>{props.store.address}<img onClick={()=>copy(props.store.address)} className={style.copy} src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/icons/copy.svg"/></div>
             <div className={style.storeTime}>
-                {open ? <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/image/greenCircle.svg"/> : <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/image/redCircle.svg"/>}
+                {open ? <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/image/greenCircle.svg"/> : <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/image/redCircle.svg"/>}
                 <span className={style.storeIsOpen}>
                 {open ? "영업중" : "영업종료"}
                 </span>
