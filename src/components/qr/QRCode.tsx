@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { QRCodeCanvas } from "qrcode.react";
+import { QRCodeType } from "../../pages/qr/QrScanner";
+import { getAuthToken } from "../../util/auth";
 
 import style from "./QRCode.module.css";
-import Header from "../footer/Header";
-import { QRCodeType } from "../../pages/qr/QrScanner";
+import leftArrowImg from "../../../public/icons/leftArrow.svg";
+import { Link } from "react-router-dom";
 
 const baseUrl = import.meta.env.VITE_REDIRECT_URI;
 
 const QRCode: React.FC<{ qr: QRCodeType }> = (props) => {
-  const [url, setUrl] = useState<string>("");
+  const token = getAuthToken();
+  const [isLogged, setIsLogged] = useState<boolean>(false);
 
+  const [url, setUrl] = useState<string>("");
+  useEffect(() => {
+    if (token) {
+      setIsLogged(true);
+    }
+  }, []);
   useEffect(() => {
     if (props.qr) {
       const flyerUrl = `${baseUrl}/store/${props.qr.storeIdx}/flyer/${props.qr.flyerIdx}/qr/${props.qr.qrNum}`;
@@ -19,7 +28,14 @@ const QRCode: React.FC<{ qr: QRCodeType }> = (props) => {
 
   return (
     <div className={style.container}>
-      <Header>QR 코드</Header>
+      <header className={style.header}>
+        {isLogged && (
+          <Link to=".." relative="path">
+            <img src={leftArrowImg} alt="뒤로가기" />{" "}
+          </Link>
+        )}
+        <p>QR 코드</p>
+      </header>
       <div className={style.qrcode}>
         <div className={style.outline}>
           <h1>{props.qr.storeName}</h1>
@@ -34,12 +50,7 @@ const QRCode: React.FC<{ qr: QRCodeType }> = (props) => {
               <p>{props.qr.qrTimestamp}</p>
             </div>
             <div className={style.code}>
-              <QRCodeCanvas
-                id="qrCode"
-                value={url}
-                size={200}
-                level={"H"}
-              />
+              <QRCodeCanvas id="qrCode" value={url} size={200} level={"H"} />
             </div>
           </div>
         </div>

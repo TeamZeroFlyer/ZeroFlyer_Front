@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAuthToken } from "../../util/auth";
-import { redirect, json, useNavigate, useRouteLoaderData } from "react-router-dom";
+import {
+  redirect,
+  json,
+  useNavigate,
+  useRouteLoaderData,
+  useSearchParams,
+} from "react-router-dom";
 
 import QrGenerator from "../../components/qr/QrGenerator";
 import QRForm from "../../components/qr/QRForm";
@@ -26,6 +32,16 @@ const CreateQRCode: React.FC = () => {
   const [seletedFlyer, setSelectedFlyer] = useState<FlyerInf>();
   const [qrNumber, setQrNumber] = useState<number>(1);
   const [ptJob, setPtJob] = useState<PTJob[]>([]);
+
+  const [searchParams] = useSearchParams();
+  useEffect(() => {
+    const flyerId = Number(searchParams.get("flyerId"));
+    if (flyerId) {
+      const passedFlyer = flyers.find((flyer) => flyer.idx === flyerId);
+      setSelectedFlyer(passedFlyer);
+    }
+  }, []);
+
   const navigate = useNavigate();
 
   const qrOpenModalHandler = () => setIsQRModalOpen(true);
@@ -40,7 +56,6 @@ const CreateQRCode: React.FC = () => {
       alert("아르바이트생은 한 명 이상 필요합니다.");
       return;
     }
-    console.log(ptJob);
     if (!validateForm(ptJob)) {
       alert("아르바이트생 정보를 입력해 주세요.");
       return;
