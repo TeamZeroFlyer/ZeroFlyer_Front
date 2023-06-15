@@ -1,12 +1,22 @@
-import React from "react";
-import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { LoaderFunctionArgs, useLoaderData, useParams } from "react-router-dom";
 
 import QRCode from "../../components/qr/QRCode";
 import { getAuthToken } from "../../util/auth";
 
 const QrScanner: React.FC = () => {
+  const param = useParams();
+  useEffect(() => {
+    let timer = setInterval(async () => {
+      const qr = await getQRScan(Number(param.qrId)) as QRCodeType;
+      setScanCount(qr.qrScanCount);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, []);
   const qr = useLoaderData() as QRCodeType;
-  return <QRCode qr={qr} />;
+  const [scanCount, setScanCount] = useState<number>(qr.qrScanCount);
+  return <QRCode qr={qr} scanCounter={scanCount} />;
 };
 
 export default QrScanner;
@@ -28,6 +38,20 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     const { data } = await response.json();
     return data;
   }
+};
+
+const getQRScan = async (qrId: number) => {
+  const token = getAuthToken();
+  const response = await fetch(
+    `https://qrecode-back.shop/qr/scan?idx=${qrId}`,
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+  const { data } = await response.json();
+  return data;
 };
 
 export type QRCodeType = {

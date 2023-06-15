@@ -31,10 +31,10 @@ const NoneMember = () => {
 
   return (
     <div className={style.noneMember}>
-      <div className={style.logo}>
+      <div className={`${style.logo} ${style.item}`}>
         <img src={logoImg} alt="로고" />
       </div>
-      <div className={style.nav}>
+      <div className={`${style.nav} ${style.item}`}>
         <div className={style.citizen} onClick={()=>switchMode("USER")}>
           <a>
             시티즌 모드로 시작하기

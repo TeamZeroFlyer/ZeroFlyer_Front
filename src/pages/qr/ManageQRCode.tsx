@@ -34,6 +34,7 @@ export const loader = async () => {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!response.ok) {
+    console.log(await response.json())
     throw json(
       { message: "QR코드를 가져오는데 실패했습니다." },
       { status: 500 }
