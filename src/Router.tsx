@@ -5,7 +5,7 @@ import EditFlyer from "./pages/flyer/EditFlyer";
 import Home from "./pages/home/Home";
 import KakaoMap from "./pages/map/KakaoMap";
 import CreateQRCode, { loader as flyerLoader } from "./pages/qr/CreateQRCode";
-import FlyerDetailPage from "./pages/FlyerDetail";
+import FlyerDetailPage from "./pages/flyer/FlyerDetail";
 import QrScanner, {loader as qrScannerLoader} from "./pages/qr/QrScanner";
 import ManageQRCode, { loader as qrLoader } from "./pages/qr/ManageQRCode";
 import Setting from "./pages/setting/Setting";
@@ -18,6 +18,7 @@ import EditStore from "./pages/setting/EditStore";
 import NoneMember from "./pages/home/noneMember/NoneMember";
 import UsingPoinPage from "./pages/point/UsingPoint";
 import ErrorPage from "./pages/error/Error";
+import UserInfo from "./pages/setting/UserInfo";
 import EditQRCode, {loader as editQRLoader} from "./pages/qr/EditQRCode";
 
 const router = createBrowserRouter([
@@ -114,6 +115,10 @@ const router = createBrowserRouter([
             path: "edit",
             element: <EditStore />,
           },
+          {
+            path: "userinfo",
+            element: <UserInfo />,
+          }
         ],
       },
       {
