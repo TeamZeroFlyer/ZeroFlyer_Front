@@ -10,12 +10,12 @@ interface FooterProps{
 }
 
 const FooterElement: React.FC<FooterProps> = (props) => {
-    const [isClicked, setIsClicked] = useState(props.now === "/" + props.imgSrc ? "green" : "gray");
+    const [isClicked, setIsClicked] = useState(props.imgSrc !== '' ? (props.now.includes(props.imgSrc) ? "green" : "gray") : props.now === '/' ? "green" : "gray");
     const navigate = useNavigate();
-    
+    console.log(props)
     // 현재 페이지를 감시하여 색  설정
     useEffect(()=>{
-        setIsClicked(props.now === "/" + props.imgSrc ? "green" : "gray");
+        setIsClicked(props.imgSrc !== '' ? (props.now.includes(props.imgSrc) ? "green" : "gray") : props.now === '/' ? "green" : "gray");
     }, [props]);
     return (
         <img src={`https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/icons/footerIcon/${isClicked}${props.imgSrc === "" ? "home" : props.imgSrc}.svg`} className={style.footerElement} 

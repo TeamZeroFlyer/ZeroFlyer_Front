@@ -121,7 +121,11 @@ const router = createBrowserRouter([
           {
             path: "userinfo",
             element: <UserInfo />,
-          }
+          },
+          {
+            path: "info",
+            element: <Info />,
+          },
         ],
       },
       {
@@ -131,10 +135,6 @@ const router = createBrowserRouter([
       {
         path: "mode-select",
         element: <NoneMember />,
-      },
-      {
-        path: "info",
-        element: <Info />,
       },
     ],
   },

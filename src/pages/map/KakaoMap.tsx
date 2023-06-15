@@ -62,7 +62,6 @@ const KakaoMap = () => {
             storeDescription: store.storeDescription,
           };
           dummy.push(tmpdata);
-          console.log(dummy)
         });
         setStores(dummy);
       });
