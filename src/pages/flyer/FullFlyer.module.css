@@ -4,7 +4,7 @@
   height: 100vh;
   background-color: #517e69;
   z-index: 100;
-  padding: 25% 20px 20px 20px;
+  padding: 20px;
 }
 .imgBox {
   display: flex;
@@ -14,7 +14,11 @@
   height: 60vh;
   width: 100%;
 }
-
+.topBtn {
+  width: 15px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
 .img {
   width: 100%;
   height: 100%;
