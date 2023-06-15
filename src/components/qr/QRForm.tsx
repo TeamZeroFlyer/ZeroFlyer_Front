@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import style from "./QRForm.module.css";
 import Button from "../../UI/Button";
@@ -8,6 +8,8 @@ const QRForm: React.FC<{
   onModalClick: () => void;
   onCreateClick: () => void;
 }> = (props) => {
+  const params = useParams();
+
   return (
     <div className={style.createQRCode}>
       <div className={style.header}>
@@ -17,7 +19,7 @@ const QRForm: React.FC<{
             취소
           </Link>
           <span className={style.create} onClick={props.onCreateClick}>
-            생성
+            {!params.qrId ? "생성" : "수정"}
           </span>
         </div>
       </div>
