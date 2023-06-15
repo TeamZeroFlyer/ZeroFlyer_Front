@@ -20,7 +20,6 @@ export type QRManagement = {
 
 const ManageQRCode = () => {
   const qrList = useRouteLoaderData("qrList") as QRManagement[];
-  console.log(qrList)
   return (
     <>
       <Header>QR코드 관리</Header>
@@ -35,7 +34,6 @@ export const loader = async () => {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!response.ok) {
-    console.log(await response.json())
     throw json(
       { message: "QR코드를 가져오는데 실패했습니다." },
       { status: 500 }

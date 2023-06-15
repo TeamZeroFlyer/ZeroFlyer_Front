@@ -19,7 +19,7 @@ const PointList: React.FC<{ pointHistory: PointHistory }> = (props) => {
         <div className={style.head}>
           <div className={style.scan}>
             <p className={style.label}>스캔 횟수</p>
-            <p className={style.value}>{props.pointHistory.scan}회</p>
+            <p className={style.value}>{props.pointHistory.scanCount}회</p>
           </div>
           <div className={style.barcode}>
             <img src={barcode} alt="바코드" />

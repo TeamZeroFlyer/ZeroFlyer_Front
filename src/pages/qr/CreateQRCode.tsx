@@ -77,7 +77,6 @@ const CreateQRCode: React.FC = () => {
       if (!response.ok) {
         // TODO: 998이면 토큰 리프레시하기
         const error = await response.json();
-        console.log(error);
         alert("QR을 생성하는데 문제가 발생했습니다.");
       } else {
         return navigate("/qr");

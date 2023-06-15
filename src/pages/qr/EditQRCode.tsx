@@ -32,9 +32,7 @@ type QR = {
 const EditQRCode: React.FC = () => {
   const params = useParams();
   const flyerList = useRouteLoaderData("flyer") as FlyerInf[];
-  console.log(flyerList);
   const qr = useLoaderData() as QR;
-  console.log(qr);
 
   const navigate = useNavigate();
 
@@ -42,7 +40,6 @@ const EditQRCode: React.FC = () => {
   const [seletedFlyer, setSelectedFlyer] = useState<FlyerInf>(
     flyerList.find((flyer) => flyer.idx === qr.flyerIdx)!
   );
-  console.log(seletedFlyer);
   const [qrNumber, setQrNumber] = useState<number>(1);
   const [ptJob, setPtJob] = useState<PTJob>({
     ptjName: qr.ptjName,
@@ -55,11 +52,7 @@ const EditQRCode: React.FC = () => {
   const qrEditHandler = async () => {
     if (seletedFlyer && qrNumber > 0 && validateForm(ptJob)) {
       const token = getAuthToken();
-      console.log({
-        qrFlyerIdx: seletedFlyer.idx,
-        qrPtjName: ptJob.ptjName,
-        qrPtjPhone: ptJob.ptjPhone,
-      });
+      
       const reponse = await fetch(
         `https://qrecode-back.shop/qr/update?idx=${params.qrId}`,
         {
