@@ -11,12 +11,12 @@ import ManageQRCode, { loader as qrLoader } from "./pages/qr/ManageQRCode";
 import Setting from "./pages/setting/Setting";
 import LoginPage from "./pages/login/Login";
 import { tokenLoader } from "./util/auth";
-import PointPage from "./pages/point/Point";
+import PointPage, { loader as pointListLoader} from "./pages/point/Point";
 import Flyer from "./pages/flyer/Flyer";
 import FullFyler from "./pages/flyer/FullFlyer";
 import EditStore from "./pages/setting/EditStore";
 import NoneMember from "./pages/home/noneMember/NoneMember";
-import UsingPoinPage from "./pages/point/UsingPoint";
+import UsingPoinPage, {loader as totalPointLoader } from "./pages/point/UsingPoint";
 import ErrorPage from "./pages/error/Error";
 import EditQRCode, {loader as editQRLoader} from "./pages/qr/EditQRCode";
 
@@ -38,10 +38,12 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <UsingPoinPage />,
+            loader: totalPointLoader,
           },
           {
             path: "history",
             element: <PointPage />,
+            loader: pointListLoader,
           },
         ],
       },
