@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 import style from "./FlyerPreview.module.css";
 import { FlyerInf } from "../pages/qr/CreateQRCode";
@@ -10,6 +11,7 @@ const FlyerPreview: React.FC<{
   qrNumber: number;
   selectQrNumber: React.Dispatch<React.SetStateAction<number>>;
 }> = (props) => {
+  const params = useParams();
   return (
     <div className={style.flyerPreview}>
       <p>전단지 정보</p>
@@ -25,13 +27,15 @@ const FlyerPreview: React.FC<{
               <p className={style.label}>유효 기간</p>
               <p className={style.name}>2023-05-22 ~ 2023-06-31</p>
             </div>
-            <div className={style.input}>
-              <label htmlFor="number">개수:</label>
-              <QuantityInput
-                value={props.qrNumber}
-                onNumberChange={props.selectQrNumber}
-              />
-            </div>
+            {!params.qrId && (
+              <div className={style.input}>
+                <label htmlFor="number">개수:</label>
+                <QuantityInput
+                  value={props.qrNumber}
+                  onNumberChange={props.selectQrNumber}
+                />
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -39,8 +43,8 @@ const FlyerPreview: React.FC<{
         {props.previewFlyer.flyerTag
           .split("#")
           .filter((item) => item !== "")
-          .map((value) => (
-            <Hashtag>{`#${value}`}</Hashtag>
+          .map((value, idx) => (
+            <Hashtag key={idx}>{`#${value}`}</Hashtag>
           ))}
       </div>
     </div>

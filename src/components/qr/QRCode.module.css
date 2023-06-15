@@ -1,5 +1,6 @@
 .container {
   padding-top: 72px;
+  padding-bottom: 20px;
 }
 .header{
   display: flex;
@@ -12,7 +13,7 @@
   width: 24px;
   height: 24px;
   position: absolute;
-  left: 0;
+  left: 24px;
 }
 
 .header p {

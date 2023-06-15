@@ -23,7 +23,6 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     }
   );
   if (!response.ok) {
-    console.log(await response.json());
     throw json(
       { message: "QR 코드를 불러오는데 실패했습니다." },
       { status: 500 }

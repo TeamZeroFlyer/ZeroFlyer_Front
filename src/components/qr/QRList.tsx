@@ -22,15 +22,17 @@ const QRList: React.FC<{
       </div>
       <hr />
       <div className={style.contents}>
-        <label>
-          <span className={style.ptlabel}>알바 보기</span>
-          <input
-            role="switch"
-            type="checkbox"
-            checked={showPartTime}
-            onChange={handleCheckboxChange}
-          />
-        </label>
+        {props.qrcodes.length > 0 && (
+          <label>
+            <span className={style.ptlabel}>알바 보기</span>
+            <input
+              role="switch"
+              type="checkbox"
+              checked={showPartTime}
+              onChange={handleCheckboxChange}
+            />
+          </label>
+        )}
         <QRItem isPTchecked={showPartTime} qrcodes={props.qrcodes} />
       </div>
     </div>
