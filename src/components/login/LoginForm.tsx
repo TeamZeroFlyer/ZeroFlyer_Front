@@ -5,13 +5,11 @@ import GoogleLoginButton from "./GoogleLoginButton";
 import KakaoLoginButton from "./KakaoLoginButton";
 import logo from "../../../public/image/login_button/logo.svg";
 
-const rediretUrl = import.meta.env.VITE_REDIRECT_URI;
-
 const kakaoUrl =
-`https://qrecode-back.shop/login/oauth2/authorization/kakao?redirect_uri=${rediretUrl}`
+`https://qrecode-back.shop/login/oauth2/authorization/kakao?redirect_uri=https://qrecode.site/mode-select`
 
 const googleUrl =
-`https://qrecode-back.shop/login/oauth2/authorization/google?redirect_uri=${rediretUrl}`
+`https://qrecode-back.shop/login/oauth2/authorization/google?redirect_uri=https://qrecode.site/mode-select`
 
 const LoginForm = () => {
 

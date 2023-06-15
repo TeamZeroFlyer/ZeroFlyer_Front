@@ -27,7 +27,7 @@ const Footer: React.FC<AppProps> = (props) => {
     }, [props.status, status])
     return (
         <>
-        { isMobile ?
+        { !now.includes('mode-select') && (isMobile ?
         <div className={style.footer} ref={footerRef}>
             {footerList[status].map((element, i) => (
                 <FooterElement key={i} status={status} imgSrc={element} now={now} onClick = {()=>{setNow("/" + element);}} />
@@ -35,7 +35,7 @@ const Footer: React.FC<AppProps> = (props) => {
         </div>
         :
         <FooterWeb status={status}/>
-            }
+            )}
         </>
     );
 };

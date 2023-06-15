@@ -141,7 +141,7 @@ const Advertiser = () => {
                 { storeData.store_name ?
                 <>
                 <div className={style.greenImg}>
-                    <img src={storeData.url}  alt='https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/plus.svg'/>
+                    <img src={storeData.url}  onError={(e)=>{e.currentTarget.src ='https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg'}}/>
                 </div>
                 <div className={style.greenText}>
                     <div className={style.greenText1}>{storeData.store_name}</div>

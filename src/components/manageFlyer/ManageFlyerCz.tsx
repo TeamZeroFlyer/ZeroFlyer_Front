@@ -104,7 +104,7 @@ const ManageFlyerAd = () => {
                     parseInt(flyer.flyerEnd) >= currentNumber && 
                         <div key={i} className={style.flyerInfo} onClick={()=>clickFull(flyer.idx, flyer.isValid, flyer.flyerUrl)}>
                         <div className={style.imgInfo}>
-                        <img className={style.flyerThumbnail} src={flyer.flyerUrl}  alt='https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/plus.svg'/>
+                        <img className={style.flyerThumbnail} src={flyer.flyerUrl}  onError={(e)=>{e.currentTarget.src ='https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg'}}/>
                         </div>
                         </div>
                 ))}
@@ -113,10 +113,11 @@ const ManageFlyerAd = () => {
                     parseInt(flyer.flyerEnd) < currentNumber && 
                         <div key={i} className={style.flyerInfoUsed} onClick={()=>clickFull(flyer.idx, flyer.isValid, flyer.flyerUrl)}>
                         <div className={style.imgInfo}>
-                        <img className={style.flyerThumbnail} src={flyer.flyerUrl}  alt='https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/plus.svg'/>
+                        <img className={style.flyerThumbnail} src={flyer.flyerUrl}  onError={(e)=>{e.currentTarget.src ='https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg'}}/>
                         </div>
                     </div>
                 ))}
+                {flyerList.length === 0 && <div className={style.noFlyer}>저장된 전단지가 없습니다.</div>}
             </div>
         </div>
     );

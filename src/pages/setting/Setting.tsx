@@ -13,6 +13,9 @@ const Setting = () => {
       if (status === 2){
         navigate("/setting/edit");
       }
+      if (status === 1){
+        navigate("/setting/userinfo");
+      }
     };
 
     const switchMode = () => {
@@ -51,9 +54,11 @@ const Setting = () => {
         <Header>설정</Header>
         <div className={style.general}>
             <div className={style.title}>일반</div>
+            {status === 2 &&
             <div className={style.element}  onClick={()=>editStore()}>
-                {status === 1 ? "로그인 정보" : "가게 정보"} <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/lock.svg"/>
+                 가게 정보 <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/lock.svg"/>
             </div>
+            }
             <div className={style.element}  onClick={()=>switchMode()}>
             {status === 1 ? "광고주" : "일반"} 모드로 전환 <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/smile.svg"/>
             </div>
