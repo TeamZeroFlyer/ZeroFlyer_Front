@@ -62,6 +62,7 @@ const KakaoMap = () => {
             storeDescription: store.storeDescription,
           };
           dummy.push(tmpdata);
+          console.log(dummy)
         });
         setStores(dummy);
       });
@@ -160,7 +161,11 @@ const KakaoMap = () => {
     <div className={style.map}>
       <Map center={center} style={{ width: "100%", height: "100%" }} level={level} onZoomChanged={(map) => {setLevel(map.getLevel()); setCenter({ lat: map.getCenter().getLat(), lng: map.getCenter().getLng() });} } onDragEnd={(map) => setCenter({ lat: map.getCenter().getLat(), lng: map.getCenter().getLng() })}>
         {stores.map((position, i) => (
-          isFlyer && <MapMarker key={`${position.storeName}-${position.latlng.lat}-${position.latlng.lng}`} position={position.latlng} image={!isFlyer && !position.hasCoupon ? { src: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/image/mapMarkerNoCoupon.svg", size: { width: 48, height: 48 }} : { src: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/image/mapMarker.svg", size: { width: 48, height: 48 }}} onClick={() => getModalOneInfo(i)}>
+          isFlyer ? <MapMarker key={`${position.storeName}-${position.latlng.lat}-${position.latlng.lng}`} position={position.latlng} image={{ src: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/image/mapMarker.svg", size: { width: 48, height: 48 }}} onClick={() => getModalOneInfo(i)}>
+            <span className={!isFlyer && !position.hasCoupon ? style.markerNameNo : style.markerName}>{position.storeName}</span>
+          </MapMarker>
+          :
+          position.hasCoupon && <MapMarker key={`${position.storeName}-${position.latlng.lat}-${position.latlng.lng}`} position={position.latlng} image={{ src: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/image/percTree.svg", size: { width: 48, height: 48 }}} onClick={() => getModalOneInfo(i)}>
             <span className={!isFlyer && !position.hasCoupon ? style.markerNameNo : style.markerName}>{position.storeName}</span>
           </MapMarker>
         ))}

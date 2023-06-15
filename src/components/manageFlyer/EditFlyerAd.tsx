@@ -235,7 +235,7 @@ const EditFlyerAd = () => {
                     "flyerTag": tmpHashTag,
                     "flyerStart": (document.getElementById('start') as HTMLInputElement).value,
                     "flyerEnd": (document.getElementById('end') as HTMLInputElement).value,
-                    "hasCoupon": checked,
+                    "hasCoupon": !checked,
                     })
             })
             .then(response => {
@@ -308,7 +308,7 @@ const EditFlyerAd = () => {
 
             <div className={style.forTag}>
                 <div className={style.tagInfo}>태그 (최대 3개, 6글자)</div>
-                <input ref={tag} onKeyUpCapture={enterTag} className={style.searchBox2} minLength={1} maxLength={6} placeholder='키워드 입력 후 Enter'/>
+                <input ref={tag} onKeyUpCapture={enterTag} className={style.searchBox2} minLength={1} maxLength={6} placeholder='쿠폰 할인 있을 경우 #30%할인 추가해주세요'/>
                 <div>
                     {hashTag.length === 0 && <span className={style.noHashTag}>ex) #합리적인가격</span>}
                     {hashTag.map((hashtag, i) => (
@@ -319,7 +319,7 @@ const EditFlyerAd = () => {
 
             <div className={style.box} onClick={()=>checked ? setChecked(false) :  setChecked(true)}>
                     <img className={style.check} src={checked ? `https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/image/checkedBox.svg` : `https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/image/checkBox.svg`} />
-                    쿠폰포함
+                    쿠폰 없애기
             </div>
 
             <div className={style.infoTitle}>
