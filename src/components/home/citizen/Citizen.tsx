@@ -20,7 +20,7 @@ type User = {
 const calcCo2 = (totalScan: number) => totalScan * 2.88;
 const calcLeftTree = (totalScan: number) => 10 - (totalScan % 10);
 const calcPlantedTree = (totalScan: number) => Math.floor(totalScan / 10);
-const calcProgress = (totalScan: number) => 10 - calcLeftTree(totalScan);
+const calcProgress = (totalScan: number) => (10 - calcLeftTree(totalScan)) * 10;
 
 const CitizenPage = () => {
   const token = getAuthToken();
