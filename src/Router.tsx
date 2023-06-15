@@ -90,7 +90,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "flyer/:flyerId/qr/:qrId",
+        path: "store/:storeIdx/flyer/:flyerId/qr/:qrId",
         element: <FlyerDetailPage />,
       },
       {
