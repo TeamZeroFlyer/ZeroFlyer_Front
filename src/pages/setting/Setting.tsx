@@ -62,20 +62,20 @@ const Setting = () => {
             <div className={style.element}  onClick={()=>switchMode()}>
             {status === 1 ? "광고주" : "일반"} 모드로 전환 <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/smile.svg"/>
             </div>
-            <div className={style.element}>
+            <div className={style.elementUn}>
             상품 구매
             </div>
         </div>
 
         <div className={style.general}>
             <div className={style.title}>정보</div>
-            <div className={style.element}>
+            <div className={style.element} onClick={()=>navigate('/info')}>
                 QR:ECOde 소개 <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/plant.svg"/>
             </div>
-            <div className={style.element}>
+            <div className={style.element} onClick={()=>navigate('/info')}>
                 이용약관 <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/guard.svg"/>
             </div>
-            <div className={style.element}>
+            <div className={style.element} onClick={()=>navigate('/info')}>
                 개인정보처리방침 <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/page.svg"/>
             </div>
         </div>
