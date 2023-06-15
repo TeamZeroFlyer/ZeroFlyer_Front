@@ -8,7 +8,7 @@ interface AppProps{
 }
 
 // 0: 비로그인, 1: 소비자, 2: 광고주
-const footerList = [["", "map", "login"], ["", "flyer", "map", "setting"], ["", "flyer", "qr", "map", "setting"]];
+const footerList = [["map", "login"], ["", "flyer", "map", "setting"], ["", "flyer", "qr", "map", "setting"]];
 
 const Footer: React.FC<AppProps> = (props) => {
     const url = window.location.pathname;
@@ -30,7 +30,7 @@ const Footer: React.FC<AppProps> = (props) => {
         { isMobile ?
         <div className={style.footer} ref={footerRef}>
             {footerList[status].map((element, i) => (
-                <FooterElement key={i} status={status} imgSrc={element} state={status} now={now} onClick = {()=>{setNow("/" + element);}} />
+                <FooterElement key={i} status={status} imgSrc={element} now={now} onClick = {()=>{setNow("/" + element);}} />
             ))}
         </div>
         :

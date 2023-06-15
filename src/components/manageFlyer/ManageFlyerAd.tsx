@@ -85,7 +85,9 @@ const ManageFlyerAd = () => {
                                 {flyer.flyerScanCount}
                             </div>
                             <div className={style.flyerBtn}>
+                                <Link to={`/qr/new?flyerId=${flyer.idx}`}>
                                 <div className={style.btn}>QR 만들기</div>
+                                </Link>
                                 <Link to={`/flyer/${flyer.idx}`}>
                                 <div className={style.btn}>수정</div>
                                 </Link>

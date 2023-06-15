@@ -289,7 +289,7 @@ const EditFlyerAd = () => {
             </div>
 
             <div className={style.forTag}>
-                <div className={style.tagInfo}>태그 (최대 3개)</div>
+                <div className={style.tagInfo}>태그 (최대 3개, 6글자)</div>
                 <input ref={tag} onKeyUpCapture={enterTag} className={style.searchBox2} minLength={1} maxLength={6} placeholder='키워드 입력 후 Enter'/>
                 <div>
                     {hashTag.length === 0 && <span className={style.noHashTag}>ex) #합리적인가격</span>}
