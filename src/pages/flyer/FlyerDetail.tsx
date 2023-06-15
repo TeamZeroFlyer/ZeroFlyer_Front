@@ -94,15 +94,8 @@ const FlyerDetailPage: React.FC = () => {
         />
       </div>
       <div className={style.twoBtn}>
-        {status !== 0 && (
-          <Link to="/">
-            <div className={style.btn} onClick={() => {}}>
-              <span className={style.green}>홈</span>으로 이동
-            </div>
-          </Link>
-        )}
         <div className={style.btn2} onClick={() => save()}>
-          전단지 <span className={style.green}>쿠폰</span>을<br></br> 저장해요!
+        <span className={style.green}>나무</span>를 심고 <span className={style.green}>포인트</span>을 적립해요!
         </div>
       </div>
     </div>

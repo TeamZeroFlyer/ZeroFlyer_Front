@@ -15,9 +15,9 @@
   }
   .coupon {
     position: fixed;
-    top: 174px;
+    top: 180px;
     left: 50%;
-    transform: translate(-380px);
+    transform: translate(-370px);
     z-index: 3;
   }
   .findMyGeo {
@@ -52,8 +52,8 @@
   }
   .coupon {
     position: fixed;
-    top: 174px;
-    left: 5px;
+    top: 180px;
+    left: 15px;
     z-index: 3;
   }
   .findMyGeo {
