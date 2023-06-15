@@ -9,7 +9,10 @@ import { Link } from "react-router-dom";
 
 const baseUrl = "https://www.qrecode.site";
 
-const QRCode: React.FC<{ qr: QRCodeType }> = (props) => {
+const QRCode: React.FC<{
+  qr: QRCodeType,
+  scanCounter: number
+}> = (props) => {
   const token = getAuthToken();
   const [isLogged, setIsLogged] = useState<boolean>(false);
 
@@ -43,7 +46,7 @@ const QRCode: React.FC<{ qr: QRCodeType }> = (props) => {
           <div className={style.qr}>
             <div className={style.scan}>
               <div>
-                <p>{props.qr.qrScanCount}</p>
+                <p>{props.scanCounter}</p>
               </div>
             </div>
             <div className={style.info}>

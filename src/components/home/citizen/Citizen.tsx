@@ -2,7 +2,6 @@ import { Link, json } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAuthToken } from "../../../util/auth";
 
-import Header from "../../../components/footer/Header";
 import style from "./Citizen.module.css";
 import barcodeImg from "../../../../public/image/home/barcode.svg";
 import minitreeImg from "../../../../public/image/home/minitree.svg";
@@ -59,14 +58,14 @@ const CitizenPage = () => {
       setProgressRadius(130);
     } else {
       setProgressRadius(150);
-
     }
   }, []);
-  return (
+  return (<>
+    
     <div className={style.citizenPage}>
-      <Header>
+    <header className={style.header}>
         <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/image/logo.svg" />
-      </Header>
+      </header>
       <div className={style.contents}>
         <div className={`${style.item} ${style.userInfo}`}>
           <div>
@@ -129,6 +128,7 @@ const CitizenPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
