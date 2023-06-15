@@ -7,7 +7,7 @@ import style from "./QRCode.module.css";
 import leftArrowImg from "../../../public/icons/leftArrow.svg";
 import { Link } from "react-router-dom";
 
-const baseUrl = import.meta.env.VITE_REDIRECT_URI;
+const baseUrl = "https://qrecode.site";
 
 const QRCode: React.FC<{ qr: QRCodeType }> = (props) => {
   const token = getAuthToken();
@@ -21,7 +21,7 @@ const QRCode: React.FC<{ qr: QRCodeType }> = (props) => {
   }, []);
   useEffect(() => {
     if (props.qr) {
-      const flyerUrl = `${baseUrl}/store/${props.qr.storeIdx}/flyer/${props.qr.flyerIdx}/qr/${props.qr.qrNum}`;
+      const flyerUrl = `${baseUrl}/store/${props.qr.storeIdx}/flyer/${props.qr.flyerIdx}/qr/${props.qr.qrIdx}`;
       setUrl(flyerUrl);
     }
   }, [props.qr]);

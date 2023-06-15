@@ -35,6 +35,7 @@ export type QRCodeType = {
   storeName: string;
   qrScanCount: number;
   qrNum: string;
+  qrIdx: number;
   qrTimestamp: string;
   flyerIdx: number;
 };

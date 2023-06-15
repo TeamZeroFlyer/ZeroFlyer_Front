@@ -1,7 +1,7 @@
 .container {
   padding-top: 72px;
-  padding-bottom: 20px;
 }
+
 .header{
   display: flex;
   position: relative;
@@ -13,7 +13,7 @@
   width: 24px;
   height: 24px;
   position: absolute;
-  left: 24px;
+  left: 0;
 }
 
 .header p {
@@ -109,6 +109,14 @@
   .container {
     height: calc(100vh - 80px);
     overflow: scroll;
+  }
+
+  .header{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    max-width: 350px;
+    margin: 0 auto 36px auto;
   }
 
   .outline {
