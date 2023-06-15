@@ -1,4 +1,4 @@
-import { useNavigate, json, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getAuthToken } from "../../util/auth";
 import style from "./QrDropdown.module.css";
 

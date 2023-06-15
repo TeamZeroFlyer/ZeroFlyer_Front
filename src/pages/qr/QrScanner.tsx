@@ -1,5 +1,5 @@
 import React from "react";
-import { LoaderFunctionArgs, json, useLoaderData } from "react-router-dom";
+import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 
 import QRCode from "../../components/qr/QRCode";
 import { getAuthToken } from "../../util/auth";
