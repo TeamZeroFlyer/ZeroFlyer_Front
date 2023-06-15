@@ -142,7 +142,7 @@ const ManageFlyerAd = () => {
                             </div>
                         </div>
                         <div className={style.imgInfo}>
-                        <img className={style.flyerThumbnail} src={flyer.flyerUrl}  alt='https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/plus.svg'/>
+                        <img className={style.flyerThumbnail} src={flyer.flyerUrl}  onError={(e)=>{e.currentTarget.src ='https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg'}}/>
                         </div>
                     </div>
                 ))}
