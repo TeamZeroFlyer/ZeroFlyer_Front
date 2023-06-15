@@ -78,7 +78,6 @@ const FlyerDetailPage: React.FC = () => {
           return response.json();
         })
         .then((data) => {
-          console.log(data);
           if (data.data === "success") {
             alert("저장되었습니다.");
             window.location.href = "/";
