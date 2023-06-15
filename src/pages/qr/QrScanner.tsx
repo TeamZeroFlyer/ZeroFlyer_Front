@@ -10,7 +10,7 @@ const QrScanner: React.FC = () => {
     let timer = setInterval(async () => {
       const qr = await getQRScan(Number(param.qrId)) as QRCodeType;
       setScanCount(qr.qrScanCount);
-    }, 5000);
+    }, 1500);
 
     return () => clearInterval(timer);
   }, []);
