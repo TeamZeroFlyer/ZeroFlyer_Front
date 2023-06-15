@@ -12,7 +12,6 @@ interface FooterProps{
 const FooterElement: React.FC<FooterProps> = (props) => {
     const [isClicked, setIsClicked] = useState(props.imgSrc !== '' ? (props.now.includes(props.imgSrc) ? "green" : "gray") : props.now === '/' ? "green" : "gray");
     const navigate = useNavigate();
-    console.log(props)
     // 현재 페이지를 감시하여 색  설정
     useEffect(()=>{
         setIsClicked(props.imgSrc !== '' ? (props.now.includes(props.imgSrc) ? "green" : "gray") : props.now === '/' ? "green" : "gray");

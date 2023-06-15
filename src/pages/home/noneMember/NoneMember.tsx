@@ -19,7 +19,6 @@ const NoneMember = () => {
           })
           .then(data => {
             if( data.data === "success"){
-              console.log("success", mode)
               window.location.href = "/";
         }})
           .catch(_ => {
