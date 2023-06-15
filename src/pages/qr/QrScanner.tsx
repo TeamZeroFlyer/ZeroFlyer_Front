@@ -6,7 +6,6 @@ import { getAuthToken } from "../../util/auth";
 
 const QrScanner: React.FC = () => {
   const qr = useLoaderData() as QRCodeType;
-  console.log(qr);
   return <QRCode qr={qr} />;
 };
 

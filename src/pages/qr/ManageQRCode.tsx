@@ -1,4 +1,4 @@
-import { json, useLoaderData } from "react-router-dom";
+import { json, useRouteLoaderData } from "react-router-dom";
 import { getAuthToken } from "../../util/auth";
 
 import QRList from "../../components/qr/QRList";
@@ -19,7 +19,7 @@ export type QRManagement = {
 };
 
 const ManageQRCode = () => {
-  const qrList = useLoaderData() as QRManagement[];
+  const qrList = useRouteLoaderData("qrList") as QRManagement[];
   console.log(qrList)
   return (
     <>
@@ -35,6 +35,7 @@ export const loader = async () => {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!response.ok) {
+    console.log(await response.json())
     throw json(
       { message: "QR코드를 가져오는데 실패했습니다." },
       { status: 500 }

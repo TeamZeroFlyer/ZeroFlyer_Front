@@ -18,6 +18,7 @@ import EditStore from "./pages/setting/EditStore";
 import NoneMember from "./pages/home/noneMember/NoneMember";
 import UsingPoinPage from "./pages/point/UsingPoint";
 import ErrorPage from "./pages/error/Error";
+import EditQRCode, {loader as editQRLoader} from "./pages/qr/EditQRCode";
 
 const router = createBrowserRouter([
   {
@@ -63,10 +64,13 @@ const router = createBrowserRouter([
       },
       {
         path: "qr",
+        id: "flyer",
+        loader: flyerLoader,
         children: [
           {
             index: true,
             element: <ManageQRCode />,
+            id: "qrList",
             loader: qrLoader,
           },
           {
@@ -79,6 +83,8 @@ const router = createBrowserRouter([
               },
               {
                 path: "edit",
+                element: <EditQRCode />,
+                loader:editQRLoader,
               },
             ],
           },
@@ -90,7 +96,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "flyer/:flyerId/qr/:qrId",
+        path: "store/:storeIdx/flyer/:flyerId/qr/:qrId",
         element: <FlyerDetailPage />,
       },
       {
