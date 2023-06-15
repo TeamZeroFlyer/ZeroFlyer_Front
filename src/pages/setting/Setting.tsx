@@ -13,6 +13,9 @@ const Setting = () => {
       if (status === 2){
         navigate("/setting/edit");
       }
+      if (status === 1){
+        navigate("/setting/userinfo");
+      }
     };
 
     const switchMode = () => {

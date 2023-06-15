@@ -117,6 +117,7 @@ const ManageFlyerAd = () => {
                         </div>
                     </div>
                 ))}
+                {flyerList.length === 0 && <div className={style.noFlyer}>저장된 전단지가 없습니다.</div>}
             </div>
         </div>
     );
