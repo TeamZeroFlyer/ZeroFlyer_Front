@@ -1,110 +1,132 @@
-// import React, { useState } from "react";
-// import { getAuthToken } from "../../util/auth";
-// import { redirect, LoaderFunctionArgs, json, useLoaderData, useParams} from "react-router-dom";
+import React, { useState } from "react";
+import { getAuthToken } from "../../util/auth";
+import {
+  LoaderFunctionArgs,
+  json,
+  useLoaderData,
+  useParams,
+  useRouteLoaderData,
+  useNavigate,
+} from "react-router-dom";
+import { FlyerInf, PTJob } from "./CreateQRCode";
 
-// import QrGenerator from "../../components/qr/QrGenerator";
-// import QRForm from "../../components/qr/QRForm";
-// import FlyerPreview from "../../components/FlyerPreview";
-// import PartTimeList from "../../components/qr/PartTimeList";
-// import style from "./CreateQRCode.module.css";
+import QrGenerator from "../../components/qr/QrGenerator";
+import QRForm from "../../components/qr/QRForm";
+import FlyerPreview from "../../components/FlyerPreview";
+import PartTimeList from "../../components/qr/PartTimeList";
+import style from "./CreateQRCode.module.css";
 
-// export type FlyerInf = {
-//   id: number;
-//   src: string;
-//   flyerName: string;
-//   hashTag: string[];
-//   alt: string;
-// };
+type QR = {
+  idx: number;
+  qrNum: string;
+  qrStart: string;
+  qrEnd: string;
+  ptjName: string;
+  ptjPhone: string;
+  flyerIdx: 1;
+  flyerName: string;
+  scanCount: number;
+  timeStamp: string;
+};
 
-// export type PTJob = {
-//   name: string;
-//   phone: string;
-// };
+const EditQRCode: React.FC = () => {
+  const params = useParams();
+    const flyerList = useRouteLoaderData("flyer") as FlyerInf[];
+    console.log(flyerList)
+  const qr = useLoaderData() as QR;
+  console.log(qr)
 
-// const EditQRCode: React.FC = () => {
-//     const params = useParams();
-//     const data =  useLoaderData();
-//   const [isQRModalOpen, setIsQRModalOpen] = useState<boolean>(false);
-//   const [seletedFlyer, setSelectedFlyer] = useState<FlyerInf>(data.flyer);
-//   const [qrNumber, setQrNumber] = useState<number>(1);
-//   const [ptJob, setPtJob] = useState<PTJob>(data.ptj);
+  const navigate = useNavigate();
 
-//   const qrOpenModalHandler = () => setIsQRModalOpen(true);
-//   const qrCloseHandler = () => setIsQRModalOpen(false);
+  const [isQRModalOpen, setIsQRModalOpen] = useState<boolean>(false);
+  const [seletedFlyer, setSelectedFlyer] = useState<FlyerInf>(
+    flyerList.find((flyer) => flyer.idx === qr.flyerIdx)!
+    );
+    console.log(seletedFlyer)
+  const [qrNumber, setQrNumber] = useState<number>(1);
+  const [ptJob, setPtJob] = useState<PTJob>({
+    ptjName: qr.ptjName,
+    ptjPhone: qr.ptjPhone,
+  });
 
-//   const qrEditHandler = async () => {
-//     if (seletedFlyer && qrNumber > 0 && validateForm(ptJob)) {
-//       const token = getAuthToken();
-      
-//       const reponse = await fetch(`https://qrecode-back.shop/qr/${params.qrId}/edit`, {
-//         method: "PATCH",
-//         headers: { Authentication: `Bearer ${token}` },
-//         body: JSON.stringify({
-//           flyerId: seletedFlyer.id,
-//           ptj: ptJob,
-//         }),
-//       });
+  const qrOpenModalHandler = () => setIsQRModalOpen(true);
+  const qrCloseHandler = () => setIsQRModalOpen(false);
 
-//       if (!reponse.ok) {
-//         //TODO: 에러처리.
-//         //throw new Error("QR을 생성하는데 문제가 발생했습니다.");
-//         // throw json(
-//         //   { message: "QR을 생성하는데 문제가 발생했습니다." },
-//         //   { status: 500 }
-//         // );
-//       } else {
-//         return redirect("/qr");
-//       }
-//     }
-//   };
+  const qrEditHandler = async () => {
+    if (seletedFlyer && qrNumber > 0 && validateForm(ptJob)) {
+      const token = getAuthToken();
 
-//   return (
-//     <div className={style.createQRCode}>
-//       {isQRModalOpen && (
-//         <QrGenerator
-//           onConfirm={qrCloseHandler}
-//           onSelectFlyer={setSelectedFlyer}
-//           onSelectQrNumber={setQrNumber}
-//         />
-//       )}
-//       <QRForm
-//         onModalClick={qrOpenModalHandler}
-//         onCreateClick={qrEditHandler}
-//       />
-//       {seletedFlyer && (
-//         <FlyerPreview
-//           previewFlyer={seletedFlyer}
-//           qrNumber={qrNumber}
-//           selectQrNumber={setQrNumber}
-//         />
-//       )}
-//           {seletedFlyer && <PartTimeList ea={1} onEditPt={setPtJob} pt={ ptJob} />}
-//     </div>
-//   );
-// };
+      const reponse = await fetch(
+        `https://qrecode-back.shop/qr/update?idx=${params.qrId}`,
+        {
+          method: "POST",
+          headers: { Authentication: `Bearer ${token}` },
+          body: JSON.stringify({
+            qrFlyerInx: seletedFlyer.idx,
+            qrPtjName: ptJob.ptjName,
+            qrPthPhone: ptJob.ptjPhone,
+          }),
+        }
+      );
 
-// const validateForm = (ptList: PTJob[]) => {
-//   if (ptList.length === 0) return false;
-//   const isValid = ptList.every(
-//     (entry) =>
-//       entry.name !== "" && entry.name && entry.phone !== "" && entry.phone
-//   );
-//   return isValid;
-// };
+      if (!reponse.ok) {
+        //TODO: 에러처리.
+        //throw new Error("QR을 생성하는데 문제가 발생했습니다.");
+        // throw json(
+        //   { message: "QR을 생성하는데 문제가 발생했습니다." },
+        //   { status: 500 }
+        // );
+      } else {
+        return navigate("/qr");
+      }
+    }
+  };
 
-// const loader = async ({ params }: LoaderFunctionArgs) => {
-//   const token = getAuthToken();
-//   const qrId = params.qrId;
+  return (
+    <div className={style.createQRCode}>
+      {isQRModalOpen && (
+        <QrGenerator
+          onConfirm={qrCloseHandler}
+          onSelectFlyer={setSelectedFlyer}
+          onSelectQrNumber={setQrNumber}
+          flyers={flyerList}
+        />
+      )}
+      <QRForm onModalClick={qrOpenModalHandler} onCreateClick={qrEditHandler} />
+      {seletedFlyer && (
+        <FlyerPreview
+          previewFlyer={seletedFlyer}
+          qrNumber={qrNumber}
+          selectQrNumber={setQrNumber}
+        />
+      )}
+      {seletedFlyer && <PartTimeList ea={1} onEditPt={setPtJob} pt={ptJob} />}
+    </div>
+  );
+};
 
-//   const response = await fetch(`https://qrecode-back.shop/qr/${qrId}/edit`, {
-//     headers: { Authorization: `Bearer ${token}` },
-//   });
-//     if (!response.ok) {
-//         throw json({ message: "데이터를 가져오는데 실패했습니다." }, { status: 500 });
-//     } else {
-//         const resData = await response.json();
-//         return resData.qr;
-//     }
-// };
+const validateForm = (ptj: PTJob) => {
+  const isValid =
+    ptj.ptjName !== "" && ptj.ptjName && ptj.ptjPhone !== "" && ptj.ptjPhone;
+  return isValid;
+};
 
-// export default EditQRCode;
+export const loader = async ({ params }: LoaderFunctionArgs) => {
+  const token = getAuthToken();
+  const qrId = params.qrId;
+
+  const response = await fetch(`https://qrecode-back.shop/qr?idx=${qrId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!response.ok) {
+    throw json(
+      { message: "데이터를 가져오는데 실패했습니다." },
+      { status: 500 }
+    );
+  } else {
+    const { data } = await response.json();
+    return data;
+  }
+};
+
+export default EditQRCode;

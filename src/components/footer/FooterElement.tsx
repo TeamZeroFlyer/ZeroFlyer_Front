@@ -15,6 +15,7 @@ const FooterElement: React.FC<FooterProps> = (props) => {
     
     // 현재 페이지를 감시하여 색  설정
     useEffect(()=>{
+        console.log(props)
         setIsClicked(props.now === "/" + props.imgSrc ? "green" : "gray");
     }, [props]);
     return (
