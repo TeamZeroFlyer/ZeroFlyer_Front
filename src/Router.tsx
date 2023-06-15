@@ -20,6 +20,7 @@ import UsingPoinPage, {loader as totalPointLoader } from "./pages/point/UsingPoi
 import ErrorPage from "./pages/error/Error";
 import UserInfo from "./pages/setting/UserInfo";
 import EditQRCode, {loader as editQRLoader} from "./pages/qr/EditQRCode";
+import Info from "./pages/setting/Info";
 
 const router = createBrowserRouter([
   {
@@ -130,6 +131,10 @@ const router = createBrowserRouter([
       {
         path: "mode-select",
         element: <NoneMember />,
+      },
+      {
+        path: "info",
+        element: <Info />,
       },
     ],
   },

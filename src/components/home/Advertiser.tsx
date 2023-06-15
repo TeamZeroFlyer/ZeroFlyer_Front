@@ -135,7 +135,7 @@ const Advertiser = () => {
 
         <div className={style.greenInfoBox}>
             <div className={style.greenInfoTitle}>
-                My Store {!storeData.store_name  && <Link to='/setting'><img src="/public/icons/plus.svg" /></Link>}
+                My Store {!storeData.store_name  && <Link to='/setting'><img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/plus.svg" /></Link>}
             </div>
             <div className={style.greenInfoTwo}>
                 { storeData.store_name ?
