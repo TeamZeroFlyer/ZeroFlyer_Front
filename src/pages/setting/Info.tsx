@@ -3,7 +3,7 @@ const Info = () => {
 
     return(
         <>
-        <img className={style.info} src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/image/info.svg"/>
+        <img className={style.info} src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/image/info.svg"/>
         </>
     );
 };

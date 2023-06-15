@@ -30,7 +30,7 @@ const EditFlyerAd = () => {
     //     tmpHash.splice(0, 1);
     // }
     const { flyerCode } = useParams();
-    const [imgFile, setImgFile] = useState('https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/camera.svg');
+    const [imgFile, setImgFile] = useState('https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/icons/camera.svg');
     const imgRef = useRef<HTMLInputElement>(null);
     const tag = useRef<HTMLInputElement>(null);
     const [hashTag, setHashTag] = useState<string[]>([]);
@@ -318,7 +318,7 @@ const EditFlyerAd = () => {
             </div>
 
             <div className={style.box} onClick={()=>checked ? setChecked(false) :  setChecked(true)}>
-                    <img className={style.check} src={checked ? `https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/image/checkedBox.svg` : `https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/image/checkBox.svg`} />
+                    <img className={style.check} src={checked ? `https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/image/checkedBox.svg` : `https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/image/checkBox.svg`} />
                     쿠폰포함
             </div>
 
@@ -354,7 +354,7 @@ export default EditFlyerAd;
 //     endDate: "20230630",
 //     hashTag: "#합리적인가격#여기가최고",
 //     hasCoupon: true,
-//     imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//     imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/flyer/flyerExample.png",
 // }
 
 // let dummy2: Store = {

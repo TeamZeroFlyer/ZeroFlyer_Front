@@ -100,9 +100,9 @@ const ManageFlyerAd = () => {
                             <div className={style.flyerTitle}>{flyer.flyerName}</div>
                             <div className={style.flyerValidDate}>{formatDate(flyer.flyerStart)} ~ {formatDate(flyer.flyerEnd)}</div>
                             <div className={style.flyerCount}>
-                                <img src={"https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/smallFace.svg"} />
+                                <img src={"https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/icons/smallFace.svg"} />
                                 {flyer.flyerQrCount}
-                                <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/smallFlyer.svg" />
+                                <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/icons/smallFlyer.svg" />
                                 {flyer.flyerScanCount}
                             </div>
                             <div className={style.flyerBtn}>
@@ -122,7 +122,7 @@ const ManageFlyerAd = () => {
                 {now === "using" &&
                 <Link to="/flyer/new">
                 <div className={style.addFlyer}>
-                    <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/image/addFlyer.svg" />
+                    <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/image/addFlyer.svg" />
                 </div>
                 </Link>}
                 {now === "used" && dummy.map((flyer, i)=>(
@@ -132,9 +132,9 @@ const ManageFlyerAd = () => {
                             <div className={style.flyerTitle}>{flyer.flyerName}</div>
                             <div className={style.flyerValidDate}>{formatDate(flyer.flyerStart)} ~ {formatDate(flyer.flyerEnd)}</div>
                             <div className={style.flyerCount}>
-                                <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/smallFace.svg" />
+                                <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/icons/smallFace.svg" />
                                 {flyer.flyerQrCount}
-                                <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/smallFlyer.svg" />
+                                <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/icons/smallFlyer.svg" />
                                 {flyer.flyerScanCount}
                             </div>
                             <div className={style.flyerBtn}>
@@ -167,7 +167,7 @@ export default ManageFlyerAd;
 //         phone: "010-1234-5678",
 //         startTime: "0700",
 //         closeTime: "2400",
-//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/flyer/flyerExample.png",
 //         qrNum: 2,
 //         qrTotalViewCount: 172,
 //     },
@@ -184,7 +184,7 @@ export default ManageFlyerAd;
 //         phone: "010-1234-5678",
 //         startTime: "0700",
 //         closeTime: "2400",
-//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/flyer/flyerExample.png",
 //         qrNum: 2,
 //         qrTotalViewCount: 172,
 //     },
@@ -201,7 +201,7 @@ export default ManageFlyerAd;
 //         phone: "010-1234-5678",
 //         startTime: "0700",
 //         closeTime: "2400",
-//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/flyer/flyerExample.png",
 //         qrNum: 2,
 //         qrTotalViewCount: 172,
 //     },
@@ -218,7 +218,7 @@ export default ManageFlyerAd;
 //         phone: "010-1234-5678",
 //         startTime: "0700",
 //         closeTime: "2400",
-//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/flyer/flyerExample.png",
 //         qrNum: 2,
 //         qrTotalViewCount: 172,
 //     },
@@ -235,7 +235,7 @@ export default ManageFlyerAd;
 //         phone: "010-1234-5678",
 //         startTime: "0700",
 //         closeTime: "2400",
-//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/flyer/flyerExample.png",
 //         qrNum: 2,
 //         qrTotalViewCount: 172,
 //     },
@@ -252,7 +252,7 @@ export default ManageFlyerAd;
 //         phone: "010-1234-5678",
 //         startTime: "0700",
 //         closeTime: "2400",
-//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/flyer/flyerExample.png",
 //         qrNum: 2,
 //         qrTotalViewCount: 172,
 //     },
@@ -269,7 +269,7 @@ export default ManageFlyerAd;
 //         phone: "010-1234-5678",
 //         startTime: "0700",
 //         closeTime: "2400",
-//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/flyer/flyerExample.png",
 //         qrNum: 2,
 //         qrTotalViewCount: 172,
 //     },
@@ -286,7 +286,7 @@ export default ManageFlyerAd;
 //         phone: "010-1234-5678",
 //         startTime: "0700",
 //         closeTime: "2400",
-//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/flyer/flyerExample.png",
 //         qrNum: 2,
 //         qrTotalViewCount: 172,
 //     },
