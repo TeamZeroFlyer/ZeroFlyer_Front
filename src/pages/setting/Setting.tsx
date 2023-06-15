@@ -69,10 +69,10 @@ const Setting = () => {
 
         <div className={style.general}>
             <div className={style.title}>정보</div>
-            <div className={style.element} onClick={()=>navigate('/info')}>
+            <div className={style.element} onClick={()=>navigate('/setting/info')}>
                 QR:ECOde 소개 <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/icons/plant.svg"/>
             </div>
-            <div className={style.element} onClick={()=>navigate('/info')}>
+            <div className={style.element} onClick={()=>navigate('/setting/info')}>
                 이용약관 <img src="https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/main/public/icons/guard.svg"/>
             </div>
             <div className={style.element} onClick={()=>navigate('/info')}>
