@@ -21,3 +21,11 @@
   font-weight: 800;
   font-size: 14px;
 }
+
+@media (max-width: 768px) {
+  @media (max-height: 600px) {
+    .cardContent img {
+      width: 38px;
+    }
+  }
+}

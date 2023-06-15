@@ -56,7 +56,7 @@ const CitizenPage = () => {
     if (getAuthToken())
       fetchHomeData();
     if (window.innerHeight < 700) {
-      setProgressRadius(135);
+      setProgressRadius(130);
     } else {
       setProgressRadius(150);
 
@@ -96,7 +96,7 @@ const CitizenPage = () => {
             <div className={style.treeImageWrapper}>
               <img
                 src={
-                  10 - calcLeftTree(userData.userScanCount) > 6
+                  10 - calcLeftTree(userData.userScanCount) > 5
                     ? bigtreeImg
                     : minitreeImg
                 }
