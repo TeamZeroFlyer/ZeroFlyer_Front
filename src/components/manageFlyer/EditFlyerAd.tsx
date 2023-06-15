@@ -252,9 +252,27 @@ const EditFlyerAd = () => {
             });
 
         }
+    };
+    
+    const removeFlyer = (idx: number) => {
+        const token = localStorage.getItem("accessToken");
 
-
-
+        //TODO: 서버켜지면 적용확인
+        fetch("https://qrecode-back.shop/store/delete?idx=" + idx, {
+            method: "DELETE",
+            headers: {
+              Authorization: "Bearer " + token,
+            }
+          })
+            .then(response => {
+              return response.json()
+            })
+            .then(data => {
+                if(data.data === "success"){
+                    alert("전단지가 삭제되었습니다.");
+                    window.location.href = "/flyer";
+                }
+            });
     };
     
     return (
@@ -322,7 +340,7 @@ const EditFlyerAd = () => {
                     <input readOnly className={style.searchBox3} minLength={1} maxLength={10} placeholder={store?.time}/>
                 </div>
             </div>
-            {flyerCode !== "new" && <div className={style.deleteBtn}>전단지삭제</div>}
+            {flyerCode !== "new" && <div className={style.deleteBtn} onClick={()=>removeFlyer(parseInt(flyerCode!))}>전단지삭제</div>}
         </div>
     );
 }

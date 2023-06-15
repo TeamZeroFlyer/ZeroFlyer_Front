@@ -64,6 +64,27 @@ const ManageFlyerAd = () => {
         }
     }, [now]);
 
+    const removeFlyer = (idx: number) => {
+        const token = localStorage.getItem("accessToken");
+
+        //TODO: 서버켜지면 적용확인
+        fetch("https://qrecode-back.shop/store/delete?idx=" + idx, {
+            method: "DELETE",
+            headers: {
+              Authorization: "Bearer " + token,
+            }
+          })
+            .then(response => {
+              return response.json()
+            })
+            .then(data => {
+                if(data.data === "success"){
+                    alert("전단지가 삭제되었습니다.");
+                    window.location.reload(); 
+                }
+            });
+    };
+
     return(
         <div className={style.container}>
             <Header>전단지관리</Header>
@@ -117,11 +138,11 @@ const ManageFlyerAd = () => {
                                 {flyer.flyerScanCount}
                             </div>
                             <div className={style.flyerBtn}>
-                                <div className={style.btnRemove}>삭제</div>
+                                <div className={style.btnRemove} onClick={()=>removeFlyer(flyer.idx)}>삭제</div>
                             </div>
                         </div>
                         <div className={style.imgInfo}>
-                        <img className={style.flyerThumbnail} src={flyer.flyerUrl} />
+                        <img className={style.flyerThumbnail} src={flyer.flyerUrl}  alt='https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/plus.svg'/>
                         </div>
                     </div>
                 ))}

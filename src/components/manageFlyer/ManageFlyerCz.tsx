@@ -1,24 +1,15 @@
 import { useEffect, useState } from "react";
 import style from "./ManageFlyerCz.module.css";
-import { Link } from 'react-router-dom';
 import Header from "../footer/Header";
+import { useNavigate } from 'react-router-dom';
 
 interface Flyer {
-    flyerCode: number;
-    flyerTitle: string;
-    storeName: string;
-    startDate: string;
-    endDate: string;
-    address: string;
-    detailAddress: string;
-    hashTag: string[];
-    hasCoupon: boolean;
-    phone: string;
-    startTime: string;
-    closeTime: string;
-    imgSrc: string;
-    qrNum: number;
-    qrTotalViewCount: number;
+    idx: number,
+    flyerUrl: string,
+    flyerName: string,
+    flyerStart: string,
+    flyerEnd: string,
+    isValid: boolean,
 }
 
 const currentDate = new Date();
@@ -29,6 +20,28 @@ const currentNumber = Number(`${year}${month}${day}`);
 
 const ManageFlyerAd = () => {
     const [now, setNow] = useState("using");
+    const [flyerList, setFlyerList] = useState<Flyer[]>([]);
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        const token = localStorage.getItem("accessToken");
+
+        //TODO: 서버켜지면 적용확인
+        fetch("https://qrecode-back.shop/user/flyer", {
+            method: "GET",
+            headers: {
+                Authorization: "Bearer " + token,
+            }
+            })
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                setFlyerList(data.data);
+            });
+
+    }, []);
+
     useEffect(()=>{
         const usingDiv = document.getElementById("using");
         const usedDiv = document.getElementById("used");
@@ -49,6 +62,36 @@ const ManageFlyerAd = () => {
         }
     }, [now]);
 
+    const clickFull = (idx: number, isValid: boolean, flyerUrl: string) => {
+
+        if (!isValid){
+            if(confirm("만료된 전단지입니다. 삭제하시겠습니까?")){
+                //TODO: 서버연결확인
+                fetch("https://qrecode-back.shop/user/flyer?idx=" + idx, {
+                    method: "DELETE",
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+                        "Content-Type": "application/json"
+                        },
+                    })
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        if (data.status === 200){
+                            alert("삭제되었습니다.");
+                            window.location.reload();
+                        }else{
+                            alert("삭제에 실패하였습니다.");
+                        }
+                });
+            }
+        }else{
+            navigate(`/flyer/full/${idx}?url=${encodeURIComponent(flyerUrl)}`);
+        }
+
+    };
+
     return(
         <div className={style.container}>
             <Header>전단지관리</Header>
@@ -57,25 +100,22 @@ const ManageFlyerAd = () => {
                 <div id="used" className={style.state} onClick={()=>{if(now !== "used"){setNow("used")}}}>만료된 전단지</div>
             </div>
             <div className={style.content}>
-                {now === "using" && dummy.map((flyer, i)=>(
-                    parseInt(flyer.endDate) >= currentNumber && 
-                    <Link to={`/flyer/full/${flyer.flyerCode}`}>
-                        <div key={i} className={style.flyerInfo}>
+                {now === "using" && flyerList.map((flyer, i)=>(
+                    parseInt(flyer.flyerEnd) >= currentNumber && 
+                        <div key={i} className={style.flyerInfo} onClick={()=>clickFull(flyer.idx, flyer.isValid, flyer.flyerUrl)}>
                         <div className={style.imgInfo}>
-                        <img className={style.flyerThumbnail} src={flyer.imgSrc} />
+                        <img className={style.flyerThumbnail} src={flyer.flyerUrl}  alt='https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/plus.svg'/>
                         </div>
-                    </div></Link>
+                        </div>
                 ))}
 
-                {now === "used" && dummy.map((flyer, i)=>(
-                    parseInt(flyer.endDate) < currentNumber && 
-                    <Link to={`/flyer/full/${flyer.flyerCode}`}>
-                        <div key={i} className={style.flyerInfoUsed}>
+                {now === "used" && flyerList.map((flyer, i)=>(
+                    parseInt(flyer.flyerEnd) < currentNumber && 
+                        <div key={i} className={style.flyerInfoUsed} onClick={()=>clickFull(flyer.idx, flyer.isValid, flyer.flyerUrl)}>
                         <div className={style.imgInfo}>
-                        <img className={style.flyerThumbnail} src={flyer.imgSrc} />
+                        <img className={style.flyerThumbnail} src={flyer.flyerUrl}  alt='https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/plus.svg'/>
                         </div>
                     </div>
-                    </Link>
                 ))}
             </div>
         </div>
@@ -84,141 +124,141 @@ const ManageFlyerAd = () => {
 
 export default ManageFlyerAd;
 
-const dummy: Flyer[] = [
-    {
-        flyerCode: 0,
-        flyerTitle: "첫 방문 고객 할인",
-        storeName: "새싹미용실",
-        startDate: "20230522",
-        endDate: "20230630",
-        address: "새싹시 새싹동 12번지",
-        detailAddress: "12동 191호",
-        hashTag: ["합리적인가격", "여기가최고"],
-        hasCoupon: true,
-        phone: "010-1234-5678",
-        startTime: "0700",
-        closeTime: "2400",
-        imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
-        qrNum: 2,
-        qrTotalViewCount: 172,
-    },
-    {
-        flyerCode: 1,
-        flyerTitle: "첫 방문 고객 할인",
-        storeName: "새싹미용실",
-        startDate: "20230522",
-        endDate: "20230630",
-        address: "새싹시 새싹동 12번지",
-        detailAddress: "12동 191호",
-        hashTag: ["합리적인가격", "여기가최고"],
-        hasCoupon: true,
-        phone: "010-1234-5678",
-        startTime: "0700",
-        closeTime: "2400",
-        imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
-        qrNum: 2,
-        qrTotalViewCount: 172,
-    },
-    {
-        flyerCode: 2,
-        flyerTitle: "첫 방문 고객 할인",
-        storeName: "새싹미용실",
-        startDate: "20230522",
-        endDate: "20230630",
-        address: "새싹시 새싹동 12번지",
-        detailAddress: "12동 191호",
-        hashTag: ["합리적인가격", "여기가최고"],
-        hasCoupon: true,
-        phone: "010-1234-5678",
-        startTime: "0700",
-        closeTime: "2400",
-        imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
-        qrNum: 2,
-        qrTotalViewCount: 172,
-    },
-    {
-        flyerCode: 3,
-        flyerTitle: "첫 방문 고객 할인",
-        storeName: "새싹미용실",
-        startDate: "20230522",
-        endDate: "20230630",
-        address: "새싹시 새싹동 12번지",
-        detailAddress: "12동 191호",
-        hashTag: ["합리적인가격", "여기가최고"],
-        hasCoupon: true,
-        phone: "010-1234-5678",
-        startTime: "0700",
-        closeTime: "2400",
-        imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
-        qrNum: 2,
-        qrTotalViewCount: 172,
-    },
-    {
-        flyerCode: 4,
-        flyerTitle: "첫 방문 고객 할인",
-        storeName: "새싹미용실",
-        startDate: "20230522",
-        endDate: "20230630",
-        address: "새싹시 새싹동 12번지",
-        detailAddress: "12동 191호",
-        hashTag: ["합리적인가격", "여기가최고"],
-        hasCoupon: true,
-        phone: "010-1234-5678",
-        startTime: "0700",
-        closeTime: "2400",
-        imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
-        qrNum: 2,
-        qrTotalViewCount: 172,
-    },
-    {
-        flyerCode: 5,
-        flyerTitle: "첫 방문 고객 할인",
-        storeName: "새싹미용실",
-        startDate: "20230522",
-        endDate: "20230530",
-        address: "새싹시 새싹동 12번지",
-        detailAddress: "12동 191호",
-        hashTag: ["합리적인가격", "여기가최고"],
-        hasCoupon: true,
-        phone: "010-1234-5678",
-        startTime: "0700",
-        closeTime: "2400",
-        imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
-        qrNum: 2,
-        qrTotalViewCount: 172,
-    },
-    {
-        flyerCode: 6,
-        flyerTitle: "첫 방문 고객 할인",
-        storeName: "새싹미용실",
-        startDate: "20230522",
-        endDate: "20230530",
-        address: "새싹시 새싹동 12번지",
-        detailAddress: "12동 191호",
-        hashTag: ["합리적인가격", "여기가최고"],
-        hasCoupon: true,
-        phone: "010-1234-5678",
-        startTime: "0700",
-        closeTime: "2400",
-        imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
-        qrNum: 2,
-        qrTotalViewCount: 172,
-    },
-    {
-        flyerCode: 7,
-        flyerTitle: "첫 방문 고객 할인",
-        storeName: "새싹미용실",
-        startDate: "20230522",
-        endDate: "20230530",
-        address: "새싹시 새싹동 12번지",
-        detailAddress: "12동 191호",
-        hashTag: ["합리적인가격", "여기가최고"],
-        hasCoupon: true,
-        phone: "010-1234-5678",
-        startTime: "0700",
-        closeTime: "2400",
-        imgSrc: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
-        qrNum: 2,
-        qrTotalViewCount: 172,
-    },
-]
+// const dummy: Flyer[] = [
+//     {
+//         idx: 0,
+//         flyerTitle: "첫 방문 고객 할인",
+//         storeName: "새싹미용실",
+//         flyerStart: "20230522",
+//         flyerEnd: "20230630",
+//         address: "새싹시 새싹동 12번지",
+//         detailAddress: "12동 191호",
+//         hashTag: ["합리적인가격", "여기가최고"],
+//         hasCoupon: true,
+//         phone: "010-1234-5678",
+//         startTime: "0700",
+//         closeTime: "2400",
+//         flyerUrl: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         qrNum: 2,
+//         qrTotalViewCount: 172,
+//     },
+//     {
+//         idx: 1,
+//         flyerTitle: "첫 방문 고객 할인",
+//         storeName: "새싹미용실",
+//         flyerStart: "20230522",
+//         flyerEnd: "20230630",
+//         address: "새싹시 새싹동 12번지",
+//         detailAddress: "12동 191호",
+//         hashTag: ["합리적인가격", "여기가최고"],
+//         hasCoupon: true,
+//         phone: "010-1234-5678",
+//         startTime: "0700",
+//         closeTime: "2400",
+//         flyerUrl: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         qrNum: 2,
+//         qrTotalViewCount: 172,
+//     },
+//     {
+//         idx: 2,
+//         flyerTitle: "첫 방문 고객 할인",
+//         storeName: "새싹미용실",
+//         flyerStart: "20230522",
+//         flyerEnd: "20230630",
+//         address: "새싹시 새싹동 12번지",
+//         detailAddress: "12동 191호",
+//         hashTag: ["합리적인가격", "여기가최고"],
+//         hasCoupon: true,
+//         phone: "010-1234-5678",
+//         startTime: "0700",
+//         closeTime: "2400",
+//         flyerUrl: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         qrNum: 2,
+//         qrTotalViewCount: 172,
+//     },
+//     {
+//         idx: 3,
+//         flyerTitle: "첫 방문 고객 할인",
+//         storeName: "새싹미용실",
+//         flyerStart: "20230522",
+//         flyerEnd: "20230630",
+//         address: "새싹시 새싹동 12번지",
+//         detailAddress: "12동 191호",
+//         hashTag: ["합리적인가격", "여기가최고"],
+//         hasCoupon: true,
+//         phone: "010-1234-5678",
+//         startTime: "0700",
+//         closeTime: "2400",
+//         flyerUrl: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         qrNum: 2,
+//         qrTotalViewCount: 172,
+//     },
+//     {
+//         idx: 4,
+//         flyerTitle: "첫 방문 고객 할인",
+//         storeName: "새싹미용실",
+//         flyerStart: "20230522",
+//         flyerEnd: "20230630",
+//         address: "새싹시 새싹동 12번지",
+//         detailAddress: "12동 191호",
+//         hashTag: ["합리적인가격", "여기가최고"],
+//         hasCoupon: true,
+//         phone: "010-1234-5678",
+//         startTime: "0700",
+//         closeTime: "2400",
+//         flyerUrl: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         qrNum: 2,
+//         qrTotalViewCount: 172,
+//     },
+//     {
+//         idx: 5,
+//         flyerTitle: "첫 방문 고객 할인",
+//         storeName: "새싹미용실",
+//         flyerStart: "20230522",
+//         flyerEnd: "20230530",
+//         address: "새싹시 새싹동 12번지",
+//         detailAddress: "12동 191호",
+//         hashTag: ["합리적인가격", "여기가최고"],
+//         hasCoupon: true,
+//         phone: "010-1234-5678",
+//         startTime: "0700",
+//         closeTime: "2400",
+//         flyerUrl: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         qrNum: 2,
+//         qrTotalViewCount: 172,
+//     },
+//     {
+//         idx: 6,
+//         flyerTitle: "첫 방문 고객 할인",
+//         storeName: "새싹미용실",
+//         flyerStart: "20230522",
+//         flyerEnd: "20230530",
+//         address: "새싹시 새싹동 12번지",
+//         detailAddress: "12동 191호",
+//         hashTag: ["합리적인가격", "여기가최고"],
+//         hasCoupon: true,
+//         phone: "010-1234-5678",
+//         startTime: "0700",
+//         closeTime: "2400",
+//         flyerUrl: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         qrNum: 2,
+//         qrTotalViewCount: 172,
+//     },
+//     {
+//         idx: 7,
+//         flyerTitle: "첫 방문 고객 할인",
+//         storeName: "새싹미용실",
+//         flyerStart: "20230522",
+//         flyerEnd: "20230530",
+//         address: "새싹시 새싹동 12번지",
+//         detailAddress: "12동 191호",
+//         hashTag: ["합리적인가격", "여기가최고"],
+//         hasCoupon: true,
+//         phone: "010-1234-5678",
+//         startTime: "0700",
+//         closeTime: "2400",
+//         flyerUrl: "https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/flyer/flyerExample.png",
+//         qrNum: 2,
+//         qrTotalViewCount: 172,
+//     },
+// ]
