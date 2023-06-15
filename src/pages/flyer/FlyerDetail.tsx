@@ -7,7 +7,7 @@ type ChildProps = {
 }
 // localhost:5173/flyer/:flyerId/qr/:qrId/
 const FlyerDetailPage: React.FC = () => {
-  const { flyerId, qrId } = useParams();
+  const { flyerId, qrId, storeIdx } = useParams();
   const token = getAuthToken();
   const client = getDupClient();
   const [imgUrl, setImgUrl] = React.useState<string>("");
@@ -15,22 +15,28 @@ const FlyerDetailPage: React.FC = () => {
 
   useEffect(() => {
     const scanCode = async () => {
-      await fetch("https://qrecode-back.shop/scan", {
+      const response = await fetch("https://qrecode-back.shop/qr/logging", {
         method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token ? token : "none-member"}`,
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-          flyerId: flyerId,
-          qrId: qrId,
+          storeIdx: storeIdx,
+          flyerIdx: flyerId,
+          qrIdx: qrId,
         }),
       });
+
+      if (!response.ok) {
+        throw new Error("서버에서 문제가 발생했습니다.");
+      }
+      if (flyerId && qrId && !client) {
+        setDupClient(flyerId, qrId);
+        scanCode();
+      }
     };
-
-    // 이미 스캔한 대상이 아니라면.
-    if (flyerId && qrId && !client) {
-      setDupClient(flyerId, qrId);
-      scanCode();
-    }
-
+    
     //Todo: 서버url 확인
     fetch("https://qrecode-back.shop/user/flyer/show?idx=" + flyerId, {
       method: "GET",
