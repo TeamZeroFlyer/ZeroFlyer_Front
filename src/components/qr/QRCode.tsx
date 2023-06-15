@@ -21,7 +21,7 @@ const QRCode: React.FC<{ qr: QRCodeType }> = (props) => {
   }, []);
   useEffect(() => {
     if (props.qr) {
-      const flyerUrl = `${baseUrl}store/${props.qr.storeIdx}/flyer/${props.qr.flyerIdx}/qr/${props.qr.qrNum}`;
+      const flyerUrl = `${baseUrl}/store/${props.qr.storeIdx}/flyer/${props.qr.flyerIdx}/qr/${props.qr.qrNum}`;
       setUrl(flyerUrl);
     }
   }, [props.qr]);
@@ -50,7 +50,7 @@ const QRCode: React.FC<{ qr: QRCodeType }> = (props) => {
               <p>{props.qr.qrTimestamp}</p>
             </div>
             <div className={style.code}>
-              <QRCodeCanvas id="qrCode" value={url} size={200} level={"H"} />
+              <QRCodeCanvas id="qrCode" value={url} size={210} level={"H"} />
             </div>
           </div>
         </div>

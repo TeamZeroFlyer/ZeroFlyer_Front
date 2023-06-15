@@ -56,7 +56,6 @@ const CitizenPage = () => {
     if (getAuthToken())
       fetchHomeData();
     if (window.innerHeight < 700) {
-      console.log(window.innerHeight);
       setProgressRadius(135);
     } else {
       setProgressRadius(150);
