@@ -1,48 +1,45 @@
 import React from "react";
-import { LoaderFunctionArgs, json} from "react-router-dom";
+import { LoaderFunctionArgs, json, useLoaderData } from "react-router-dom";
 
 import QRCode from "../../components/qr/QRCode";
+import { getAuthToken } from "../../util/auth";
 
 const QrScanner: React.FC = () => {
-  //const qr = useLoaderData() as QRCodeType;
-  return <QRCode qr={dummy} />;
+  const qr = useLoaderData() as QRCodeType;
+  console.log(qr);
+  return <QRCode qr={qr} />;
 };
 
 export default QrScanner;
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
+  const token = getAuthToken();
   const qrId = params.qrId;
-  const response = await fetch(`https://qrecode-back.shop/qr/${qrId}`);
+  const response = await fetch(
+    `https://qrecode-back.shop/qr/scan?idx=${qrId}`,
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
   if (!response.ok) {
+    console.log(await response.json());
     throw json(
       { message: "QR 코드를 불러오는데 실패했습니다." },
       { status: 500 }
     );
   } else {
-    return response;
+    const { data } = await response.json();
+    return data;
   }
 };
 
-/**
- * storeName: string
- * qrScan: number
- * qrId: string
- * qrCreateAt: date
- * flyerLink: string
- */
-
 export type QRCodeType = {
+  storeIdx: number;
   storeName: string;
-  qrScan: number;
-  qrId: string;
-  qrCreateAt: Date;
-  flyerLink: string;
-};
-
-const dummy: QRCodeType = {
-  storeName: "새싹 미용실",
-  qrScan: 63,
-  qrId: "QR052301",
-  qrCreateAt: new Date("2023-05-23"),
-  flyerLink: "http://localhost:5173/flyer/1",
+  qrScanCount: number;
+  qrNum: string;
+  qrTimestamp: string;
+  flyerIdx: number;
 };

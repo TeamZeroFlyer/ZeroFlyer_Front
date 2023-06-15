@@ -4,10 +4,10 @@ import App from "./App";
 import EditFlyer from "./pages/flyer/EditFlyer";
 import Home from "./pages/home/Home";
 import KakaoMap from "./pages/map/KakaoMap";
-import CreateQRCode from "./pages/qr/CreateQRCode";
+import CreateQRCode, { loader as flyerLoader } from "./pages/qr/CreateQRCode";
 import FlyerDetailPage from "./pages/FlyerDetail";
-import QrScanner from "./pages/qr/QrScanner";
-import ManageQRCode from "./pages/qr/ManageQRCode";
+import QrScanner, {loader as qrScannerLoader} from "./pages/qr/QrScanner";
+import ManageQRCode, { loader as qrLoader } from "./pages/qr/ManageQRCode";
 import Setting from "./pages/setting/Setting";
 import LoginPage from "./pages/login/Login";
 import { tokenLoader } from "./util/auth";
@@ -36,13 +36,13 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <UsingPoinPage />
-          }, 
+            element: <UsingPoinPage />,
+          },
           {
             path: "history",
-            element: <PointPage />
-          }
-        ]
+            element: <PointPage />,
+          },
+        ],
       },
       {
         path: "flyer",
@@ -67,6 +67,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <ManageQRCode />,
+            loader: qrLoader,
           },
           {
             path: ":qrId",
@@ -74,14 +75,16 @@ const router = createBrowserRouter([
               {
                 index: true,
                 element: <QrScanner />,
+                loader:qrScannerLoader,
               },
               {
-                path: 'edit',
-              }
-            ]
+                path: "edit",
+              },
+            ],
           },
           {
             path: "new",
+            loader: flyerLoader,
             element: <CreateQRCode />,
           },
         ],

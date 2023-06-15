@@ -10,13 +10,12 @@ const FlyerPreview: React.FC<{
   qrNumber: number;
   selectQrNumber: React.Dispatch<React.SetStateAction<number>>;
 }> = (props) => {
-
   return (
     <div className={style.flyerPreview}>
       <p>전단지 정보</p>
       {props.previewFlyer && (
         <div className={style.content}>
-          <img src={props.previewFlyer.src} alt={props.previewFlyer.alt} />
+          <img src={props.previewFlyer.flyerUrl} alt="전단지 미리보기" />
           <div className={style.flyer}>
             <div>
               <p className={style.label}>전단지 별명</p>
@@ -37,9 +36,12 @@ const FlyerPreview: React.FC<{
         </div>
       )}
       <div className={style.hashtag}>
-        <Hashtag>#합리적인가격</Hashtag>
-        <Hashtag>#헤어스파</Hashtag>
-        <Hashtag>#두피클리닉</Hashtag>
+        {props.previewFlyer.flyerTag
+          .split("#")
+          .filter((item) => item !== "")
+          .map((value) => (
+            <Hashtag>{`#${value}`}</Hashtag>
+          ))}
       </div>
     </div>
   );

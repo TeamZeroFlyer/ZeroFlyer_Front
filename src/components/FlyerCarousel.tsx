@@ -2,18 +2,20 @@ import React, { useState } from "react";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 
 import style from "./FlyerCarousel.module.css";
-import { slides } from "../data/carouselData.json";
+import { FlyerInf } from "../pages/qr/CreateQRCode";
+import { Link } from "react-router-dom";
 
 const FlyerCarousel: React.FC<{
+  flyers: FlyerInf[];
   selectPreviewFlyer: (flyerId: number) => void;
 }> = (props) => {
   const [slide, setSlide] = useState<number>(0);
   const nextSlide = () => {
-    setSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    setSlide((prev) => (prev === props.flyers.length - 1 ? 0 : prev + 1));
   };
 
   const prevSlide = () => {
-    setSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    setSlide((prev) => (prev === 0 ? props.flyers.length - 1 : prev - 1));
   };
 
   const onSelectFlyer = (flyerId: number) => {
@@ -22,44 +24,58 @@ const FlyerCarousel: React.FC<{
 
   return (
     <div className={style.carousel}>
-      <BsArrowLeftCircleFill
-        className={[style.arrow, style.arrowLeft].join(" ")}
-        onClick={prevSlide}
-      />
-      {slides.map((item, idx) => {
-        return (
-          <img
-            src={item.src}
-            alt={item.alt}
-            key={idx}
-            className={
-              slide === idx
-                ? style.slide
-                : [style.slide, style.slideHidden].join(" ")
-            }
-            onClick={onSelectFlyer.bind(null, item.id)}
-          />
-        );
-      })}
-      <BsArrowRightCircleFill
-        className={[style.arrow, style.arrowRight].join(" ")}
-        onClick={nextSlide}
-      />
-      <span className={style.indicators}>
-        {slides.map((_, idx) => {
+      {props.flyers.length > 1 && (
+        <BsArrowLeftCircleFill
+          className={[style.arrow, style.arrowLeft].join(" ")}
+          onClick={prevSlide}
+        />
+      )}
+      {props.flyers.length > 0 ? (
+        props.flyers.map((flyer, idx) => {
           return (
-            <button
-              key={idx}
+            <img
+              src={flyer.flyerUrl}
+              alt="전단지 이미지"
+              key={flyer.idx}
               className={
                 slide === idx
-                  ? style.indicator
-                  : [style.indicator, style.indicatorInactive].join(" ")
+                  ? style.slide
+                  : [style.slide, style.slideHidden].join(" ")
               }
-              onClick={() => setSlide(idx)}
-            ></button>
+              onClick={onSelectFlyer.bind(null, flyer.idx)}
+            />
           );
-        })}
-      </span>
+        })
+      ) : (
+        <Link to="/flyer/new">
+          <div className={style.placeHolder}>
+            <p>전단지 등록하러가기!</p>
+          </div>
+        </Link>
+      )}
+      {props.flyers.length > 1 && (
+        <BsArrowRightCircleFill
+          className={[style.arrow, style.arrowRight].join(" ")}
+          onClick={nextSlide}
+        />
+      )}
+      {props.flyers.length > 1 && (
+        <span className={style.indicators}>
+          {props.flyers.map((_, idx) => {
+            return (
+              <button
+                key={idx}
+                className={
+                  slide === idx
+                    ? style.indicator
+                    : [style.indicator, style.indicatorInactive].join(" ")
+                }
+                onClick={() => setSlide(idx)}
+              ></button>
+            );
+          })}
+        </span>
+      )}
     </div>
   );
 };

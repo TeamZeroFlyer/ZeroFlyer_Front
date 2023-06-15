@@ -12,7 +12,7 @@ const FlyerDetailPage: React.FC = () => {
     const scanCode = async () => {
       await fetch("https://qrecode-back.shop/scan", {
         method: "POST",
-        headers: { Authentication: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` },
         body: JSON.stringify({
           flyerId: flyerId,
           qrId: qrId,

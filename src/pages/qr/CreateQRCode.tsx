@@ -1,6 +1,6 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { getAuthToken } from "../../util/auth";
-import { redirect } from "react-router-dom";
+import { redirect, json, useLoaderData, useNavigate } from "react-router-dom";
 
 import QrGenerator from "../../components/qr/QrGenerator";
 import QRForm from "../../components/qr/QRForm";
@@ -9,49 +9,63 @@ import PartTimeList from "../../components/qr/PartTimeList";
 import style from "./CreateQRCode.module.css";
 
 export type FlyerInf = {
-  id: number;
-  src: string;
+  idx: number;
+  flyerUrl: string;
   flyerName: string;
-  hashTag: string[];
-  alt: string;
+  flyerTag: string;
 };
 
 export type PTJob = {
-  name: string;
-  phone: string;
+  ptjName: string;
+  ptjPhone: string;
 };
 
 const CreateQRCode: React.FC = () => {
+  const flyers = useLoaderData() as FlyerInf[];
   const [isQRModalOpen, setIsQRModalOpen] = useState<boolean>(false);
   const [seletedFlyer, setSelectedFlyer] = useState<FlyerInf>();
   const [qrNumber, setQrNumber] = useState<number>(1);
   const [ptJob, setPtJob] = useState<PTJob[]>([]);
+  const navigate = useNavigate();
 
   const qrOpenModalHandler = () => setIsQRModalOpen(true);
   const qrCloseHandler = () => setIsQRModalOpen(false);
 
   const qrCreateHandler = async () => {
+    if (!seletedFlyer) {
+      alert("전단지를 선택해 주세요.");
+      return;
+    }
+    if (qrNumber < 0) {
+      alert("아르바이트생은 한 명 이상 필요합니다.");
+      return;
+    }
+    console.log(ptJob);
+    if (!validateForm(ptJob)) {
+      alert("아르바이트생 정보를 입력해 주세요.");
+      return;
+    }
+
     if (seletedFlyer && qrNumber > 0 && validateForm(ptJob)) {
       const token = getAuthToken();
-      
-      const reponse = await fetch("https://qrecode-back.shop/qr/new", {
+      const response = await fetch("https://qrecode-back.shop/qr/insert", {
         method: "POST",
-        headers: { Authentication: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-          flyerId: seletedFlyer.id,
-          ptj: ptJob,
-        })
+          qrFlyerIdx: seletedFlyer.idx,
+          qrPtj: ptJob,
+        }),
       });
-
-      if (!reponse.ok) {
-        //TODO: 에러처리.
-        //throw new Error("QR을 생성하는데 문제가 발생했습니다.");
-        // throw json(
-        //   { message: "QR을 생성하는데 문제가 발생했습니다." },
-        //   { status: 500 }
-        // );
+      if (!response.ok) {
+        // TODO: 998이면 토큰 리프레시하기
+        const error = await response.json();
+        console.log(error);
+        alert("QR을 생성하는데 문제가 발생했습니다.");
       } else {
-        return redirect("/qr");
+        return navigate("/qr");
       }
     }
   };
@@ -63,6 +77,7 @@ const CreateQRCode: React.FC = () => {
           onConfirm={qrCloseHandler}
           onSelectFlyer={setSelectedFlyer}
           onSelectQrNumber={setQrNumber}
+          flyers={flyers}
         />
       )}
       <QRForm
@@ -80,14 +95,40 @@ const CreateQRCode: React.FC = () => {
     </div>
   );
 };
-
 const validateForm = (ptList: PTJob[]) => {
   if (ptList.length === 0) return false;
   const isValid = ptList.every(
     (entry) =>
-      entry.name !== "" && entry.name && entry.phone !== "" && entry.phone
+      entry.ptjName !== "" &&
+      entry.ptjName &&
+      entry.ptjPhone !== "" &&
+      entry.ptjPhone
   );
   return isValid;
+};
+
+export const loader = async () => {
+  const token = getAuthToken();
+  const response = await fetch("https://qrecode-back.shop/store/flyer", {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    if (error.statusCode === `131`) {
+      alert("점포를 먼저 등록해주세요.");
+      return redirect("/setting/edit");
+    } else {
+      throw json(
+        { message: "전단지 목록을 가져오는데 실패했습니다." },
+        { status: 500 }
+      );
+    }
+  } else {
+    const { data } = await response.json();
+    return data;
+  }
 };
 
 export default CreateQRCode;

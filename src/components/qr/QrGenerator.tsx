@@ -15,10 +15,10 @@ const ModalOverlay: React.FC<{
   onConfirm: () => void;
   onSelectFlyer: (flyer: FlyerInf) => void;
   onSelectQrNumber: (qrNumber: number) => void;
+  flyers: FlyerInf[];
 }> = (props) => {
-
   const selectPreviewFlyer = (flyerId: number) => {
-    const selectedFlyer = slides.find((slide) => slide.id === flyerId)!;
+    const selectedFlyer = props.flyers.find((flyer) => flyer.idx === flyerId)!;
     props.onSelectFlyer(selectedFlyer);
     props.onConfirm();
   };
@@ -31,7 +31,10 @@ const ModalOverlay: React.FC<{
       </header>
       <div className={style.carouselContainer}>
         {slides.length > 0 && (
-          <FlyerCarousel selectPreviewFlyer={selectPreviewFlyer} />
+          <FlyerCarousel
+            selectPreviewFlyer={selectPreviewFlyer}
+            flyers={props.flyers}
+          />
         )}
         {slides.length < 0 && <button>전단지 추가하기</button>}
       </div>
@@ -43,6 +46,7 @@ const QrGenerator: React.FC<{
   onConfirm: () => void;
   onSelectFlyer: (flyer: FlyerInf) => void;
   onSelectQrNumber: (qrNumber: number) => void;
+  flyers: FlyerInf[];
 }> = (props) => {
   return (
     <>
@@ -55,6 +59,7 @@ const QrGenerator: React.FC<{
           onConfirm={props.onConfirm}
           onSelectFlyer={props.onSelectFlyer}
           onSelectQrNumber={props.onSelectQrNumber}
+          flyers={props.flyers}
         />,
         document.getElementById("overlay-root") as HTMLElement
       )}

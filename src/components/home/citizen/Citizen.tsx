@@ -24,6 +24,7 @@ const calcProgress = (totalScan: number) => 10 - calcLeftTree(totalScan);
 
 const CitizenPage = () => {
   const token = getAuthToken();
+  const [progressRadius, setProgressRadius] = useState(150);
   const [userData, setUserData] = useState<User>({
     userName: "",
     userPoint: 0,
@@ -54,7 +55,13 @@ const CitizenPage = () => {
     };
     if (getAuthToken())
       fetchHomeData();
+    if (window.innerHeight < 700) {
+      console.log(window.innerHeight);
+      setProgressRadius(135);
+    } else {
+      setProgressRadius(150);
 
+    }
   }, []);
   return (
     <div className={style.citizenPage}>
@@ -85,7 +92,7 @@ const CitizenPage = () => {
           <CircleProgressBar
             progress={calcProgress(userData.userScanCount)}
             strokeWidth={8}
-            circleRadius={150}
+            circleRadius={progressRadius}
           >
             <div className={style.treeImageWrapper}>
               <img

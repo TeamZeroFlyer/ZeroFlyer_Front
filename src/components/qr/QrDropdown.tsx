@@ -3,7 +3,7 @@ import { getAuthToken } from "../../util/auth";
 import style from "./QrDropdown.module.css";
 
 const Dropdown: React.FC<{
-  qrId: string;
+  qrId: number;
 }> = (props) => {
   const navigate = useNavigate();
   const token = getAuthToken();
@@ -12,7 +12,7 @@ const Dropdown: React.FC<{
   };
   const onDeleteHandler = async () => {
     const response = await fetch(
-      `https://qrecode-back.shop/qr/delet/${props.qrId}`,
+      `https://qrecode-back.shop/qr/delete?idx=${props.qrId}`,
       {
         method: "DELETE",
         headers: {

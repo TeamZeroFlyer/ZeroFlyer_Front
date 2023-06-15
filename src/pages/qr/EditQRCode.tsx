@@ -97,7 +97,7 @@
 //   const qrId = params.qrId;
 
 //   const response = await fetch(`https://qrecode-back.shop/qr/${qrId}/edit`, {
-//     headers: { Authentication: `Bearer ${token}` },
+//     headers: { Authorization: `Bearer ${token}` },
 //   });
 //     if (!response.ok) {
 //         throw json({ message: "데이터를 가져오는데 실패했습니다." }, { status: 500 });
