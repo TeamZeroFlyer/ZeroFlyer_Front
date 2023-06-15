@@ -83,7 +83,7 @@ const FlyerDetailPage: React.FC = () => {
     <>
     <div className={style.container}>
         <div className={style.imgBox}>
-            <img className={style.img} src={imgUrl} alt='https://raw.githubusercontent.com/TeamZeroFlyer/ZeroFlyer_Front/9be89183664a4898914b84dece371161ba044478/public/icons/plus.svg'/>
+            <img className={style.img} src={imgUrl} onError={(e)=>{e.currentTarget.src ='https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg'}}/>
         </div>
         <div className={style.twoBtn}>
             {status !== 0 && <Link to='/'><div className={style.btn} onClick={()=>{}}><span className={style.green}>홈</span>으로 이동</div></Link>}
