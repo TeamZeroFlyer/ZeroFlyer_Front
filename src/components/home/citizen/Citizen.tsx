@@ -2,7 +2,6 @@ import { Link, json } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAuthToken } from "../../../util/auth";
 
-import Header from "../../../components/footer/Header";
 import style from "./Citizen.module.css";
 import barcodeImg from "../../../../public/image/home/barcode.svg";
 import minitreeImg from "../../../../public/image/home/minitree.svg";
