@@ -148,7 +148,6 @@
     height: calc(100vh - 90px);
     display: flex;
     flex-direction: column;
-    padding-bottom: 10px;
   }
   .contents {
     display: flex;
@@ -174,8 +173,7 @@
     display: inline-block;
     width: 56px;
   }
-  @media (max-height: 600px) {
-
+  @media (max-height: 660px) {
     .contents {
       overflow: scroll;
       display: flex;
