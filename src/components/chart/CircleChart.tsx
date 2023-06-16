@@ -36,7 +36,7 @@ const CircleChart: React.FC<HomeElement> = (props) => {
     const options: ApexCharts.ApexOptions = {
       chart: {
         type: 'radialBar',
-        height: 220,
+        height: 190,
         toolbar: {
           show: false,
         },
