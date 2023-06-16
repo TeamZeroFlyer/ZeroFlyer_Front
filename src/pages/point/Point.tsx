@@ -12,7 +12,7 @@ export type History = {
 export type PointHistory = {
   scanCount: number;
   totalPoint: number;
-  histories: History[];
+  logList: History[];
 };
 
 const PointPage = () => {

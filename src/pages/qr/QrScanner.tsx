@@ -33,7 +33,8 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     }
   );
   if (!response.ok) {
-    throw new Error("QR 코드를 불러오는데 실패했습니다.");
+    console.log(await response.json())
+    //throw new Error("QR 코드를 불러오는데 실패했습니다.");
   } else {
     const { data } = await response.json();
     return data;
