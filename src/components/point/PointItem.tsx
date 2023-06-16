@@ -18,7 +18,7 @@ const PointItem: React.FC<{
       </div>
       <div className={`${style.item} ${style.point}`}>
         <p>
-          {props.history.point > 0 ? "+" : "-"}
+          {props.history.point > 0 ? "+" : ""}
           {props.history.point}p
         </p>
       </div>
