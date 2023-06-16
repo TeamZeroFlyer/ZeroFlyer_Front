@@ -33,7 +33,7 @@ const PointList: React.FC<{ pointHistory: PointHistory }> = (props) => {
         </div>
         <div className={style.history}>
           <ul className={style.list}>
-            {props.pointHistory.histories?.map((history, idx) => {
+            {props.pointHistory.logList?.map((history, idx) => {
               return <PointItem key={idx} history={history} />;
             })}
           </ul>
