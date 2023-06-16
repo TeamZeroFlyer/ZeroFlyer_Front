@@ -174,7 +174,7 @@
     display: inline-block;
     width: 56px;
   }
-  @media (max-height: 678px) {
+  @media (max-height: 600px) {
 
     .contents {
       overflow: scroll;
